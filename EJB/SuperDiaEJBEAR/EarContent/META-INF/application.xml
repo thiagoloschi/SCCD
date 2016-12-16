@@ -4,4 +4,10 @@
   <module>
     <ejb>SuperDiaEJB.jar</ejb>
   </module>
+  <module>
+    <web>
+      <web-uri>SuperDiaWeb.war</web-uri>
+      <context-root>SuperDiaWeb</context-root>
+    </web>
+  </module>
 </application>
