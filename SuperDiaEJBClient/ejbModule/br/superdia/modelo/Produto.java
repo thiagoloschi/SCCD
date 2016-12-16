@@ -3,11 +3,20 @@ package br.superdia.modelo;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@SequenceGenerator(name = "produto_id", sequenceName = "produto_seq", allocationSize = 1)
+	@GeneratedValue(generator = "produto_id", strategy = GenerationType.SEQUENCE)
+	private Long id;
 	private String nome;
 	private String descricao;
 	private double preco;

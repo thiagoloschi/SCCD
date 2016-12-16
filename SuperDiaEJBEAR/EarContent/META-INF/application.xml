@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/application_7.xsd" version="7">
+  <display-name>SuperDiaEJBEAR</display-name>
+  <module>
+    <ejb>SuperDiaEJB.jar</ejb>
+  </module>
+</application>
