@@ -30,6 +30,36 @@ public class Venda implements Serializable {
 	@ManyToOne
 	private Usuario usuario;
 	
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public Calendar getData() {
+		return data;
+	}
+	
+	public void setData(Calendar data) {
+		this.data = data;
+	}
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+	
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}	
 }
 

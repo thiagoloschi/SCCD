@@ -11,7 +11,7 @@ import br.superdia.jpa.JPAUtil;
 
 @Stateless
 @Remote(IDAO.class)
-public class IDAOBean<T> implements IDAO<T> {
+public class DAOBean<T> implements IDAO<T> {
 
 	public void add(T t) {
 		EntityManager em = JPAUtil.getEntityManager();
@@ -48,6 +48,8 @@ public class IDAOBean<T> implements IDAO<T> {
 
 	public T getForId(Long id, Class<T> classe) {
 		EntityManager em = JPAUtil.getEntityManager();
-		return (T) em.find(classe, id);
+		T t = (T) em.find(classe, id);
+		em.close();
+		return t;
 	}
 }
