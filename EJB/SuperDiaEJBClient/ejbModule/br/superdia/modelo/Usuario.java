@@ -2,6 +2,7 @@ package br.superdia.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,11 @@ public class Usuario implements Serializable {
 	@SequenceGenerator(name = "usuario_id", sequenceName = "usuario_seq", allocationSize = 1)
 	@GeneratedValue(generator = "usuario_id", strategy = GenerationType.SEQUENCE)
 	private Long id;
+	@Column(nullable = false, length = 40)
 	private String usuario;
+	@Column(nullable = false)
 	private String senha;
+	@Column(nullable = false)
 	private String perfil;
 	
 	public Usuario() {

@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.superdia.modelo.Usuario;
-import br.superdia.sessionbean.IUsuario;
+import br.superdia.sessionbean.IDAO;
 
 /**
  * Gerencia o cadastro do usuario.
@@ -14,7 +14,7 @@ import br.superdia.sessionbean.IUsuario;
 @SessionScoped
 public class UsuarioMB {
 	@EJB
-	private IUsuario iUsuario;
+	private IDAO<Usuario> iUsuario;
 	
 	private Usuario usuario = new Usuario();
 	

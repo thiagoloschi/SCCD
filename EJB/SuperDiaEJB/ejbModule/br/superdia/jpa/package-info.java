@@ -1,0 +1,4 @@
+/**
+ * 
+ */
+package br.superdia.jpa;

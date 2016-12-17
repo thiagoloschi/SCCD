@@ -5,7 +5,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import br.superdia.modelo.Produto;
-import br.superdia.sessionbean.IProduto;
+import br.superdia.sessionbean.IDAO;
 
 /**
  * Classe responsavel pelo gerenciamento de estoque. 
@@ -13,8 +13,8 @@ import br.superdia.sessionbean.IProduto;
 @ManagedBean
 @SessionScoped
 public class ProdutoMB {
-	@EJB
-	private IProduto iProduto;
+	@EJB()
+	private IDAO<Produto> iProduto;
 	
 	private Produto produto = new Produto();
 	

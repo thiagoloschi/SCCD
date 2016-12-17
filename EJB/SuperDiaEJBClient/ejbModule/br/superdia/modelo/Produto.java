@@ -2,6 +2,7 @@ package br.superdia.modelo;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,8 +18,11 @@ public class Produto implements Serializable{
 	@SequenceGenerator(name = "produto_id", sequenceName = "produto_seq", allocationSize = 1)
 	@GeneratedValue(generator = "produto_id", strategy = GenerationType.SEQUENCE)
 	private Long id;
+	@Column(nullable = false, length = 50)
 	private String nome;
+	@Column(nullable = false, length = 300)
 	private String descricao;
+	@Column(nullable = false)
 	private double preco;
 	private int estoqueMinimo;
 	private int quantidadeEstoque;
