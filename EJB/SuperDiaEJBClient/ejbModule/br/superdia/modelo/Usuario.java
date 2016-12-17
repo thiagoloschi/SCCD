@@ -47,6 +47,14 @@ public class Usuario implements Serializable {
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	
 }
