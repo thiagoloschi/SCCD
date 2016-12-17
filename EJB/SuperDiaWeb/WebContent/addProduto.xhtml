@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Super dia - Cadastro</title>
+</h:head>
+<h:body>
+	<h2>Super dia - Cadastro produto</h2>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome: " for="nome" />
+			<h:inputText id="nome" value="#{produtoMB.produto.nome}" />
+			<h:outputLabel value="Descrição: " for="descricao" />
+			<h:inputTextarea id="descricao" value="#{produtoMB.produto.descricao}" />
+			<h:outputLabel value="Preço" for="preco" />
+			<h:inputText id="preco" value="#{produtoMB.produto.preco}" />
+			<h:outputLabel for="qtdeEstoque" value="Quantidade em Estoque: " />
+			<h:inputText id="qtdeEstoque" value="#{produtoMB.produto.quantidadeEstoque}" />
+			<h:outputLabel for="estoqueMinimo" value="Estoque minimo: " />
+			<h:inputText id="estoqueMinimo" value="#{produtoMB.produto.estoqueMinimo}" />
+			<h:commandButton value="Cadastrar" action="#{produtoMB.gravaProduto}" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

@@ -22,6 +22,10 @@ public class UsuarioMB {
 		if(usuario.getId()==null)
 			iUsuario.add(usuario);
 	}
+	
+	public void login(){
+		
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
