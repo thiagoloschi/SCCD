@@ -24,11 +24,12 @@ public class Produto implements Serializable{
 	private String descricao;
 	@Column(nullable = false)
 	private double preco;
+	@Column(nullable=false)
+	private String vendidoPor;
 	private int estoqueMinimo;
 	private int quantidadeEstoque;
 	
-	public Produto() {
-	}
+	public Produto() {}
 
 	public String getNome() {
 		return nome;
@@ -77,6 +78,13 @@ public class Produto implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
+
+	public String getVendidoPor() {
+		return vendidoPor;
+	}
+
+	public void setVendidoPor(String vendidoPor) {
+		this.vendidoPor = vendidoPor;
+	}
+
 }
