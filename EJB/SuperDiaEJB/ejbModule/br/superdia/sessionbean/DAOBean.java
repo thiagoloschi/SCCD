@@ -13,8 +13,10 @@ import br.superdia.jpa.JPAUtil;
 @Remote(IDAO.class)
 public class DAOBean<T> implements IDAO<T> {
 
+	private EntityManager em;	
+
 	public void add(T t) {
-		EntityManager em = JPAUtil.getEntityManager();
+		em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(t);
 		em.getTransaction().commit();
@@ -22,7 +24,7 @@ public class DAOBean<T> implements IDAO<T> {
 	}
 
 	public void remove(T t) {
-		EntityManager em = JPAUtil.getEntityManager();
+		em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		em.remove(em.merge(t));
 		em.getTransaction().commit();
@@ -30,7 +32,7 @@ public class DAOBean<T> implements IDAO<T> {
 	}
 
 	public void update(T t) {
-		EntityManager em = JPAUtil.getEntityManager();
+		em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		em.merge(t);
 		em.getTransaction().commit();
@@ -38,7 +40,7 @@ public class DAOBean<T> implements IDAO<T> {
 	}
 
 	public List<T> getAll(Class<T> classe) {
-		EntityManager em = JPAUtil.getEntityManager();
+		em = JPAUtil.getEntityManager();
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 		List<T> lista = em.createQuery(query).getResultList();
@@ -47,7 +49,7 @@ public class DAOBean<T> implements IDAO<T> {
 	}
 
 	public T getForId(Long id, Class<T> classe) {
-		EntityManager em = JPAUtil.getEntityManager();
+		em = JPAUtil.getEntityManager();
 		T t = (T) em.find(classe, id);
 		em.close();
 		return t;
