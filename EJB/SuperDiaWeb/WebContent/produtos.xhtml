@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Superdia - Produtos</title>
+</head>
+<body>
+<h:dataTable value="#{produtoMB.produtos}" var="produto">
+		<h:column>	
+			<f:facet name="header">Produto</f:facet>
+			#{produto.nome}
+		</h:column>
+		<h:column>	
+			<f:facet name="header">Descrição</f:facet>
+			#{produto.descricao}
+		</h:column>		
+		<h:column>	
+			<f:facet name="header">Preço</f:facet>
+			#{produto.preco}
+		</h:column>
+		<h:column>
+			<!-- Vitor, aqui tem que mudar pra função de carrinhoMB que voce criou -->
+			<h:commandLink value="Adicionar ao Carrinho" action="#{carrinhoMB.adicionar(produto)}"/>
+		</h:column>
+	</h:dataTable>
+
+</body>
+</html>

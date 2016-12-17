@@ -18,6 +18,9 @@ public class ProdutoMB {
 	@EJB()
 	private IDAO<Produto> iProduto;
 	
+	//Lista de produtos
+	private List<Produto> produtos;
+	
 	private Produto produto = new Produto();
 	
 	public void gravaProduto(){
@@ -33,10 +36,11 @@ public class ProdutoMB {
 		this.produto = produto;
 	}
 	
-	public List<Produto>getProdutos(){
-		
-		return iProduto.getAll(Produto.class);
-		
+	public List<Produto> getProdutos() {
+		if(produtos==null)
+			this.produtos = iProduto.getAll(Produto.class);
+		return produtos;
+
 	}
 	
 }// class
