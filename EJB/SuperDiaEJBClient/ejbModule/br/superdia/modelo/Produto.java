@@ -86,5 +86,7 @@ public class Produto implements Serializable{
 	public void setVendidoPor(String vendidoPor) {
 		this.vendidoPor = vendidoPor;
 	}
+	
+	
 
 }
