@@ -24,6 +24,9 @@ public class ProdutoMB {
 	private Produto produto = new Produto();
 	
 	public void gravaProduto(){
+		
+		produto.setVendidoPor("");
+		
 		if(produto.getId() == null)
 			iProduto.add(produto);
 	}

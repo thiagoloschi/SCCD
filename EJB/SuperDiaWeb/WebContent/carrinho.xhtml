@@ -4,10 +4,10 @@
     xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Superdia - Produtos</title>
+<title>Superdia - Carrinho</title>
 </head>
 <body>
-<h:dataTable value="#{produtoMB.produtos}" var="produto" border="1">
+<h:dataTable value="#{carrinhoMB.produtos}" var="produto">
 		<h:column>	
 			<f:facet name="header">Produto</f:facet>
 			#{produto.nome}
@@ -21,8 +21,7 @@
 			#{produto.preco}
 		</h:column>
 		<h:column>
-			<f:facet name="header">Adicionar</f:facet>
-			<h:commandLink value="Adicionar" action="#{carrinhoMB.addProdutoCarrinho(produto)}"/>
+			<h:commandLink value="Remover do Carrinho" action="#{carrinhoMB.removerProdutoCarrinho(produto)}"/>
 		</h:column>
 	</h:dataTable>
 
