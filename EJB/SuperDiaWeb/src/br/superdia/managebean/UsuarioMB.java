@@ -26,6 +26,12 @@ public class UsuarioMB {
 	public void login(){
 		
 	}
+	
+	public String logout(){
+		
+		return "login";
+		
+	}
 
 	public Usuario getUsuario() {
 		return usuario;

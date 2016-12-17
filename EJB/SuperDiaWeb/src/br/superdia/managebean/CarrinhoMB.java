@@ -18,7 +18,7 @@ public class CarrinhoMB {
 	private List<Produto>produtos;
 
 	public float total = 0;
-
+	
 	public void addProdutoCarrinho(Produto produto){
 
 		icarrinho.addProduct(produto);
@@ -50,6 +50,9 @@ public class CarrinhoMB {
 	}
 
 	public float getTotal() {
+		
+		if(produtos == null)
+			return 0;
 		
 		total = 0;
 

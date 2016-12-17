@@ -15,7 +15,7 @@ import br.superdia.sessionbean.IDAO;
 @ManagedBean
 @SessionScoped
 public class ProdutoMB {
-	@EJB()
+	@EJB
 	private IDAO<Produto> iProduto;
 	
 	//Lista de produtos
@@ -23,6 +23,10 @@ public class ProdutoMB {
 	
 	private Produto produto = new Produto();
 	
+	public ProdutoMB() {
+		System.out.println("\n\n\n******************** AQUI PRODUTOS\n\n\n");
+	}
+
 	public void gravaProduto(){
 		
 		produto.setVendidoPor("");
