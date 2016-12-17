@@ -1,0 +1,34 @@
+package br.superdia.managebean;
+
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+import br.superdia.modelo.Usuario;
+import br.superdia.sessionbean.IUsuario;
+
+/**
+ * Gerencia o cadastro do usuario.
+ */
+@ManagedBean
+@SessionScoped
+public class UsuarioMB {
+	@EJB
+	private IUsuario iUsuario;
+	
+	private Usuario usuario = new Usuario();
+	
+	public void addUsuario(){
+		if(usuario.getId()==null)
+			iUsuario.add(usuario);
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+}
