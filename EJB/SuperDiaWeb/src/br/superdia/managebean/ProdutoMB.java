@@ -1,5 +1,7 @@
 package br.superdia.managebean;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -29,6 +31,12 @@ public class ProdutoMB {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+	
+	public List<Produto>getProdutos(){
+		
+		return iProduto.getAll(Produto.class);
+		
 	}
 	
 }// class
