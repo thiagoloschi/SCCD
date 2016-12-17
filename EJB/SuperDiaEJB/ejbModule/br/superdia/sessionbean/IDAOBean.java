@@ -13,32 +13,34 @@ import br.superdia.jpa.JPAUtil;
 @Remote(IDAO.class)
 public class IDAOBean<T> implements IDAO<T> {
 
+	private EntityManager em;	
+	
+	public IDAOBean() {
+		em = JPAUtil.getEntityManager();
+	}
+
 	public void add(T t) {
-		EntityManager em = JPAUtil.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(t);
 		em.getTransaction().commit();
 		em.close();
 	}
 
-	public void remove(T t) {
-		EntityManager em = JPAUtil.getEntityManager();
+	public void remove(T t) {		
 		em.getTransaction().begin();
 		em.remove(em.merge(t));
 		em.getTransaction().commit();
 		em.close();
 	}
 
-	public void update(T t) {
-		EntityManager em = JPAUtil.getEntityManager();
+	public void update(T t) {		
 		em.getTransaction().begin();
 		em.merge(t);
 		em.getTransaction().commit();
 		em.close();
 	}
 
-	public List<T> getAll(Class<T> classe) {
-		EntityManager em = JPAUtil.getEntityManager();
+	public List<T> getAll(Class<T> classe) {		
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 		List<T> lista = em.createQuery(query).getResultList();
@@ -46,8 +48,7 @@ public class IDAOBean<T> implements IDAO<T> {
 		return lista;
 	}
 
-	public T getForId(Long id, Class<T> classe) {
-		EntityManager em = JPAUtil.getEntityManager();
+	public T getForId(Long id, Class<T> classe) {		
 		return (T) em.find(classe, id);
 	}
 }
