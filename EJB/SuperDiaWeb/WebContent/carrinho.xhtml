@@ -7,7 +7,9 @@
 <title>Superdia - Carrinho</title>
 </head>
 <body>
-<h:dataTable value="#{carrinhoMB.produtos}" var="produto">
+
+<h:form>
+<h:dataTable value="#{carrinhoMB.produtos}" var="produto" border="1">
 		<h:column>	
 			<f:facet name="header">Produto</f:facet>
 			#{produto.nome}
@@ -21,9 +23,11 @@
 			#{produto.preco}
 		</h:column>
 		<h:column>
-			<h:commandLink value="Remover do Carrinho" action="#{carrinhoMB.removerProdutoCarrinho(produto)}"/>
+			<f:facet name="header">Remover</f:facet>
+			<h:commandLink value="Remover" action="#{carrinhoMB.removerProdutoCarrinho(produto)}"/>
 		</h:column>
 	</h:dataTable>
+</h:form>	
 
 </body>
 </html>

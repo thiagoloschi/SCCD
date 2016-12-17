@@ -26,6 +26,7 @@ public class CarrinhoMB {
 	public void removerProdutoCarrinho(Produto produto){
 		
 		icarrinho.removeProduct(produto);
+		this.produtos = icarrinho.getItens();
 		
 	}
 	
