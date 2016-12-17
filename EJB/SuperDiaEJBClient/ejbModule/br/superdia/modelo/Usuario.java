@@ -1,6 +1,10 @@
 package br.superdia.modelo;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,7 +45,18 @@ public class Usuario implements Serializable {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		String senhaCriptografada = null;
+		MessageDigest algorithm;
+		try {
+			algorithm = MessageDigest.getInstance("SHA-256");
+			byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+			senhaCriptografada = new String(messageDigest, StandardCharsets.UTF_8);
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		this.senha = senhaCriptografada;
 	}
 
 	public String getPerfil() {
