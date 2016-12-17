@@ -20,13 +20,14 @@ public class CarrinhoMB {
 	public void addProdutoCarrinho(Produto produto){
 		
 		icarrinho.addProduct(produto);
+		atualizaLista();
 		
 	}
 	
 	public void removerProdutoCarrinho(Produto produto){
 		
 		icarrinho.removeProduct(produto);
-		this.produtos = icarrinho.getItens();
+		atualizaLista();
 		
 	}
 	
@@ -35,6 +36,12 @@ public class CarrinhoMB {
 		if(produtos==null)
 			this.produtos = icarrinho.getItens();
 		return produtos;
+		
+	}
+	
+	private void atualizaLista(){
+		
+		this.produtos = icarrinho.getItens();
 		
 	}
 	
