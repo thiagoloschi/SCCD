@@ -29,8 +29,17 @@ public class ProdutoMB {
 		
 		if(produto.getId() == null)
 			iProduto.add(produto);
+		else iProduto.update(produto);
+		
+		produto = new Produto();
+		produtos = iProduto.getAll(Produto.class);
 	}
-
+	
+	public void remove(Produto produto){
+		iProduto.remove(produto);
+		produtos = iProduto.getAll(Produto.class);
+	}
+	
 	public Produto getProduto() {
 		return produto;
 	}

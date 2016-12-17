@@ -4,10 +4,14 @@
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Super dia - Cadastro</title>
+<title>SuperDia Estoque</title>
 </h:head>
 <h:body>
-	<h2>Super dia - Cadastro produto</h2>
+	<h1>Controle de Estoque</h1>
+	<hr/>
+	<br/><br/>
+	<h4>Cadastro de produtos</h4>
+	<br/>
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome: " for="nome" />
@@ -21,6 +25,30 @@
 			<h:outputLabel for="estoqueMinimo" value="Estoque minimo: " />
 			<h:inputText id="estoqueMinimo" value="#{produtoMB.produto.estoqueMinimo}" />
 			<h:commandButton value="Cadastrar" action="#{produtoMB.gravaProduto}" />
+		</h:panelGrid>
+		<br/><br/>
+
+		<h4>Produtos Cadastrados</h4>
+		<h:panelGrid>
+			<h:dataTable value="#{produtoMB.produtos}" var="produto" border="1">
+		<h:column>	
+			<f:facet name="header">Produto</f:facet>
+			#{produto.nome}
+		</h:column>
+		<h:column>	
+			<f:facet name="header">Descrição</f:facet>
+			#{produto.descricao}
+		</h:column>		
+		<h:column>	
+			<f:facet name="header">Preço</f:facet>
+			#{produto.preco}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Controle</f:facet>
+			<h:commandLink value="Editar" action="#{carrinhoMB.addProdutoCarrinho(produto)}"/> | 
+			<h:commandLink value="Remover" action="#{produtoMB.remove(produto)}"/>
+		</h:column>
+	</h:dataTable>
 		</h:panelGrid>
 	</h:form>
 </h:body>
