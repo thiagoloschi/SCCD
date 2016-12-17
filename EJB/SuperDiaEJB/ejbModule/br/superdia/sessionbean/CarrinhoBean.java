@@ -26,7 +26,15 @@ public class CarrinhoBean implements ICarrinho {
 	}
 
 	public void removeProduct(Produto produto) {
-		produtos.removeIf( p -> p.getNome().equalsIgnoreCase(produto.getNome()) );
+		
+		System.err.println("\n\n\nFora do loop: " + produtos.toString() + "\n\n\n");
+		
+		for(int contador = 0; contador < produtos.size(); contador++)
+			if(produto.getId() == produtos.get(contador).getId()){
+				produtos.remove(contador);
+				break;
+			}
+		//produtos.removeIf( p -> p.getNome().equalsIgnoreCase(produto.getNome()) );
 	}
 
 	public void clearItens() {
