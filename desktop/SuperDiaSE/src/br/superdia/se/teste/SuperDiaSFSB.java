@@ -50,6 +50,8 @@ public class SuperDiaSFSB {
 				switch(opcao) {
 				case 0: adiciona(); break;
 				case 1: lista(); break;
+				case 2: remove(produto); break;
+				case 3: altera(produto);break;
 				}
 			}
 		}while(opcao != CLOSED_OPTION && opcao != 2);
@@ -76,7 +78,7 @@ public class SuperDiaSFSB {
 		
 		return produto;
 	}
-
+	
 	public static void lista() {
 		List<Produto> produtos = iproduto.getAll(Produto.class);
 
@@ -84,6 +86,56 @@ public class SuperDiaSFSB {
 			printProduto(produtos.get(i));
 		}
 
+	}
+	
+	public static void remove(Produto produto){
+		int op = showConfirmDialog(null, String.format("Nome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
+				+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", 
+				produto.getNome(), produto.getDescricao(), produto.getPreco(), 
+				produto.getVendidoPor(), produto.getEstoqueMinimo(), produto.getQuantidadeEstoque()),
+				"Remover Produto", YES_NO_OPTION, QUESTION_MESSAGE);
+		if(op == YES_OPTION)
+			iproduto.remove(produto);
+		else
+			msgInfo("Operação Cancelada", "Remover Produto");
+	}
+	
+	public static void altera(Produto produto){
+		boolean alterou = false;
+		String nome = lerString("Nome: ", "Você deve fornecer o nome!", "Alterar Produto", true);
+		if(nome != null){
+			produto.setNome(nome);
+			alterou = true;
+		}
+		String descricao = lerString("Descrição: ", "Vocẽ deve fornecer uma descrição", "Alterar Produto", true);
+		if(descricao != null){
+			produto.setDescricao(descricao);
+			alterou = true;
+		}
+		Double preco = lerNumeroReal("Preço: ", "Você deve fornecer o preço", "Adiciona Produto", true);
+		if(preco != null){
+			produto.setPreco(preco);	
+			alterou = true;
+		}
+		String vendidoPor = lerString("Vendido Por: ", "Vocẽ deve fornecer quem vendeu o produto", "Adiconar Produto", true);
+		if(vendidoPor != null){
+			produto.setVendidoPor(vendidoPor);
+			alterou = true;
+		}
+		Integer estoqueMinimo = lerNumeroInteiro("Estoque Mínimo: ", "Você deve fornecer o estoque mínimo!", "Alterar Produto", true);
+		if(estoqueMinimo != null){
+			produto.setEstoqueMinimo(estoqueMinimo);
+			alterou = true;
+		}
+		Integer quantidadeEstoque = lerNumeroInteiro("Quantidade de Estoque: ", "Você deve fornecer a quantidade de estoque!",
+				"Alterar Produto", true);
+		if(quantidadeEstoque != null){
+			produto.setQuantidadeEstoque(quantidadeEstoque);
+			alterou = true;
+		}
+		
+		if(alterou)
+			iproduto.update(produto);
 	}
 
 	public static void printProduto(Produto produto) {
