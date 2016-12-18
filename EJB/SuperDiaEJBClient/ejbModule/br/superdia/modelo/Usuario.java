@@ -1,10 +1,6 @@
 package br.superdia.modelo;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

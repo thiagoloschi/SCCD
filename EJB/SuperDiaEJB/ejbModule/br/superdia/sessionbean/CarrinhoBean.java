@@ -7,7 +7,6 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
 import javax.jws.WebService;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import br.superdia.modelo.Produto;
