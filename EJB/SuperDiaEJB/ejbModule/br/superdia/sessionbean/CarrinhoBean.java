@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
+import javax.jws.WebService;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 import br.superdia.modelo.Produto;
 import br.superdia.modelo.Usuario;
@@ -18,6 +21,8 @@ import br.superdia.modelo.Venda;
 
 @Stateful
 @Remote(ICarrinho.class)
+@WebService
+@Path("/cliente/carrinho")
 public class CarrinhoBean implements ICarrinho {
 	private List<Produto> produtos = new ArrayList<>();
 	
@@ -26,21 +31,13 @@ public class CarrinhoBean implements ICarrinho {
 	}
 
 	public void removeProduct(Produto produto) {
-		
-		System.err.println("\n\n\nFora do loop: " + produtos.toString() + "\n\n\n");
-		
-		for(int contador = 0; contador < produtos.size(); contador++)
-			if(produto.getId() == produtos.get(contador).getId()){
-				produtos.remove(contador);
-				break;
-			}
-		//produtos.removeIf( p -> p.getNome().equalsIgnoreCase(produto.getNome()) );
+		produtos.removeIf( p -> p.getId() == produto.getId());
 	}
 
 	public void clearItens() {
 		produtos.clear();		
 	}
-
+	
 	public List<Produto> getItens() {
 		return produtos;
 	}
