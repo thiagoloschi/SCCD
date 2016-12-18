@@ -1,0 +1,8 @@
+.metadata/*
+.recommenders/*
+EJB/*/.classpath
+EJB/SuperDiaWeb/.classpath
+RemoteSystemsTempFiles/.project
+*.classpath
+EJB/SuperDiaWeb/.classpath
+*.prefs
