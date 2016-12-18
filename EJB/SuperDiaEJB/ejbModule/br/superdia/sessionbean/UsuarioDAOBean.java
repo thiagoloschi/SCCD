@@ -16,14 +16,14 @@ public class UsuarioDAOBean implements IUsuarioDAO {
 	 * Verifica se um usuário é válido, caso seja, retorna o perfil do mesmo para
 	 * que possa ser setado no objeto e liberar apenas suas permissões de acesso.
 	 */
-	public String isValid(Usuario usuario){
+	public boolean isValid(Usuario usuario){
 		EntityManager em = JPAUtil.getEntityManager();
 		String q = "SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha";
 		TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
 		query.setParameter("usuario", usuario.getUsuario());
 		query.setParameter("senha", usuario.getSenha());
-		Usuario u = query.getSingleResult();
+		boolean result = !query.getResultList().isEmpty();
 		em.close();
-		return u != null ? u.getPerfil() : null;
+		return result;
 	}
 }

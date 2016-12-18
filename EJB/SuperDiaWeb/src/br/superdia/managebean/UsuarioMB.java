@@ -6,6 +6,7 @@ import javax.faces.bean.SessionScoped;
 
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.IDAO;
+import br.superdia.sessionbean.IUsuarioDAO;
 
 /**
  * Gerencia o cadastro do usuario.
@@ -15,6 +16,9 @@ import br.superdia.sessionbean.IDAO;
 public class UsuarioMB {
 	@EJB
 	private IDAO<Usuario> iUsuario;
+	
+	@EJB
+	private IUsuarioDAO usuarioDAO;
 	
 	private Usuario usuario = new Usuario();
 	
@@ -33,15 +37,26 @@ public class UsuarioMB {
 			iUsuario.add(usuario);
 	}
 	
-	public void login(){
-		
+	public String login(){
+		boolean loginValido = usuarioDAO.isValid(usuario);
+		System.err.println(loginValido);
+		if(loginValido)
+			return "produtos";
+		else {
+			usuario = new Usuario();
+			return "login";
+		}			
 	}
 	
-	/*public String logout(){
-		
-		//return "login";
-		
-	}*/
+	public String logout(){		
+		usuario = new Usuario();
+		return "login";	
+	}
+	
+	public boolean isLogado(){
+		System.err.println(usuario.getUsuario());
+		return usuario.getUsuario() != null;
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -53,7 +68,7 @@ public class UsuarioMB {
 	
 	public String cadastrarCliente(){
 		
-		// Verificar se o cliente já existe no banco.
+		// Verificar se o cliente ja existe no banco.
 		//				...........
 		
 		// Verifica se as duas senhas batem.
