@@ -86,6 +86,13 @@ public class Produto implements Serializable{
 	public void setVendidoPor(String vendidoPor) {
 		this.vendidoPor = vendidoPor;
 	}
+
+	@Override
+	public String toString() {
+		return "produto:[id:" + id + ",nome:" + nome + ",descricao:" + descricao + ",preco:" + preco
+				+ ",vendidoPor:" + vendidoPor + ",estoqueMinimo:" + estoqueMinimo + ",quantidadeEstoque:"
+				+ quantidadeEstoque + "]";
+	}
 	
 	
 
