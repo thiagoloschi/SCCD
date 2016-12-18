@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,25 +17,16 @@
 
 	<h:form>
 	
-		<h:dataTable value="#{produtoMB.produtos}" var="produto" border="1">
-			<h:column>
-				<f:facet name="header">Produto</f:facet>
-			#{produto.nome}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Descrição</f:facet>
-			#{produto.descricao}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Preço</f:facet>
-			#{produto.preco}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Carrinho</f:facet>
-				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(produto)}"
-					value="Adicionar" />
-			</h:column>
-		</h:dataTable>
+		<b:dataTable value="#{produtoMB.produtos}" var="pr">
+			<b:dataTableColumn value="#{pr.nome}" />
+			<b:dataTableColumn value="#{pr.descricao}" />
+			<b:dataTableColumn value="#{pr.preco}" />
+			<b:dataTableColumn label="Adicionar carrinho">
+				<h:commandLink value="Adicionar"
+					action="#{carrinhoMB.addProdutoCarrinho(pr)}" />
+			</b:dataTableColumn>
+		</b:dataTable>
+		
 	</h:form>
 
 </h:body>

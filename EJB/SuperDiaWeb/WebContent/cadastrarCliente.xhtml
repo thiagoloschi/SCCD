@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:b="http://bootsfaces.net/ui" 
-    xmlns:f="http://java.sun.com/jsf/core">
+    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Super dia - Login</title>
+<title>Super dia - Cadastro de cliente</title>
 </h:head>
 <h:body>
-	<h2>Centro de distribuição Super dia</h2>
+	<h2>Cadastrar cliente</h2>
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Usuario: " for="usuario" />
-			<b:inputText id="usuario" placeholder="usuário" value="#{usuarioMB.usuario.usuario}"></b:inputText>
+			<h:inputText id="usuario" value="#{usuarioMB.usuario.usuario}" />
 			<h:outputLabel value="Senha:" for="senha" />
 			<h:inputSecret value="#{usuarioMB.usuario.senha}" id="senha" />
-			<h:commandButton action="#{usuarioMB.login}" value="Login" />
+			<h:outputLabel value="Repita senha:" for="senha2" />
+			<h:inputSecret value="#{usuarioMB.senha2}" id="senha2" />
+			<h:commandButton action="#{usuarioMB.cadastrarCliente}" value="Cadastrar" />
 		</h:panelGrid>
 	</h:form>
-	
-	<br></br><br></br>
-	
-	<h:form>
-		<h:link value="Cadastrar" outcome="cadastrarCliente" /> <br></br>
-	</h:form>
-	
 </h:body>
 </html>

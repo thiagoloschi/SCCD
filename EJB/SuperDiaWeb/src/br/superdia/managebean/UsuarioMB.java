@@ -18,6 +18,16 @@ public class UsuarioMB {
 	
 	private Usuario usuario = new Usuario();
 	
+	private String senha2;
+	
+	public String getSenha2() {
+		return senha2;
+	}
+
+	public void setSenha2(String senha2) {
+		this.senha2 = senha2;
+	}
+
 	public void addUsuario(){
 		if(usuario.getId()==null)
 			iUsuario.add(usuario);
@@ -39,6 +49,27 @@ public class UsuarioMB {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public String cadastrarCliente(){
+		
+		// Verificar se o cliente já existe no banco.
+		//				...........
+		
+		// Verifica se as duas senhas batem.
+		if(senha2.equalsIgnoreCase(usuario.getSenha())){
+			
+			usuario.setPerfil("cliente");
+			iUsuario.add(usuario);
+			
+			usuario = new Usuario();
+			
+			return "login";
+			
+		}
+		
+		return "cadastrarCliente";
+		
 	}
 	
 }

@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void setSenha(String senha) {
-		String senhaCriptografada = null;
+		/*String senhaCriptografada = null;
 		MessageDigest algorithm;
 		try {
 			algorithm = MessageDigest.getInstance("SHA-256");
@@ -54,9 +54,11 @@ public class Usuario implements Serializable {
 			senhaCriptografada = new String(messageDigest, StandardCharsets.UTF_8);
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
-		this.senha = senhaCriptografada;
+		// MERDA DE CRIPTOGRAFIA...
+		
+		this.senha = senha;
 	}
 
 	public String getPerfil() {

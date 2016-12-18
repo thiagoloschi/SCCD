@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html" 
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core">
-    
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>menu</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>menu</title>
 </h:head>
 <h:body>
 
-	<h:form>
-		<h:link value="listar" outcome="produtos" /> <br></br>
-		<h:link value="carrinho" outcome="carrinho" /> <br></br>
-		<h:link value="estoque" outcome="controleEstoque" /> <br></br>
-	</h:form>
-	
-	<br></br><br></br>
+	<b:navBar brand="Home" brandHref="login.xhtml" inverse="true">
+		<b:navbarLinks>
+			<b:navLink value="Listar" href="produtos.xhtml"></b:navLink>
+			<b:navLink value="Carrinho" href="carrinho.xhtml"></b:navLink>
+			<b:navLink value="Estoque" href="controleEstoque.xhtml"></b:navLink>
+		</b:navbarLinks>
+	</b:navBar>
+
+	<br></br>
+	<br></br>
 
 </h:body>
 </html>

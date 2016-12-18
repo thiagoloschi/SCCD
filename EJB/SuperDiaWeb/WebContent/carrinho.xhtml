@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,29 +16,23 @@
 	</ui:insert>
 
 	<h:form>
-		
-		<h:outputText value="#{carrinhoMB.total}" /><br></br>
+
+		<h:outputText value="#{carrinhoMB.total}" />
+		<br></br>
 		<h:commandButton value="Limpar" action="#{carrinhoMB.clearCarrinho()}"></h:commandButton>
-		
-		<h:dataTable value="#{carrinhoMB.produtos}" var="produto" border="1">
-			<h:column>
-				<f:facet name="header">Produto</f:facet>
-			#{produto.nome}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Descrição</f:facet>
-			#{produto.descricao}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Preço</f:facet>
-			#{produto.preco}
-		</h:column>
-			<h:column>
-				<f:facet name="header">Remover</f:facet>
+
+		<b:dataTable value="#{carrinhoMB.produtos}" var="pr">
+			<b:dataTableColumn value="#{pr.nome}" />
+			<b:dataTableColumn value="#{pr.descricao}" />
+			<b:dataTableColumn value="#{pr.preco}" />
+			<b:dataTableColumn label="Remover carrinho">
 				<h:commandLink value="Remover"
-					action="#{carrinhoMB.removerProdutoCarrinho(produto)}" />
-			</h:column>
-		</h:dataTable>
+					action="#{carrinhoMB.removerProdutoCarrinho(pr)}" />
+			</b:dataTableColumn>
+		</b:dataTable>
+
+
+
 	</h:form>
 
 </h:body>
