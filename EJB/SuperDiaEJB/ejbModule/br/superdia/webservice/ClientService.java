@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import br.superdia.modelo.Produto;
+import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.ICarrinho;
 import br.superdia.sessionbean.IDAO;
 
@@ -67,6 +68,30 @@ public class ClientService {
 			return "ERRO";
 		}
 			return "OK";
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/carrinho/clean")
+	public String cleanCarrinho(){
+		try {
+			carrinho.clearItens();
+		} catch (Exception e) {
+			return "ERRO";
+		}
+			return "Carrinho Limpo.";
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/carrinho/endsBuy/{usuario}")
+	public String endsBuy(@PathParam("usuario") Usuario usuario){
+		try {
+			carrinho.endsBuy(usuario);
+		} catch (Exception e) {
+			return "ERRO";
+		}
+			return "Compra Finalizada.";
 	}
 	
 }
