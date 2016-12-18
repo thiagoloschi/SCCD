@@ -39,7 +39,6 @@ public class UsuarioMB {
 	
 	public String login(){
 		boolean loginValido = usuarioDAO.isValid(usuario);
-		System.err.println(loginValido);
 		if(loginValido)
 			return "produtos";
 		else {
@@ -54,7 +53,6 @@ public class UsuarioMB {
 	}
 	
 	public boolean isLogado(){
-		System.err.println(usuario.getUsuario());
 		return usuario.getUsuario() != null;
 	}
 
