@@ -27,11 +27,11 @@ public class UsuarioMB {
 		
 	}
 	
-	public String logout(){
+	/*public String logout(){
 		
-		return "login";
+		//return "login";
 		
-	}
+	}*/
 
 	public Usuario getUsuario() {
 		return usuario;
