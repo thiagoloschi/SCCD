@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/SuperDiaWeb/WebContent/WEB-INF/lib/SuperDiaClient.jar"/>
 	<classpathentry kind="lib" path="/home/renato/Documentos/glassfish4/glassfish/modules/gf-client-module.jar"/>
+	<classpathentry kind="lib" path="/SuperDiaWeb/WebContent/WEB-INF/lib/SuperDiaClient.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
