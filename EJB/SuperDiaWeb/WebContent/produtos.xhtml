@@ -7,28 +7,29 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
 	<title>Superdia - Produtos</title>
 </h:head>
 <h:body>
-
 	<ui:insert name="menu">
 		<ui:include src="navbar.xhtml" />
 		<ui:include src="logout.xhtml" />
 	</ui:insert>
-
+	<div class="body">
 	<h:form>
-	
+		
 		<b:dataTable value="#{produtoMB.produtos}" var="pr">
 			<b:dataTableColumn value="#{pr.nome}" />
 			<b:dataTableColumn value="#{pr.descricao}" />
 			<b:dataTableColumn value="#{pr.preco}" />
 			<b:dataTableColumn label="Adicionar carrinho">
-				<h:commandLink value="Adicionar"
-					action="#{carrinhoMB.addProdutoCarrinho(pr)}" />
+				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr)}">
+					<b:icon name="shopping-cart"  size="2x"/>
+				</h:commandLink>
 			</b:dataTableColumn>
 		</b:dataTable>
 		
 	</h:form>
-
+	</div>
 </h:body>
 </html>

@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:b="http://bootsfaces.net/ui" 
+    xmlns:b="http://bootsfaces.net/ui"
     xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Super dia - Login</title>
 </h:head>
@@ -12,19 +13,20 @@
 	<h2>Centro de distribuição Super dia</h2>
 	<h:form>
 		<h:panelGrid columns="2">
+
 			<h:outputLabel value="Usuario: " for="usuario" />
-			<b:inputText id="usuario" placeholder="usuário" value="#{usuarioMB.usuario.usuario}"></b:inputText>
+			<b:inputText id="usuario" placeholder="Usuário" value="#{usuarioMB.usuario.usuario}"></b:inputText>
 			<h:outputLabel value="Senha:" for="senha" />
 			<h:inputSecret value="#{usuarioMB.usuario.senha}" id="senha" />
 			<h:commandButton action="#{usuarioMB.login}" value="Login" />
 		</h:panelGrid>
 	</h:form>
-	
+
 	<br></br><br></br>
-	
+
 	<h:form>
 		<h:link value="Cadastrar" outcome="cadastrarCliente" /> <br></br>
 	</h:form>
-	
+
 </h:body>
 </html>

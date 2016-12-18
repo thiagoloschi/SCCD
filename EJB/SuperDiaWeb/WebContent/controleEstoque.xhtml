@@ -3,9 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html" 
     xmlns:ui="http://java.sun.com/jsf/facelets"
+    	xmlns:b="http://bootsfaces.net/ui"
     xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <title>SuperDia Estoque</title>
 </h:head>
 <h:body>
@@ -14,10 +16,8 @@
         <ui:include src="navbar.xhtml" />
         <ui:include src="logout.xhtml" />
 </ui:insert>
-
-	<h1>Controle de Estoque</h1>
+	<div class="body">
 	<hr/>
-	<br/><br/>
 	<h4>Cadastro de produtos</h4>
 	<br/>
 	<h:form>
@@ -37,27 +37,17 @@
 		<br/><br/>
 
 		<h4>Produtos Cadastrados</h4>
-		<h:panelGrid>
-			<h:dataTable value="#{produtoMB.produtos}" var="produto" border="1">
-		<h:column>	
-			<f:facet name="header">Produto</f:facet>
-			#{produto.nome}
-		</h:column>
-		<h:column>	
-			<f:facet name="header">Descrição</f:facet>
-			#{produto.descricao}
-		</h:column>		
-		<h:column>	
-			<f:facet name="header">Preço</f:facet>
-			#{produto.preco}
-		</h:column>
-		<h:column>
-			<f:facet name="header">Controle</f:facet>
-			<h:commandLink value="Editar" action="#{carrinhoMB.addProdutoCarrinho(produto)}"/> | 
-			<h:commandLink value="Remover" action="#{produtoMB.remove(produto)}"/>
-		</h:column>
-	</h:dataTable>
-		</h:panelGrid>
+		<b:dataTable value="#{produtoMB.produtos}" var="pr">
+			<b:dataTableColumn value="#{pr.nome}" />
+			<b:dataTableColumn value="#{pr.descricao}" />
+			<b:dataTableColumn value="#{pr.preco}" />
+			<b:dataTableColumn label="Adicionar carrinho">
+				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr)}">
+					<b:icon name="shopping-cart"  size="2x"/>
+				</h:commandLink>
+			</b:dataTableColumn>
+		</b:dataTable>
 	</h:form>
+	</div>
 </h:body>
 </html>
