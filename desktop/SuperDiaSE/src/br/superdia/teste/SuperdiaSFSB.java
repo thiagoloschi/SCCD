@@ -1,9 +1,7 @@
-package br.superdia.se.teste;
+package br.superdia.teste;
 
 import java.util.List;
-import static javax.swing.JOptionPane.*;
 import java.util.Properties;
-import java.util.Scanner;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -12,10 +10,14 @@ import javax.naming.NamingException;
 import br.superdia.modelo.Produto;
 import br.superdia.sessionbean.IDAO;
 
-public class SuperDiaSFSB {
+import static javax.swing.JOptionPane.*;
+
+public class SuperdiaSFSB {
 	private static IDAO<Produto> iproduto;
 	private static Produto produto;
 
+	private static final String NOME_PROGRAMA = "Super Dia";
+	private static final String ADICONA_PRODUTO = "Adicionar Produto";
 	private static final String NOME_PROGRAMA = "Super Dia";
 
 	public static void main(String[] args) {
@@ -41,12 +43,12 @@ public class SuperDiaSFSB {
 
 	private static void menu(){
 		int opcao;
-		String opcoes[] = {"Adicionar", "Listar", "Sair"};
+	String opcoes[] = {"Adicionar", "Listar", "Remover", "Alterar", "Sair"};
 
 		do {
 			opcao = showOptionDialog(null, "Escolha um comando abaixo.", NOME_PROGRAMA, DEFAULT_OPTION, QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 
-			if (opcao != CLOSED_OPTION && opcao != 2) {
+			if (opcao != CLOSED_OPTION && opcao != 4) {
 				switch(opcao) {
 				case 0: adiciona(); break;
 				case 1: lista(); break;
@@ -54,7 +56,7 @@ public class SuperDiaSFSB {
 				case 3: altera(produto);break;
 				}
 			}
-		}while(opcao != CLOSED_OPTION && opcao != 2);
+		}while(opcao != CLOSED_OPTION && opcao != 4);
 	}
 
 	public static Produto adiciona() {
@@ -101,6 +103,9 @@ public class SuperDiaSFSB {
 	}
 	
 	public static void altera(Produto produto){
+		/*int pesquisar = iproduto.s*/
+		produto = iproduto.getForId(produto.getId(), Produto.class);
+		
 		boolean alterou = false;
 		String nome = lerString("Nome: ", "Você deve fornecer o nome!", "Alterar Produto", true);
 		if(nome != null){
@@ -198,5 +203,4 @@ public class SuperDiaSFSB {
 	private static void msgErro(Object mensagem, String titulo) {
 		showMessageDialog(null, mensagem, titulo, ERROR_MESSAGE);
 	}
-
 }
