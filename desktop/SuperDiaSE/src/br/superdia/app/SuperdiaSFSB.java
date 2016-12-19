@@ -47,7 +47,7 @@ public class SuperdiaSFSB {
 		client.removeProdutoCarrinho(Long id);
 		
 		Ainda não esta funcionando... Irei Criar o WebService para 
-		utilizar a questões do usuarios...
+		utilizar a questões do usuario.
 		client.endsBuy(Usuario usuario);
 	 */
 	private static void criaConexao(){

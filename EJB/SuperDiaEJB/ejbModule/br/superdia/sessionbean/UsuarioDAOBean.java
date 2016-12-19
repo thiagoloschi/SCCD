@@ -26,4 +26,20 @@ public class UsuarioDAOBean implements IUsuarioDAO {
 		em.close();
 		return result;
 	}
+	
+	/*
+	 * Verifica se o usuário existe, caso exista ele retorna o Objeto usuário
+	 * caso contrario retorna null.
+	 */
+	public Usuario getUser(Usuario usuario){
+		EntityManager em = JPAUtil.getEntityManager();
+		String q = "SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha";
+		TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
+		query.setParameter("usuario", usuario.getUsuario());
+		query.setParameter("senha", usuario.getSenha());
+		Usuario result = query.getSingleResult();
+		em.close();
+		return result;
+	}
+	
 }
