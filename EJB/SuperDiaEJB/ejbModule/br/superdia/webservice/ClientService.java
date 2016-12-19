@@ -5,11 +5,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import br.superdia.modelo.Produto;
 import br.superdia.modelo.Usuario;
@@ -18,7 +13,6 @@ import br.superdia.sessionbean.IDAO;
 
 @Stateless
 @WebService
-@Path("/clientservice")
 public class ClientService {
 	
 	@EJB
@@ -27,69 +21,57 @@ public class ClientService {
 	@EJB
 	private ICarrinho carrinho;
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/produtosall")
 	public List<Produto> getProdutos(){
 		List<Produto> produtos = produtosDao.getAll(Produto.class);
 		return produtos;
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/carrinhoall")
 	public List<Produto> getCarrinho(){
 		return carrinho.getItens();
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/carrinho/add/{id}")
-	public String addProdutoCarrinho(@PathParam("id") Long id){
+	public Boolean addProdutoCarrinho(Long id){
 		try {
 			Produto produto = produtosDao.getForId(id, Produto.class);
 			carrinho.addProduct(produto);
 		} catch (Exception e) {
-			return "ERRO";
+			return false;
 		}
-			return "OK";
+			return true;
 	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/carrinho/remove/{id}")
-	public String removeProdutoCarrinho(@PathParam("id") Long id){
+
+	public Boolean removeProdutoCarrinho(Long id){
 		try {
 			Produto produto = produtosDao.getForId(id, Produto.class);
 			carrinho.removeProduct(produto);
 		} catch (Exception e) {
-			return "ERRO";
+			return false;
 		}
-			return "OK";
+			return true;
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/carrinho/clean")
-	public String cleanCarrinho(){
+	public Boolean cleanCarrinho(){
 		try {
 			carrinho.clearItens();
 		} catch (Exception e) {
-			return "ERRO";
+			return false;
 		}
-			return "Carrinho Limpo.";
+			return true;
 	}
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/carrinho/endsBuy/{usuario}")
-	public String endsBuy(@PathParam("usuario") Usuario usuario){
+
+	/**
+	 * Você deve fornecer o usuario para finalizar a compra.
+	 * @param usuario
+	 * @return true caso compra finalizado com sucesso
+	 * ou false com houver erro.
+	 */
+	public Boolean endsBuy(Usuario usuario){
 		try {
 			carrinho.endsBuy(usuario);
 		} catch (Exception e) {
-			return "ERRO";
+			return false;
 		}
-			return "Compra Finalizada.";
+			return true;
 	}
 	
 }

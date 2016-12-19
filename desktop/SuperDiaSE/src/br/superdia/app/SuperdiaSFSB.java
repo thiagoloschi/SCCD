@@ -1,4 +1,4 @@
-package br.superdia.teste;
+package br.superdia.app;
 
 import java.util.List;
 import java.util.Properties;
@@ -7,38 +7,53 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import br.superdia.modelo.Produto;
-import br.superdia.sessionbean.IDAO;
+import br.superdia.webservice.ClientService;
+import br.superdia.webservice.ClientServiceService;
+import br.superdia.webservice.Produto;
 
 import static javax.swing.JOptionPane.*;
 
 public class SuperdiaSFSB {
-	private static IDAO<Produto> iproduto;
-	private static Produto produto;
 
 	private static final String NOME_PROGRAMA = "Super Dia";
 	private static final String ADICONA_PRODUTO = "Adicionar Produto";
-	private static final String NOME_PROGRAMA = "Super Dia";
 
+	private static ClientService client;
+	private static Produto produto;
+	
 	public static void main(String[] args) {
-		Properties props = new Properties();
-		props.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.enterprise.naming.SerialInitContextFactory");
-		props.setProperty("org.omg.CORBA.ORBInitialHost", "localhost");
-		props.setProperty("org.omg.CORBA.ORBInitialPort", "3700"); 
-
-		InitialContext ic;
+		
 		try {
-			ic = new InitialContext(props);
-
-			iproduto = (IDAO<Produto>) ic.lookup("br.superdia.sessionbean.IDAO");
-
+			
+			criaConexao();
 			menu();
 
 			System.exit(0);
-		} catch (NamingException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Obtem conexão com webService disponibilizado pelo SuperDiaEAR
+	 * Com todas as funções do Carrinho.
+	 * 
+	  	client.addProdutoCarrinho(Long id);
+		client.cleanCarrinho();
+		
+		client.getCarrinho();
+		client.getProdutos();
+		client.removeProdutoCarrinho(Long id);
+		
+		Ainda não esta funcionando... Irei Criar o WebService para 
+		utilizar a questões do usuarios...
+		client.endsBuy(Usuario usuario);
+	 */
+	private static void criaConexao(){
+		ClientServiceService service = new ClientServiceService();
+		client = service.getClientServicePort();
+		
 	}
 
 	private static void menu(){
@@ -82,7 +97,7 @@ public class SuperdiaSFSB {
 	}
 	
 	public static void lista() {
-		List<Produto> produtos = iproduto.getAll(Produto.class);
+		List<Produto> produtos = client.getProdutos();
 
 		for (int i = 0; i < produtos.size(); i++) {
 			printProduto(produtos.get(i));
