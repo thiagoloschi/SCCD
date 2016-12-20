@@ -1,6 +1,7 @@
 package br.superdia.app;
 
 import static javax.swing.JOptionPane.*;
+import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.JOptionPane.showOptionDialog;
@@ -10,19 +11,17 @@ import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.glassfish.grizzly.ShutdownContext;
 
 import br.superdia.webservice.ClientService;
 import br.superdia.webservice.ClientServiceService;
 import br.superdia.webservice.Produto;
-import br.superdia.webservice.Usuario;
 
 public class SuperdiaSFSB {
 
 	private static final String NOME_PROGRAMA = "Caixa Super Dia";
 	private static final String ADICONA_PRODUTO = "Adicionar Produto";
 	private static final String LISTA_PRODUTO = "Lista Produto";
-	private static final String ALTERA_PRODUTO = "Altera Produto";
+	private static final String LISTA_PRODUTO_CAIXA = "Lista Produto Caixa";
 	private static final String REMOVE_PRODUTO = "Remove Produto";
 	private static final String FINALIZA_COMPRA = "Finaliza Produto";
 
@@ -69,39 +68,38 @@ public class SuperdiaSFSB {
 	private static void menu(){
 
 		int opcao;
-		String opcoes[] = {"Adicionar", "Listar Caixa", "Listar", "Remover", "Alterar", "Finalizar Compra", "Sair"};
+		String opcoes[] = {"Adicionar", "Listar Caixa", "Remover", "Finalizar Compra", "Sair"};
 
 		do {
 			opcao = showOptionDialog(null, "Escolha um comando abaixo.", NOME_PROGRAMA, DEFAULT_OPTION, QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 
-			if (opcao != CLOSED_OPTION && opcao != 6) {
+			if (opcao != CLOSED_OPTION && opcao != 4) {
 				switch(opcao) {
 				case 0: adiciona(); break;
 				case 1: listaCaixa(); break;
-				case 2: lista(); break;
-				case 3: remove(produto); break;
-				case 4: altera(produto);break;
-				case 5: finalizaCompra(produto); break;
+				case 2: remove(produto); break;
+				case 3: finalizaCompra(produto); break;
 				}
 			}
-		}while(opcao != CLOSED_OPTION && opcao != 6);
+		}while(opcao != CLOSED_OPTION && opcao != 4);
 	}
 
 	public static Produto adiciona() {
-		lista();
+		listaProduto();
 
 		List<Produto> produtos = client.getProdutos();
 
-		String nome = lerString("Informe o Produto que deseja adicionar ao carrinho: ", 
+		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
 						ADICONA_PRODUTO, false);
+		
 		for (int i = 0; i < produtos.size(); i++) {
-			if (produtos.get(i).getNome().equalsIgnoreCase(nome)) {
-				int op = showConfirmDialog(null, String.format("Nome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
-						+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", 
+			if (produtos.get(i).getId() == codigo) {
+				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
+						+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", produtos.get(i).getId(), 
 						produtos.get(i).getNome(), produtos.get(i).getDescricao(), produtos.get(i).getPreco(), 
 						produtos.get(i).getVendidoPor(), produtos.get(i).getEstoqueMinimo(), produtos.get(i).getQuantidadeEstoque()),
-						"Remover Produto", YES_NO_OPTION, QUESTION_MESSAGE);
+						NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
 				if(op == YES_OPTION) {
 					client.addProdutoCarrinho(produtos.get(i).getId());
 					msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
@@ -119,6 +117,7 @@ public class SuperdiaSFSB {
 		JTextArea listaJT = new JTextArea(10, 50);
 
 		for (int i = 0; i < produtos.size(); i++) {
+			lista += "Código: " + produtos.get(i).getId() + "\n";
 			lista += "Nome: " + produtos.get(i).getNome() + "\n";
 			lista += "Descrição: " + produtos.get(i).getDescricao() + "\n";
 			lista += "Preço: R$" + produtos.get(i).getPreco() + "\n";
@@ -127,15 +126,16 @@ public class SuperdiaSFSB {
 			lista += "Quantidade em Estoque: " + produtos.get(i).getQuantidadeEstoque() + "\n\n\n";
 		}
 		listaJT.setText(lista);
-		msgInfo(new JScrollPane(listaJT), NOME_PROGRAMA + "-" + LISTA_PRODUTO);
+		msgInfo(new JScrollPane(listaJT), NOME_PROGRAMA + "-" + LISTA_PRODUTO_CAIXA);
 	}
 
-	public static void lista() {
+	public static void listaProduto() {
 		List<Produto> produtos = client.getProdutos();
 		String lista = "";
 		JTextArea listaJT = new JTextArea(10, 50);
 
 		for (int i = 0; i < produtos.size(); i++) {
+			lista += "Código: " + produtos.get(i).getId() + "\n";
 			lista += "Nome: " + produtos.get(i).getNome() + "\n";
 			lista += "Descrição: " + produtos.get(i).getDescricao() + "\n";
 			lista += "Preço: R$" + produtos.get(i).getPreco() + "\n";
@@ -152,17 +152,17 @@ public class SuperdiaSFSB {
 
 		List<Produto> produtos = client.getProdutos();
 
-		String nome = lerString("Informe o Produto que deseja remover do carrinho: ", 
-				"Produto a ser removido", NOME_PROGRAMA + "-" + 
-						ADICONA_PRODUTO, true);
+		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
+				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
+						ADICONA_PRODUTO, false);
 		
 		for (int i = 0; i < produtos.size(); i++) {
-			if (produtos.get(i).getNome().equalsIgnoreCase(nome)) {
-				int op = showConfirmDialog(null, String.format("Nome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
-						+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", 
+			if (produtos.get(i).getId() == codigo) {
+				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
+						+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", produtos.get(i).getId(), 
 						produtos.get(i).getNome(), produtos.get(i).getDescricao(), produtos.get(i).getPreco(), 
 						produtos.get(i).getVendidoPor(), produtos.get(i).getEstoqueMinimo(), produtos.get(i).getQuantidadeEstoque()),
-						"Remover Produto", YES_NO_OPTION, QUESTION_MESSAGE);
+						NOME_PROGRAMA + "-" + REMOVE_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
 				if(op == YES_OPTION) {
 					client.removeProdutoCarrinho(produtos.get(i).getId());
 					msgInfo("Produto removido com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
@@ -173,48 +173,8 @@ public class SuperdiaSFSB {
 		}
 	}
 
-	public static void altera(Produto produto){
-		//int pesquisar = iproduto.s
-		//produto = iproduto.getForId(produto.getId(), Produto.class);
-		/*	boolean alterou = false;
-		String nome = lerString("Nome: ", "Você deve fornecer o nome!", "Alterar Produto", true);
-		if(nome != null){
-			produto.setNome(nome);
-			alterou = true;
-		}
-		String descricao = lerString("Descrição: ", "Vocẽ deve fornecer uma descrição", "Alterar Produto", true);
-		if(descricao != null){
-			produto.setDescricao(descricao);
-			alterou = true;
-		}
-		Double preco = lerNumeroReal("Preço: ", "Você deve fornecer o preço", "Adiciona Produto", true);
-		if(preco != null){
-			produto.setPreco(preco);	
-			alterou = true;
-		}
-		String vendidoPor = lerString("Vendido Por: ", "Vocẽ deve fornecer quem vendeu o produto", "Adiconar Produto", true);
-		if(vendidoPor != null){
-			produto.setVendidoPor(vendidoPor);
-			alterou = true;
-		}
-		Integer estoqueMinimo = lerNumeroInteiro("Estoque Mínimo: ", "Você deve fornecer o estoque mínimo!", "Alterar Produto", true);
-		if(estoqueMinimo != null){
-			produto.setEstoqueMinimo(estoqueMinimo);
-			alterou = true;
-		}
-		Integer quantidadeEstoque = lerNumeroInteiro("Quantidade de Estoque: ", "Você deve fornecer a quantidade de estoque!",
-				"Alterar Produto", true);
-		if(quantidadeEstoque != null){
-			produto.setQuantidadeEstoque(quantidadeEstoque);
-			alterou = true;
-		}*/
-
-		/*if(alterou)
-			iproduto.update(produto);*/
-	}
-
 	public static void finalizaCompra(Produto produto) {
-		Usuario usuario = new Usuario();
+		
 	}
 
 	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {
