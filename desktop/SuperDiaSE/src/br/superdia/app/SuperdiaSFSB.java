@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 import br.superdia.webservice.ClientService;
 import br.superdia.webservice.ClientServiceService;
 import br.superdia.webservice.Produto;
+import br.superdia.webservice.Usuario;
 
 public class SuperdiaSFSB {
 
@@ -74,12 +75,25 @@ public class SuperdiaSFSB {
 			opcao = showOptionDialog(null, "Escolha um comando abaixo.", NOME_PROGRAMA, DEFAULT_OPTION, QUESTION_MESSAGE, null, opcoes, opcoes[0]);
 
 			if (opcao != CLOSED_OPTION && opcao != 4) {
-				switch(opcao) {
-				case 0: adiciona(); break;
-				case 1: listaCaixa(); break;
-				case 2: remove(produto); break;
-				case 3: finalizaCompra(produto); break;
-				}
+
+				if (opcao == 0)
+					adiciona();
+				else 
+					if (client.getCarrinho().isEmpty()) {
+						msgInfo("O caixa está vazio", NOME_PROGRAMA + LISTA_PRODUTO_CAIXA);
+					}
+					else 
+						switch(opcao) {
+						case 1:
+							listaCaixa();
+							break;
+						case 2: 
+							remove(produto);
+							break;
+						case 3: 
+							finalizaCompra(produto); 
+							break;
+						}
 			}
 		}while(opcao != CLOSED_OPTION && opcao != 4);
 	}
@@ -92,7 +106,7 @@ public class SuperdiaSFSB {
 		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
 						ADICONA_PRODUTO, false);
-		
+
 		for (int i = 0; i < produtos.size(); i++) {
 			if (produtos.get(i).getId() == codigo) {
 				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
@@ -105,7 +119,7 @@ public class SuperdiaSFSB {
 					msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
 				}
 				else
-					msgInfo("Operação Cancelada", "Remover Produto");
+					msgInfo("Operação Cancelada", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
 			}
 		}
 		return produto;
@@ -152,10 +166,10 @@ public class SuperdiaSFSB {
 
 		List<Produto> produtos = client.getProdutos();
 
-		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
+		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja remover do carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
-						ADICONA_PRODUTO, false);
-		
+						REMOVE_PRODUTO, false);
+
 		for (int i = 0; i < produtos.size(); i++) {
 			if (produtos.get(i).getId() == codigo) {
 				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
@@ -165,16 +179,20 @@ public class SuperdiaSFSB {
 						NOME_PROGRAMA + "-" + REMOVE_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
 				if(op == YES_OPTION) {
 					client.removeProdutoCarrinho(produtos.get(i).getId());
-					msgInfo("Produto removido com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+					msgInfo("Produto removido com sucesso!", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 				}
 				else
-					msgInfo("Operação Cancelada", "Remover Produto");
+					msgInfo("Operação Cancelada",  NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 			}
 		}
 	}
 
 	public static void finalizaCompra(Produto produto) {
-		
+		Usuario usuario = new Usuario();
+
+
+		client.cleanCarrinho();
+		client.endsBuy(usuario);
 	}
 
 	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {
