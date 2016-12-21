@@ -29,9 +29,7 @@ public class ValidaCompraBean implements IValidaCompra {
 		
 		try {
 			response = requestHTTP.sendingGetRequest(urlGet);
-			if(response.contains(RESPONSE_CREDIT_CARD_INVALID)) System.out.println("Cartão inválido.");
-			else System.out.println(response);
-			return true;
+			return  response.contains(RESPONSE_CREDIT_CARD_INVALID) ? false : true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
