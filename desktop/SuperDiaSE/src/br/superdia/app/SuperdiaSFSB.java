@@ -15,6 +15,8 @@ import javax.swing.JTextArea;
 import br.superdia.webservice.ClientService;
 import br.superdia.webservice.ClientServiceService;
 import br.superdia.webservice.Produto;
+import br.superdia.webservice.UserService;
+import br.superdia.webservice.UserServiceService;
 import br.superdia.webservice.Usuario;
 
 public class SuperdiaSFSB {
@@ -28,9 +30,11 @@ public class SuperdiaSFSB {
 
 	private static ClientService client;
 	private static Produto produto;
+	private static Usuario usuario;
 
 	public SuperdiaSFSB() {
 		produto = new Produto();
+		usuario = new Usuario();
 		try {
 			criaConexao();
 			menu();
@@ -63,7 +67,6 @@ public class SuperdiaSFSB {
 	private static void criaConexao(){
 		ClientServiceService service = new ClientServiceService();
 		client = service.getClientServicePort();
-
 	}
 
 	private static void menu(){
@@ -91,7 +94,7 @@ public class SuperdiaSFSB {
 							remove(produto);
 							break;
 						case 3: 
-							finalizaCompra(produto); 
+							finalizaCompra(usuario); 
 							break;
 						}
 			}
@@ -186,13 +189,39 @@ public class SuperdiaSFSB {
 			}
 		}
 	}
+	
+	public static Usuario obterUsuario() {
+		UserServiceService userServiceService = new UserServiceService();
+		UserService userService = userServiceService.getUserServicePort();
+		
+		String login = lerString("Login: ", "Você deve fornecer o login", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+		if (login == null) return null;
+		
+		usuario.setUsuario(login);
+		
+		String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+		if (senha == null) return null;
+	
+		usuario.setSenha(senha);
+		
+		usuario = userService.obtemUsuario(usuario);
+		
+		
+		
+		return usuario;
+	}
 
-	public static void finalizaCompra(Produto produto) {
-		Usuario usuario = new Usuario();
-
-
-		client.cleanCarrinho();
-		client.endsBuy(usuario);
+	public static void finalizaCompra(Usuario usuario) {
+		usuario = obterUsuario();
+		
+		if (usuario == null)
+			msgErro("Usuário Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		else{
+			client.endsBuy(usuario);
+			client.cleanCarrinho();
+			msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+			criaConexao();
+		}
 	}
 
 	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {

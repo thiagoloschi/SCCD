@@ -9,6 +9,7 @@ public class Teste {
 	public static void main(String[] args) {
 		UserServiceService service = new UserServiceService();
 		UserService userClient = service.getUserServicePort();
+		
 		Usuario usuario = new Usuario();
 		usuario.setSenha("saw");
 		usuario.setUsuario("saw");

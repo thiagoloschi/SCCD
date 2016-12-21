@@ -34,11 +34,16 @@ public class UsuarioDAOBean implements IUsuarioDAO {
 	public Usuario getUser(Usuario usuario){
 		EntityManager em = JPAUtil.getEntityManager();
 		String q = "SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha";
-		TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
-		query.setParameter("usuario", usuario.getUsuario());
-		query.setParameter("senha", usuario.getSenha());
-		Usuario result = query.getSingleResult();
-		em.close();
+		Usuario result;
+		try{
+			TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
+			query.setParameter("usuario", usuario.getUsuario());
+			query.setParameter("senha", usuario.getSenha());
+			result = query.getSingleResult();
+			em.close();
+		}catch(Exception e){
+			return null;
+		}
 		return result;
 	}
 	
