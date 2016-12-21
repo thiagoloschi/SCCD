@@ -31,6 +31,8 @@ public class SuperdiaSFSB {
 	private static ClientService client;
 	private static Produto produto;
 	private static Usuario usuario;
+	private static Long permitido;
+	private static Integer codigo;
 
 	public SuperdiaSFSB() {
 		produto = new Produto();
@@ -106,26 +108,32 @@ public class SuperdiaSFSB {
 
 		List<Produto> produtos = client.getProdutos();
 
-		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
+		codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
 						ADICONA_PRODUTO, false);
-
-		for (int i = 0; i < produtos.size(); i++) {
-			if (produtos.get(i).getId() == codigo) {
-				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
-						+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", produtos.get(i).getId(), 
-						produtos.get(i).getNome(), produtos.get(i).getDescricao(), produtos.get(i).getPreco(), 
-						produtos.get(i).getVendidoPor(), produtos.get(i).getEstoqueMinimo(), produtos.get(i).getQuantidadeEstoque()),
-						NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
-				if(op == YES_OPTION) {
-					client.addProdutoCarrinho(produtos.get(i).getId());
-					msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
-				}
-				else
-					msgInfo("Operação Cancelada", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+		
+		if (codigo == null) return null;
+		
+		permitido = null;
+		produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p.getId();});
+		
+		if (permitido != null) {
+			int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
+					+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", produtos.get(permitido.intValue()).getId(), 
+					produtos.get(permitido.intValue()).getNome(), produtos.get(permitido.intValue()).getDescricao(), produtos.get(permitido.intValue()).getPreco(), 
+					produtos.get(permitido.intValue()).getVendidoPor(), produtos.get(permitido.intValue()).getEstoqueMinimo(), produtos.get(permitido.intValue()).getQuantidadeEstoque()),
+					NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
+			if(op == YES_OPTION) {
+				client.addProdutoCarrinho(produtos.get(permitido.intValue()).getId());
+				msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
 			}
-		}
+			else
+				msgInfo("Operação Cancelada", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+		}else
+			msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+		
 		return produto;
+		
 	}
 
 	public static void listaCaixa() {
@@ -173,6 +181,9 @@ public class SuperdiaSFSB {
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
 						REMOVE_PRODUTO, false);
 
+		System.out.println(codigo);
+		
+		
 		for (int i = 0; i < produtos.size(); i++) {
 			if (produtos.get(i).getId() == codigo) {
 				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
