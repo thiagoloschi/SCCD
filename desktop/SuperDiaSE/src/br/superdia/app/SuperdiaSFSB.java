@@ -31,7 +31,7 @@ public class SuperdiaSFSB {
 	private static ClientService client;
 	private static Produto produto;
 	private static Usuario usuario;
-	private static Long permitido;
+	private static Produto permitido;
 	private static Integer codigo;
 
 	public SuperdiaSFSB() {
@@ -93,7 +93,7 @@ public class SuperdiaSFSB {
 							listaCaixa();
 							break;
 						case 2: 
-							remove(produto);
+							remove();
 							break;
 						case 3: 
 							finalizaCompra(usuario); 
@@ -115,16 +115,16 @@ public class SuperdiaSFSB {
 		if (codigo == null) return null;
 		
 		permitido = null;
-		produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p.getId();});
+		produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p;});
 		
 		if (permitido != null) {
 			int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
-					+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", produtos.get(permitido.intValue()).getId(), 
-					produtos.get(permitido.intValue()).getNome(), produtos.get(permitido.intValue()).getDescricao(), produtos.get(permitido.intValue()).getPreco(), 
-					produtos.get(permitido.intValue()).getVendidoPor(), produtos.get(permitido.intValue()).getEstoqueMinimo(), produtos.get(permitido.intValue()).getQuantidadeEstoque()),
+					+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", permitido.getId(), 
+					permitido.getNome(), permitido.getDescricao(), permitido.getPreco(), 
+					permitido.getVendidoPor(), permitido.getEstoqueMinimo(), permitido.getQuantidadeEstoque()),
 					NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
 			if(op == YES_OPTION) {
-				client.addProdutoCarrinho(produtos.get(permitido.intValue()).getId());
+				client.addProdutoCarrinho(permitido.getId());
 				msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
 			}
 			else
@@ -172,33 +172,34 @@ public class SuperdiaSFSB {
 		msgInfo(new JScrollPane(listaJT), NOME_PROGRAMA + "-" + LISTA_PRODUTO);
 	}
 
-	public static void remove(Produto produto){
+	public static void remove(){
 		listaCaixa();
 
-		List<Produto> produtos = client.getProdutos();
+		List<Produto> produtos = client.getCarrinho();
 
-		int codigo = lerNumeroInteiro("Informe o Código do Produto que deseja remover do carrinho: ", 
+		codigo = lerNumeroInteiro("Informe o Código do Produto que deseja remover do carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
-						REMOVE_PRODUTO, false);
-
-		System.out.println(codigo);
+		REMOVE_PRODUTO, false);
 		
+		if(codigo == null) return;
 		
-		for (int i = 0; i < produtos.size(); i++) {
-			if (produtos.get(i).getId() == codigo) {
-				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
-						+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", produtos.get(i).getId(), 
-						produtos.get(i).getNome(), produtos.get(i).getDescricao(), produtos.get(i).getPreco(), 
-						produtos.get(i).getVendidoPor(), produtos.get(i).getEstoqueMinimo(), produtos.get(i).getQuantidadeEstoque()),
-						NOME_PROGRAMA + "-" + REMOVE_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
-				if(op == YES_OPTION) {
-					client.removeProdutoCarrinho(produtos.get(i).getId());
-					msgInfo("Produto removido com sucesso!", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
-				}
-				else
-					msgInfo("Operação Cancelada",  NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
+		permitido = null;
+		produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p;});
+		
+		if (permitido != null) {
+			int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
+					+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", permitido.getId(), 
+					permitido.getNome(), permitido.getDescricao(), permitido.getPreco(), 
+					permitido.getVendidoPor(), permitido.getEstoqueMinimo(), permitido.getQuantidadeEstoque()),
+					NOME_PROGRAMA + "-" + REMOVE_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
+			if(op == YES_OPTION) {
+				client.removeProdutoCarrinho(permitido.getId());
+				msgInfo("Produto removido com sucesso!", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 			}
-		}
+			else
+				msgInfo("Operação Cancelada",  NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
+		}else
+			msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 	}
 	
 	public static Usuario obterUsuario() {
@@ -216,8 +217,6 @@ public class SuperdiaSFSB {
 		usuario.setSenha(senha);
 		
 		usuario = userService.obtemUsuario(usuario);
-		
-		
 		
 		return usuario;
 	}
