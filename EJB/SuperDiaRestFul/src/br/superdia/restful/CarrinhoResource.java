@@ -1,6 +1,7 @@
 package br.superdia.restful;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -17,7 +18,10 @@ import com.google.gson.Gson;
 import br.superdia.message.RespostasJSON;
 import br.superdia.modelo.DadosCartao;
 import br.superdia.modelo.ItemVenda;
+import br.superdia.modelo.Usuario;
+import br.superdia.modelo.Venda;
 import br.superdia.sessionbean.ICarrinho;
+import br.superdia.sessionbean.IDAO;
 import br.superdia.sessionbean.IUsuarioDAO;
 import br.superdia.sessionbean.IValidaCompra;
 
@@ -35,6 +39,8 @@ public class CarrinhoResource {
 	private ICarrinho carrinho;
 	@EJB
 	private IUsuarioDAO dao;
+	@EJB
+	private IDAO<Venda> daoVenda;
 	
 	/*
 	 * Adiciona um item ao carrinho, caso o usuário seja válido. Entende-se na nossa lógica de negócios, um usuário válido,
@@ -87,14 +93,25 @@ public class CarrinhoResource {
 		if (validarCompra.tokenIsValid(token)){
 			//Caso sejá, verifica se o cartão informado pelo usuário é válido.
 			if(validarCompra.validaCartao(dados.getTipo(), dados.getNumero())){
-				//Usuario u = dao.;
 				
+				//Obtêm os dados do usuário e seta os itens no carrinho.
+				Usuario u = dao.getByToken(token);
 				itens.forEach(i -> { carrinho.addProduct(i); });
-				return "";
+				
+				//Seta os dados da venda.
+				Venda venda = new Venda();
+				venda.setData(Calendar.getInstance());
+				venda.setProdutos(itens);
+				venda.setUsuario(u);
+				
+				//Salva no banco e limpa os itens do carrinho.
+				daoVenda.add(venda);
+				itens.clear();
+				return RespostasJSON.SUCESSO_COMPRA.getMensagem();
 			}
 			return RespostasJSON.ERRO_CARTAO.getMensagem();
 		}
 		//Caso o token não seja válido.
 		return RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem();
-	}
-}
+	}//buy()
+}//class CarrinhoResource
