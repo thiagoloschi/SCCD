@@ -52,7 +52,17 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
 
+        Bundle extras = getIntent().getExtras();
+
+        System.out.println(extras.getString("produto"));
+        carregaInforActivity(extras);
+
         createToolbar();
+    }
+
+    private void carregaInforActivity(Bundle bundle) {
+        String produtoJson = bundle.getString("produto");
+        Produto produto = new Gson().fromJson(produtoJson, Produto.class);
     }
 
     private void createToolbar(){
