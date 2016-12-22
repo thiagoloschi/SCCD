@@ -1,6 +1,8 @@
 package trabalho.sccd.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import trabalho.sccd.ProdutoActivity;
 import trabalho.sccd.R;
 import trabalho.sccd.model.Produto;
 
@@ -42,7 +45,6 @@ public class AdapterListViewMain extends RecyclerView.Adapter<AdapterListViewMai
     //Define O Text do Labels
     @Override
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
-
 
         holder.setProduto(mDataset.get(position));
         holder.produtoNome.setText(mDataset.get(position).getNome());
@@ -91,10 +93,10 @@ public class AdapterListViewMain extends RecyclerView.Adapter<AdapterListViewMai
         //Método responsavel pelo Click.
         @Override
         public void onClick(View v) {
-            /*Intent resultadoActivity = new Intent(context, ProdutoActivity.class);
+            Intent resultadoActivity = new Intent(context, ProdutoActivity.class);
             resultadoActivity.putExtra("produto", transformaProdutoJson(produto));
             resultadoActivity.putExtra("position",mDataset.indexOf(produto));
-            ((Activity)context).startActivityForResult(resultadoActivity,ACTIVITY_REQUEST);*/
+            ((Activity)context).startActivityForResult(resultadoActivity,ACTIVITY_REQUEST);
         }
 
         private String transformaProdutoJson(Produto produto){
