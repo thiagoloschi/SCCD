@@ -4,8 +4,12 @@ import java.io.IOException;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.superdia.controller.RequestHTTP;
+import br.superdia.jpa.JPAUtil;
+import br.superdia.modelo.Usuario;
 
 @Stateless
 @Remote(IValidaCompra.class)
