@@ -40,6 +40,7 @@ public class ValidaCompraBean implements IValidaCompra {
 		return false;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public boolean tokenIsValid(String token) {
 		EntityManager em = JPAUtil.getEntityManager();
