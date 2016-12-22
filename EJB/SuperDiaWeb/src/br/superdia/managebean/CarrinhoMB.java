@@ -8,7 +8,9 @@ import javax.faces.bean.SessionScoped;
 
 import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Produto;
+import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.ICarrinho;
+import br.superdia.utils.SessionUtil;
 
 @ManagedBean
 @SessionScoped
@@ -75,6 +77,15 @@ public class CarrinhoMB {
 	public void clearCarrinho(){
 		
 		icarrinho.clearItens();
+		atualizaLista();
+		
+	}
+	
+	public void endsBuy(){
+		
+		Usuario usuario = (Usuario) SessionUtil.getSession().getAttribute("USUARIOLogado");
+		System.out.println("\n\n********* user " + usuario.getUsuario());
+		icarrinho.endsBuy(usuario);
 		atualizaLista();
 		
 	}
