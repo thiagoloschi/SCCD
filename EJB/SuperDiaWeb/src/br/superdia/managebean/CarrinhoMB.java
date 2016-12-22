@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Produto;
 import br.superdia.sessionbean.ICarrinho;
 
@@ -15,37 +16,44 @@ public class CarrinhoMB {
 
 	@EJB
 	private ICarrinho icarrinho;
-	private List<Produto>produtos;
+	private List<ItemVenda>produtos;
 
 	public float total = 0;
 	
-	public void addProdutoCarrinho(Produto produto){
-
-		icarrinho.addProduct(produto);
+	public void addProdutoCarrinho(Produto produto, Integer quantidade){
+		
+		ItemVenda itemVenda = new ItemVenda();
+		itemVenda.setProduto(produto);
+		itemVenda.setQuantidade(quantidade.longValue());
+		
+		icarrinho.addProduct(itemVenda);
 		atualizaLista();
 		getTotal();
 
 	}
 
-	public void removerProdutoCarrinho(Produto produto){
-
-		icarrinho.removeProduct(produto);
+	public void removerProdutoCarrinho(Produto produto, Integer quantidade){
+		ItemVenda itemVenda = new ItemVenda();
+		itemVenda.setProduto(produto);
+		itemVenda.setQuantidade(quantidade.longValue());
+		
+		icarrinho.removeProduct(itemVenda);
 		atualizaLista();
 		getTotal();
 
 	}
 
-	public List<Produto>getProdutos(){
+	public List<ItemVenda>getProdutos(){
 
 		if(produtos==null)
-			this.produtos = icarrinho.getItens();
+			this.produtos = icarrinho.getItemVendas(); //icarrinho.getItens();
 		return produtos;
 
 	}
 
 	private void atualizaLista(){
 
-		this.produtos = icarrinho.getItens();
+		this.produtos = icarrinho.getItemVendas();
 
 	}
 
@@ -57,7 +65,7 @@ public class CarrinhoMB {
 		total = 0;
 
 		for(int contador = 0; contador < produtos.size(); contador++)
-			total += produtos.get(contador).getPreco();
+			total += produtos.get(contador).getProduto().getPreco();
 
 		return total;
 	}
