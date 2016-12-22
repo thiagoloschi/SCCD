@@ -7,13 +7,13 @@ public class Produto{
     private Double preco;
     private String vendidoPor;
     private String estoqueMinimo;
-    private String quantidadeEstoque;
+    private int quantidadeEstoque;
 
-    public String getQuantidadeEstoque() {
+    public int getQuantidadeEstoque() {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(String quantidadeEstoque) {
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
