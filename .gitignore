@@ -9,3 +9,9 @@ RemoteSystemsTempFiles/.project
 EJB/SuperDiaWeb/.classpath
 *.prefs
 EJB/*/bin/
+
+EJB/SuperDiaEJB/.classpath
+
+desktop/.classpath
+
+EJB/SuperDiaEJB/.classpath
