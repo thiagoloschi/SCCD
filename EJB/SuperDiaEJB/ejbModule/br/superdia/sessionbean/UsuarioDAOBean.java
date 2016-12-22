@@ -40,6 +40,9 @@ public class UsuarioDAOBean implements IUsuarioDAO {
 			query.setParameter("usuario", usuario.getUsuario());
 			query.setParameter("senha", usuario.getSenha());
 			result = query.getSingleResult();
+			em.getTransaction().begin();
+			em.merge(result);
+			em.getTransaction().commit();
 			em.close();
 		}catch(Exception e){
 			return null;

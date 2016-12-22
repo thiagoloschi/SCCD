@@ -21,12 +21,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/var/lib/glassfish4/glassfish/lib/postgresql-9.4-1201.jdbc4.jar"/>
+	<classpathentry kind="lib" path="/home/saw/glassfish4/glassfish/lib/postgresql-9.4.1212.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
