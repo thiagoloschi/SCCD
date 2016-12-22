@@ -1,7 +1,8 @@
 @CHARSET "UTF-8";
 
 .body{
-	padding: 25px;		
+	padding: 25px;	
+	padding-top: 0;	
 }
 
 table{
@@ -18,4 +19,8 @@ icon{
 
 .loginout{
 	float: right;
+}
+
+.tema{
+	background-color: #149c82;
 }

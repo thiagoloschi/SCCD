@@ -15,28 +15,33 @@
 		<ui:include src="navbar.xhtml" />
 	</ui:insert>
 	<div class="body">
-		<hr />
+
 		<h4>Cadastro de produtos</h4>
-		<br />
-		<h:form id="cadastro">
-			<h:panelGrid columns="1">
-				<h:outputLabel value="Nome: " for="nome" />
-				<h:inputText id="nome" value="#{produtoMB.produto.nome}" />
-				<h:outputLabel value="Descrição: " for="descricao" />
-				<h:inputTextarea id="descricao"
-					value="#{produtoMB.produto.descricao}" />
-				<h:outputLabel value="Preço" for="preco" />
-				<h:inputText id="preco" value="#{produtoMB.produto.preco}" />
-				<h:outputLabel for="qtdeEstoque" value="Quantidade em Estoque: " />
-				<h:inputText id="qtdeEstoque"
-					value="#{produtoMB.produto.quantidadeEstoque}" />
-				<h:outputLabel for="estoqueMinimo" value="Estoque minimo: " />
-				<h:inputText id="estoqueMinimo"
-					value="#{produtoMB.produto.estoqueMinimo}" />
-				<h:commandButton value="Cadastrar"
-					action="#{produtoMB.gravaProduto}" />
-			</h:panelGrid>
-		</h:form>
+
+
+		<b:form  look="success" id="cadastro">
+						<center>
+				<b:row>
+					<b:inputText style="width:170px" label="Nome:"
+						render-label="true" label-style="width:150px"
+						value="#{produtoMB.produto.nome}" update="@this" tooltip="Produto" />
+				</b:row>
+				<b:row>
+				<b:inputTextarea tiny-screen="12" small-screen="7" medium-screen="5"
+						large-screen="4" style="width:170px" label="Descrição"
+						render-label="true" label-style="width:150px"
+						value="#{produtoMB.produto.descricao}" update="@this" tooltip="Descrição do produto" />
+				</b:row>
+				<b:row>
+				<b:inputText tiny-screen="12" small-screen="7" medium-screen="5"
+						large-screen="4" style="width:170px" label="Nome:"
+						render-label="true" label-style="width:150px"
+						value="#{produtoMB.produto.preco}" update="@this" tooltip="Custo do produto" />
+				</b:row>
+				
+</center>
+		</b:form>
+		
 		<br /> <br />
 
 		<h4>Produtos Cadastrados</h4>
@@ -45,13 +50,13 @@
 				<b:dataTableColumn value="#{pr.nome}" />
 				<b:dataTableColumn value="#{pr.descricao}" />
 				<b:dataTableColumn value="#{pr.preco}" />
-				<b:dataTableColumn value="#{pr.estoque}" />
+				<b:dataTableColumn value="#{pr.quantidadeEstoque}" />
 				<b:dataTableColumn label="Ações">
 					<h:commandLink>
 						<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}"/>
 						<b:icon name="pencil"  size="2x"/>
 						<f:ajax execute="@form" render=":cadastro" />
-					</h:commandLink>
+					</h:commandLink> 
 					<h:commandLink action="#{produtoMB.remove(produto)}">
 						<b:icon name="remove-circle"  size="2x"/>
 						<f:ajax execute="@form" render=":lista" />
