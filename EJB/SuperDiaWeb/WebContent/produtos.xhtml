@@ -23,7 +23,7 @@
 			<b:dataTableColumn value="#{pr.descricao}" />
 			<b:dataTableColumn value="#{pr.preco}" />
 			<b:dataTableColumn label="Adicionar carrinho">
-				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr)}">
+				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr, 1)}">
 					<b:icon name="shopping-cart"  size="2x"/>
 				</h:commandLink>
 			</b:dataTableColumn>

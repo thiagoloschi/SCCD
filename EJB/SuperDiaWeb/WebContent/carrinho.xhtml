@@ -24,12 +24,12 @@
 		<h:commandButton value="Limpar" action="#{carrinhoMB.clearCarrinho()}"></h:commandButton>
 
 		<b:dataTable value="#{carrinhoMB.produtos}" var="pr">
-			<b:dataTableColumn value="#{pr.nome}" />
-			<b:dataTableColumn value="#{pr.descricao}" />
-			<b:dataTableColumn value="#{pr.preco}" />
+			<b:dataTableColumn label="Nome" value="#{pr.getProduto().getNome()}" />
+			<b:dataTableColumn label="Descrição" value="#{pr.getProduto().getDescricao()}" />
+			<b:dataTableColumn label="Preço" value="#{pr.getProduto().getPreco()}" />
 			<b:dataTableColumn label="Remover carrinho">
 				<h:commandLink value="Remover"
-					action="#{carrinhoMB.removerProdutoCarrinho(pr)}" />
+					action="#{carrinhoMB.removerProdutoCarrinho(pr,1)}" />
 			</b:dataTableColumn>
 		</b:dataTable>
 

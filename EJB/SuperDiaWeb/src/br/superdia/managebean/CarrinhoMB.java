@@ -32,12 +32,10 @@ public class CarrinhoMB {
 
 	}
 
-	public void removerProdutoCarrinho(Produto produto, Integer quantidade){
-		ItemVenda itemVenda = new ItemVenda();
-		itemVenda.setProduto(produto);
-		itemVenda.setQuantidade(quantidade.longValue());
+	public void removerProdutoCarrinho(ItemVenda item, Integer quantidade){
 		
-		icarrinho.removeProduct(itemVenda);
+		icarrinho.removeProduct(item);
+		System.out.println(icarrinho.getItemVendas().toString());
 		atualizaLista();
 		getTotal();
 
