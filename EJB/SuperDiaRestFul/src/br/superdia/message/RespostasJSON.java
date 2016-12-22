@@ -13,7 +13,7 @@ public enum RespostasJSON {
 	//Cartão Usuário.
 	ERRO_CARTAO("{'cod': '666', 'msg': 'Cartão inválido.'}"),
 	
-	SUCESSO("{'cod': '200', 'msg': 'Realizada com sucesso.'}");
+	SUCESSO("{'cod': '200', 'msg': 'Realizada com sucesso.'}"),
 
 	//Mensagem Compra
 	SUCESSO_COMPRA("{'cod': '200', 'msg': 'Compra realizada com sucesso.'}");
