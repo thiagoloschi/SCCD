@@ -52,11 +52,12 @@ public class ProdutosResource {
 		return gson.toJson(dao.getForId(Long.valueOf(id), Produto.class));
 	}
 	
-	@Path("remover")
+	@Path("remover/{id}")
 	@DELETE
 	@Consumes("application/json")
-	public void removeProdutc(String product){
-		dao.remove(gson.fromJson(product, Produto.class));
+	public void removeProdutc(final @PathParam("id") String id){
+		Produto p = dao.getForId(Long.valueOf(id), Produto.class);
+		dao.remove(p);
 	}
 	
 	@Path("atualizar")
