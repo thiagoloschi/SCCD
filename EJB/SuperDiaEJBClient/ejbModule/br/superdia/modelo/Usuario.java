@@ -1,6 +1,10 @@
 package br.superdia.modelo;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,18 +17,23 @@ import javax.persistence.SequenceGenerator;
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@SequenceGenerator(name = "usuario_id", sequenceName = "usuario_seq", allocationSize = 1)
 	@GeneratedValue(generator = "usuario_id", strategy = GenerationType.SEQUENCE)
 	private Long id;
+
 	@Column(nullable = false, length = 40)
 	private String usuario;
+
 	@Column(nullable = false)
 	private String senha;
+
 	@Column(nullable = false)
 	private String perfil;
-	
+
+	private String token;
+
 	public Usuario() {
 	}
 
@@ -41,19 +50,18 @@ public class Usuario implements Serializable {
 	}
 
 	public void setSenha(String senha) {
-		/*String senhaCriptografada = null;
-		MessageDigest algorithm;
-		try {
-			algorithm = MessageDigest.getInstance("SHA-256");
-			byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+		/*
+		 * String senhaCriptografada = null; MessageDigest algorithm; try {
+		 * algorithm = MessageDigest.getInstance("SHA-256"); byte
+		 * messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+		 * 
+		 * senhaCriptografada = new String(messageDigest,
+		 * StandardCharsets.UTF_8); } catch (NoSuchAlgorithmException |
+		 * UnsupportedEncodingException e) { e.printStackTrace(); }
+		 */
 
-			senhaCriptografada = new String(messageDigest, StandardCharsets.UTF_8);
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}*/
-		
 		// MERDA DE CRIPTOGRAFIA...
-		
+
 		this.senha = senha;
 	}
 
@@ -72,6 +80,24 @@ public class Usuario implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
+
+	public String generateToken() {
+		String token = this.usuario + ":" + this.senha + ":" + this.perfil;
+
+		MessageDigest algorithm;
+		
+		try {
+			algorithm = MessageDigest.getInstance("SHA-256");
+			byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+			token = new String(messageDigest, StandardCharsets.UTF_8);
+			this.token = token;
+			return token;
+			
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

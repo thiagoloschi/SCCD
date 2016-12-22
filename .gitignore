@@ -2,7 +2,9 @@
 .recommenders/*
 EJB/*/.classpath
 EJB/SuperDiaWeb/.classpath
+EJB/*/build/
 RemoteSystemsTempFiles/.project
 *.classpath
 EJB/SuperDiaWeb/.classpath
 *.prefs
+EJB/*/bin/
