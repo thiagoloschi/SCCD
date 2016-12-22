@@ -48,14 +48,16 @@ public class ProdutosResource {
 	@GET
 	@Produces("application/json")
 	public String getAll(final @QueryParam("token") String token){
-		return validaCompra.tokenIsValid(token) ? gson.toJson(dao.getAll(Produto.class)) : gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
+		return validaCompra.tokenIsValid(token) ? gson.toJson(dao.getAll(Produto.class)) 
+				: gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
 	}
 	
 	@Path("obter/{id}")
 	@GET
 	@Produces("application/json")
-	public String getById(final @PathParam("id") String id){
-		return gson.toJson(dao.getForId(Long.valueOf(id), Produto.class));
+	public String getById(final @PathParam("id") String id, final @QueryParam("token") String token){
+		return validaCompra.tokenIsValid(token) ? gson.toJson(dao.getForId(Long.valueOf(id), Produto.class))
+				: gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
 	}
 	
 	@Path("remover/{id}")
