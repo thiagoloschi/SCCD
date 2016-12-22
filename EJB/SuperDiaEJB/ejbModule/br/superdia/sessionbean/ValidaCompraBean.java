@@ -47,10 +47,10 @@ public class ValidaCompraBean implements IValidaCompra {
 		Usuario result;
 		try{
 			TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
-			query.setParameter("usuario", token);
+			query.setParameter("token", token);
 			result = query.getSingleResult();
 			em.close();
-		}catch(Exception e){
+		}catch (Exception e) {
 			return false;
 		}
 		return true;
