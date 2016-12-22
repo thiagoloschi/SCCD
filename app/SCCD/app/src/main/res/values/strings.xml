@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">SCCD</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_home">Home</string>
+
+    <string name="nav_item_vagas_favoritas">Vagas Favoritas</string>
+    <string name="nav_item_media_salarial">Media salarial</string>
+    <string name="nav_item_sobre">Sobre</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
+        <item>@string/search_vaga</item>
+        <item>@string/nav_item_vagas_favoritas</item>
+        <item>@string/nav_item_media_salarial</item>
+        <item>@string/nav_item_sobre</item>
+    </string-array>
+
+    <string name="title_home">Home</string>
+    <string name="title_sobre">Sobre</string>
+
+    <string name="search">Pesquisar</string>
+    <string name="search_vaga">Pesquisar Vagas</string>
+    <string name="info">Sobre</string>
+    <string name="conexao_infor">Você deve estar conectado...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- About view -->
+    <string name="about_app">Sistema de Controle de Centros de Distribuição. \n
+        Desenvolvido pelos formandos do 6º Período do Curso Superior de Tecnologia em Sistemas para
+        Internet, no ano de 2016.</string>
+    <string name="version">Versão 1.1</string>
+
+</resources>

@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:hint="cidade/uf"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:id="@+id/cidade"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <AutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="função"
+        android:ems="10"
+        android:layout_below="@+id/cidade"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/funcao"
+        android:layout_alignParentEnd="true" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/grupo"
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/funcao"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:text="Últimas vagas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ultimasVagas"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Maio salário"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/maiorSalario"
+            android:layout_weight="1" />
+    </RadioGroup>
+
+</RelativeLayout>
