@@ -11,7 +11,10 @@ public enum RespostasJSON {
 	ITEM_EXCLUIDO("{'cod': '204', 'msg': 'Item removido com sucesso.'}"),
 	
 	//Cartão Usuário.
-	ERRO_CARTAO("{'cod': '666', 'msg': 'Cartão inválido.'}");
+	ERRO_CARTAO("{'cod': '666', 'msg': 'Cartão inválido.'}"),
+	
+	
+	SUCESSO("{'cod': '200', 'msg': 'Realizada com sucesso.'}");
 	
 	private RespostasJSON(String mensagem) {
 		this.mensagem = mensagem;

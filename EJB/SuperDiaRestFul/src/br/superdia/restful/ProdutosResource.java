@@ -62,16 +62,27 @@ public class ProdutosResource {
 	
 	@Path("remover/{id}")
 	@DELETE
-	@Consumes("application/json")
-	public void removeProdutc(final @PathParam("id") String id){
-		Produto p = dao.getForId(Long.valueOf(id), Produto.class);
-		dao.remove(p);
+	@Produces("application/json")
+	public String removeProdutc(final @PathParam("id") String id, final @QueryParam("token") String token){
+		if(validaCompra.tokenIsValid(token)){
+			Produto p = dao.getForId(Long.valueOf(id), Produto.class);
+			dao.remove(p);
+			return gson.toJson(RespostasJSON.SUCESSO.getMensagem());
+		}else{
+			return gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
+		}
 	}
 	
 	@Path("atualizar")
 	@PUT
 	@Consumes("application/json")
-	public void updateProdutc(String product){
-		dao.update(gson.fromJson(product, Produto.class));
+	@Produces("application/json")
+	public String updateProdutc(String product,final @QueryParam("token") String token){
+		if(validaCompra.tokenIsValid(token)){
+			dao.update(gson.fromJson(product, Produto.class));
+			return gson.toJson(RespostasJSON.SUCESSO.getMensagem());
+		}else{
+			return gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
+		}
 	}
 }
