@@ -40,7 +40,11 @@ public class SuperdiaSFSB {
 		usuario = new Usuario();
 		try {
 			criaConexao();
-			menu();
+			login();
+			if (usuario == null)
+				msgErro("Usuário Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+			else
+				menu();
 			System.exit(0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -103,7 +107,7 @@ public class SuperdiaSFSB {
 			}
 		}while(opcao != CLOSED_OPTION && opcao != 4);
 	}
-
+	
 	public static Produto adiciona() {
 		listaProduto();
 
@@ -209,27 +213,32 @@ public class SuperdiaSFSB {
 			msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 	}
 	
-	public static Usuario obterUsuario() {
+	public static Usuario login() {
 		UserServiceService userServiceService = new UserServiceService();
 		UserService userService = userServiceService.getUserServicePort();
 		
-		String login = lerString("Login: ", "Você deve fornecer o login", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
-		if (login == null) return null;
+		do {
+			String login = lerString("Login: ", "Você deve fornecer o login", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+			if (login == null) return null;
+			
+			usuario.setUsuario(login);
+			
+			String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+			if (senha == null) return null;
 		
-		usuario.setUsuario(login);
-		
-		String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
-		if (senha == null) return null;
-	
-		usuario.setSenha(senha);
-		
-		usuario = userService.obtemUsuario(usuario);
+			usuario.setSenha(senha);
+			
+			usuario = userService.obtemUsuario(usuario);
+			
+			if (usuario == null) return null;
+			
+		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
 		
 		return usuario;
 	}
 
 	public static void finalizaCompra(Usuario usuario) {
-		usuario = obterUsuario();
+		//usuario;// = obterUsuario();
 		
 		if (usuario == null)
 			msgErro("Usuário Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
