@@ -1,7 +1,11 @@
 package br.superdia.restful;
 
 import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -10,6 +14,10 @@ import com.google.gson.Gson;
 
 import br.superdia.modelo.Produto;
 import br.superdia.sessionbean.IDAO;
+
+/*
+ * Implementa as funcionalidades do web services para manipular os produtos em estoque.
+ */
 
 @Path("produtos")
 public class ProdutosResource {
@@ -21,6 +29,14 @@ public class ProdutosResource {
 	public ProdutosResource() {
 	}
 	
+	@Path("inserir")
+	@POST
+	@Consumes("application/json")
+	public void addProduct(String product){
+		Produto p = gson.fromJson(product, Produto.class);
+		dao.add(p);
+	}
+	
 	//http://localhost:8080/SuperDiaRestFul/rest/produtos/listar
 	@Path("listar")
 	@GET
@@ -29,11 +45,24 @@ public class ProdutosResource {
 		return gson.toJson(dao.getAll(Produto.class));
 	}
 	
-	@Path("produto/{id}")
+	@Path("obter/{id}")
 	@GET
 	@Produces("application/json")
 	public String getById(final @PathParam("id") String id){
-		System.out.println("Meu id: " + id);
 		return gson.toJson(dao.getForId(Long.valueOf(id), Produto.class));
+	}
+	
+	@Path("remover")
+	@DELETE
+	@Consumes("application/json")
+	public void removeProdutc(String product){
+		dao.remove(gson.fromJson(product, Produto.class));
+	}
+	
+	@Path("atualizar")
+	@PUT
+	@Consumes("application/json")
+	public void updateProdutc(String product){
+		dao.update(gson.fromJson(product, Produto.class));
 	}
 }
