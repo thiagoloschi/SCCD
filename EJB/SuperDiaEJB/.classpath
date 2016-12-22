@@ -27,6 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/wagner/Servers/glassfish4/glassfish/lib/postgresql-9.4.1212.jar"/>
+	<classpathentry kind="lib" path="/home/saw/glassfish4/glassfish/lib/postgresql-9.4.1212.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
