@@ -232,6 +232,8 @@ public class SuperdiaSFSB {
 			
 			if (usuario == null) return null;
 			
+			System.out.println(usuario.getPerfil());
+			
 		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
 		
 		return usuario;

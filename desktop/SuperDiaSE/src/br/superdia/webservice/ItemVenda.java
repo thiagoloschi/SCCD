@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="produto" type="{http://webservice.superdia.br/}produto" minOccurs="0"/>
  *         &lt;element name="quantidade" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="venda" type="{http://webservice.superdia.br/}venda" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,15 +31,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "itemVenda", propOrder = {
     "id",
     "produto",
-    "quantidade",
-    "venda"
+    "quantidade"
 })
 public class ItemVenda {
 
     protected Long id;
     protected Produto produto;
     protected Long quantidade;
-    protected Venda venda;
 
     /**
      * Gets the value of the id property.
@@ -112,30 +109,6 @@ public class ItemVenda {
      */
     public void setQuantidade(Long value) {
         this.quantidade = value;
-    }
-
-    /**
-     * Gets the value of the venda property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Venda }
-     *     
-     */
-    public Venda getVenda() {
-        return venda;
-    }
-
-    /**
-     * Sets the value of the venda property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Venda }
-     *     
-     */
-    public void setVenda(Venda value) {
-        this.venda = value;
     }
 
 }
