@@ -1,8 +1,6 @@
 package trabalho.sccd.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,7 @@ import java.util.List;
 import trabalho.sccd.R;
 import trabalho.sccd.model.Produto;
 
-public class AdapterListView extends RecyclerView.Adapter<AdapterListView.DataObjectHolder> {
+public class AdapterListViewMain extends RecyclerView.Adapter<AdapterListViewMain.DataObjectHolder> {
 
     //Cria uma TAG para o logs
     private static String LOG_TAG = "MyRecyclerViewAdapter";
@@ -27,7 +25,7 @@ public class AdapterListView extends RecyclerView.Adapter<AdapterListView.DataOb
     private static Context context;
 
     //Construtor da Class
-    public AdapterListView(List<Produto> mDataset, Context context) {
+    public AdapterListViewMain(List<Produto> mDataset, Context context) {
         this.context = context;
         this.mDataset = mDataset;
     }

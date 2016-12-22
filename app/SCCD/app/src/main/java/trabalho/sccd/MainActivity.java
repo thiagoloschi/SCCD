@@ -14,14 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,11 +24,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import trabalho.sccd.activity.FragmentDrawer;
-import trabalho.sccd.adapter.AdapterListView;
+import trabalho.sccd.adapter.AdapterListViewMain;
 import trabalho.sccd.controller.RequestURL;
-import trabalho.sccd.function.Conexao;
 import trabalho.sccd.model.Produto;
-import trabalho.sccd.model.ProdutosJSON;
 import trabalho.sccd.utils.Constantes;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -41,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @BindView(R.id.list_produtos) RecyclerView mRecyclerView;
     @BindView(R.id.toolbar) Toolbar mToolbar;
 
-    private AdapterListView mAdapter;
+    private AdapterListViewMain mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private FragmentDrawer mDrawerFragment;
@@ -61,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         filtroButton = (Button) findViewById(R.id.filterProdutos);
 
-        obtemVagasAPI();
+        obtemVagasAPI(); //TODO: Apagar
 
         createToolbar();
         verificaFiltroSelecionado();
@@ -92,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new AdapterListView(produtos,this);
+        mAdapter = new AdapterListViewMain(produtos,this);
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
@@ -120,13 +113,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         createRecyclerView();
     }
 
-
-/*
     public void infoActivity(View view) {
         Intent infoActivity = new Intent(this, InfoActivity.class);
         startActivity(infoActivity);
     }
-*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -150,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             case 0: break;
             //case 1: searchActivity(view); break;
             //case 2: favoriteActivity(view); break;
-            //case 4: info(); break;
+            case 4: infoActivity(view); break;
             default: Log.i("ERRO","POSITION ERROR"); break;
         }
     }

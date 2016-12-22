@@ -15,7 +15,7 @@ public class AdpterScrollListener extends RecyclerView.OnScrollListener{
 
     private Context context;
     private RecyclerView mRecyclerView;
-    private AdapterListView mAdapter;
+    private AdapterListViewMain mAdapter;
     private LinearLayoutManager mLayoutManager;
     private Long cidadeEstado, funcao;
     private int filtroIndex;
@@ -23,7 +23,7 @@ public class AdpterScrollListener extends RecyclerView.OnScrollListener{
     private int pos;
     private ProgressDialog dialog;
 
-    public AdpterScrollListener(Context context, RecyclerView mRecyclerView, AdapterListView mAdapter,
+    public AdpterScrollListener(Context context, RecyclerView mRecyclerView, AdapterListViewMain mAdapter,
                                 LinearLayoutManager mLayoutManager, Long cidadeEstado, Long funcao,
                                 int filtroIndex, int pos) {
         this.context = context;
