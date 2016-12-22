@@ -8,6 +8,14 @@ table{
 	text-align: center;
 }
 
-.navbar{
-	background-color: red;	
+icon{
+	margin :10px;
+}
+
+.sorting{
+	text-align: center;
+}
+
+.loginout{
+	float: right;
 }

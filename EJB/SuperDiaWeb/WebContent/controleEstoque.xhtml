@@ -1,53 +1,73 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html" 
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    	xmlns:b="http://bootsfaces.net/ui"
-    xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<title>SuperDia Estoque</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<title>SuperDia Estoque</title>
 </h:head>
 <h:body>
-
-<ui:insert name="menu">
-        <ui:include src="navbar.xhtml" />
-        <ui:include src="logout.xhtml" />
-</ui:insert>
+	<ui:insert name="menu">
+		<ui:include src="navbar.xhtml" />
+	</ui:insert>
 	<div class="body">
-	<hr/>
-	<h4>Cadastro de produtos</h4>
-	<br/>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Nome: " for="nome" />
-			<h:inputText id="nome" value="#{produtoMB.produto.nome}" />
-			<h:outputLabel value="Descrição: " for="descricao" />
-			<h:inputTextarea id="descricao" value="#{produtoMB.produto.descricao}" />
-			<h:outputLabel value="Preço" for="preco" />
-			<h:inputText id="preco" value="#{produtoMB.produto.preco}" />
-			<h:outputLabel for="qtdeEstoque" value="Quantidade em Estoque: " />
-			<h:inputText id="qtdeEstoque" value="#{produtoMB.produto.quantidadeEstoque}" />
-			<h:outputLabel for="estoqueMinimo" value="Estoque minimo: " />
-			<h:inputText id="estoqueMinimo" value="#{produtoMB.produto.estoqueMinimo}" />
-			<h:commandButton value="Cadastrar" action="#{produtoMB.gravaProduto}" />
-		</h:panelGrid>
-		<br/><br/>
+		<hr />
+		<h4>Cadastro de produtos</h4>
+		<br />
+		<h:form id="cadastro">
+			<h:panelGrid columns="1">
+				<h:outputLabel value="Nome: " for="nome" />
+				<h:inputText id="nome" value="#{produtoMB.produto.nome}" />
+				<h:outputLabel value="Descrição: " for="descricao" />
+				<h:inputTextarea id="descricao"
+					value="#{produtoMB.produto.descricao}" />
+				<h:outputLabel value="Preço" for="preco" />
+				<h:inputText id="preco" value="#{produtoMB.produto.preco}" />
+				<h:outputLabel for="qtdeEstoque" value="Quantidade em Estoque: " />
+				<h:inputText id="qtdeEstoque"
+					value="#{produtoMB.produto.quantidadeEstoque}" />
+				<h:outputLabel for="estoqueMinimo" value="Estoque minimo: " />
+				<h:inputText id="estoqueMinimo"
+					value="#{produtoMB.produto.estoqueMinimo}" />
+				<h:commandButton value="Cadastrar"
+					action="#{produtoMB.gravaProduto}" />
+			</h:panelGrid>
+		</h:form>
+		<br /> <br />
 
 		<h4>Produtos Cadastrados</h4>
-		<b:dataTable value="#{produtoMB.produtos}" var="pr">
-			<b:dataTableColumn value="#{pr.nome}" />
-			<b:dataTableColumn value="#{pr.descricao}" />
-			<b:dataTableColumn value="#{pr.preco}" />
-			<b:dataTableColumn label="Adicionar carrinho">
-				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr)}">
-					<b:icon name="shopping-cart"  size="2x"/>
-				</h:commandLink>
-			</b:dataTableColumn>
-		</b:dataTable>
-	</h:form>
+		<h:form id="lista">
+			<b:dataTable value="#{produtoMB.produtos}" var="pr">
+				<b:dataTableColumn value="#{pr.nome}" />
+				<b:dataTableColumn value="#{pr.descricao}" />
+				<b:dataTableColumn value="#{pr.preco}" />
+				<b:dataTableColumn value="#{pr.estoque}" />
+				<b:dataTableColumn label="Ações">
+					<h:commandLink>
+						<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}"/>
+						<b:icon name="pencil"  size="2x"/>
+						<f:ajax execute="@form" render=":cadastro" />
+					</h:commandLink>
+					<h:commandLink action="#{produtoMB.remove(produto)}">
+						<b:icon name="remove-circle"  size="2x"/>
+						<f:ajax execute="@form" render=":lista" />
+					</h:commandLink>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+
+
+
+
+
+
+
+
+
 	</div>
 </h:body>
 </html>
