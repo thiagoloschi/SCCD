@@ -28,6 +28,7 @@ public class SuperdiaSFSB {
 	private static final String LISTA_PRODUTO_CAIXA = "Lista Produto Caixa";
 	private static final String REMOVE_PRODUTO = "Remove Produto";
 	private static final String FINALIZA_COMPRA = "Finaliza Produto";
+	private static final String LOGIN = "Login";
 
 	private static ClientService client;
 	private static Produto produto;
@@ -105,43 +106,76 @@ public class SuperdiaSFSB {
 							break;
 						}
 			}
-		}while(opcao != CLOSED_OPTION && opcao != 4);
+			else  
+				login();
+		}while(opcao != CLOSED_OPTION && opcao==4);
+	}
+
+	public static void login() {
+		UserServiceService userServiceService = new UserServiceService();
+		UserService userService = userServiceService.getUserServicePort();
+
+		do {
+			String login = lerString("Login: ", "Você deve fornecer o login", NOME_PROGRAMA + "-" + LOGIN, false);
+			if (login == null) System.exit(0);
+
+			usuario.setUsuario(login);
+
+			String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + LOGIN, false);
+			if (senha == null) System.exit(0);
+
+			usuario.setSenha(senha);
+
+			usuario = userService.obtemUsuario(usuario);
+
+			if (usuario == null) return;
+
+			System.out.println(usuario.getPerfil());
+
+		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
+
+		//return usuario;
 	}
 	
 	public static Produto adiciona() {
-		listaProduto();
+		if (client.getProdutos().isEmpty()) {
+			msgInfo("Nenhum produto cadastrado!!!", NOME_PROGRAMA + LISTA_PRODUTO);
+		}
+		else {
+			listaProduto();
 
-		List<Produto> produtos = client.getProdutos();
+			List<Produto> produtos = client.getProdutos();
 
-		codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
-				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
-						ADICONA_PRODUTO, false);
-		
-		if (codigo == null) return null;
-		
-		permitido = null;
-		produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p;});
-		
-		if (permitido != null) {
-			int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
-					+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", permitido.getId(), 
-					permitido.getNome(), permitido.getDescricao(), permitido.getPreco(), 
-					permitido.getVendidoPor(), permitido.getEstoqueMinimo(), permitido.getQuantidadeEstoque()),
-					NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
-			if(op == YES_OPTION) {
-				ItemVenda itemVenda = new ItemVenda();
-				itemVenda.setProduto(permitido);
-				itemVenda.setQuantidade(1L);
-				client.addProdutoCarrinho(itemVenda);
-				msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
-			}
-			else
-				msgInfo("Operação Cancelada", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
-		}else
-			msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
-		
+
+			codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
+					"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
+							ADICONA_PRODUTO, false);
+
+			if (codigo == null) return null;
+
+			permitido = null;
+			produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p;});
+
+			if (permitido != null) {
+				int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
+						+ "Quantidade em Estoque: %d\n\nDeseja adicionar este produto?", permitido.getId(), 
+						permitido.getNome(), permitido.getDescricao(), permitido.getPreco(), 
+						permitido.getVendidoPor(), permitido.getEstoqueMinimo(), permitido.getQuantidadeEstoque()),
+						NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
+				if(op == YES_OPTION) {
+					ItemVenda itemVenda = new ItemVenda();
+					itemVenda.setProduto(permitido);
+					itemVenda.setQuantidade(1L);
+					client.addProdutoCarrinho(itemVenda);
+					msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+				}
+				else
+					msgInfo("Operação Cancelada", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+			}else
+				msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
+		}
 		return produto;
-		
+
 	}
 
 	public static void listaCaixa() {
@@ -187,13 +221,13 @@ public class SuperdiaSFSB {
 
 		codigo = lerNumeroInteiro("Informe o Código do Produto que deseja remover do carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
-		REMOVE_PRODUTO, false);
-		
+						REMOVE_PRODUTO, false);
+
 		if(codigo == null) return;
-		
+
 		permitido = null;
 		itemVendas.forEach(p -> {if(p.getProduto().getId() == codigo.longValue()) permitido = p.getProduto();});
-		
+
 		if (permitido != null) {
 			int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
 					+ "Quantidade em Estoque: %d\n\nDeseja remover este produto?", permitido.getId(), 
@@ -212,36 +246,10 @@ public class SuperdiaSFSB {
 		}else
 			msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 	}
-	
-	public static Usuario login() {
-		UserServiceService userServiceService = new UserServiceService();
-		UserService userService = userServiceService.getUserServicePort();
-		
-		do {
-			String login = lerString("Login: ", "Você deve fornecer o login", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
-			if (login == null) return null;
-			
-			usuario.setUsuario(login);
-			
-			String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
-			if (senha == null) return null;
-		
-			usuario.setSenha(senha);
-			
-			usuario = userService.obtemUsuario(usuario);
-			
-			if (usuario == null) return null;
-			
-			System.out.println(usuario.getPerfil());
-			
-		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
-		
-		return usuario;
-	}
 
 	public static void finalizaCompra(Usuario usuario) {
 		//usuario;// = obterUsuario();
-		
+
 		if (usuario == null)
 			msgErro("Usuário Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
 		else{
@@ -257,7 +265,7 @@ public class SuperdiaSFSB {
 
 		do {
 			string = showInputDialog(null, prompt, modulo, QUESTION_MESSAGE);
-
+			
 			if (string == null) break;
 
 			if (string.equals("") && !vazia)
