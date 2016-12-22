@@ -9,7 +9,7 @@ import javax.ejb.Stateful;
 import javax.jws.WebService;
 import javax.ws.rs.Path;
 
-import br.superdia.modelo.Produto;
+import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Usuario;
 import br.superdia.modelo.Venda;
 
@@ -23,31 +23,37 @@ import br.superdia.modelo.Venda;
 @WebService
 @Path("/cliente/carrinho")
 public class CarrinhoBean implements ICarrinho {
-	private List<Produto> produtos = new ArrayList<>();
+	private List<ItemVenda> itemVendas = new ArrayList<>();
 	
-	public void addProduct(Produto produto) {
-		produtos.add(produto);
+	public void addProduct(ItemVenda itemVenda) {
+		itemVendas.add(itemVenda);
 	}
 
-	public void removeProduct(Produto produto) {
-		produtos.removeIf( p -> p.getId() == produto.getId());
+	public void removeProduct(ItemVenda itemVenda) {
+		itemVendas.removeIf( p -> p.getId() == itemVenda.getProduto().getId());
 	}
 
 	public void clearItens() {
-		produtos.clear();		
+		itemVendas.clear();		
 	}
 	
-	public List<Produto> getItens() {
-		return produtos;
+	public List<ItemVenda> getItemVendas() {
+		return itemVendas;
 	}
 
 	public void endsBuy(Usuario usuario) {
 		Venda venda = new Venda();
 		venda.setData(Calendar.getInstance());
 		venda.setUsuario(usuario);
-		venda.setProdutos(produtos);
+		venda.setProdutos(geraItensVendas(venda));
 		DAOBean<Venda> dao = new DAOBean<>();
 		dao.add(venda);
 		clearItens();
 	}
+	
+	private List<ItemVenda> geraItensVendas(Venda venda){
+		itemVendas.forEach(p -> {p.setVenda(venda);});
+		return itemVendas;
+	}
+	
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://webservice.superdia.br/}produto" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://webservice.superdia.br/}itemVenda" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 public class GetCarrinhoResponse {
 
     @XmlElement(name = "return")
-    protected List<Produto> _return;
+    protected List<ItemVenda> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class GetCarrinhoResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Produto }
+     * {@link ItemVenda }
      * 
      * 
      */
-    public List<Produto> getReturn() {
+    public List<ItemVenda> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<Produto>();
+            _return = new ArrayList<ItemVenda>();
         }
         return this._return;
     }

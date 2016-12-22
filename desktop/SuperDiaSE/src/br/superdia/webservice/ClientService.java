@@ -27,6 +27,33 @@ public interface ClientService {
 
     /**
      * 
+     * @param arg0
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "addProdutoCarrinho", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.AddProdutoCarrinho")
+    @ResponseWrapper(localName = "addProdutoCarrinhoResponse", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.AddProdutoCarrinhoResponse")
+    @Action(input = "http://webservice.superdia.br/ClientService/addProdutoCarrinhoRequest", output = "http://webservice.superdia.br/ClientService/addProdutoCarrinhoResponse")
+    public Boolean addProdutoCarrinho(
+        @WebParam(name = "arg0", targetNamespace = "")
+        ItemVenda arg0);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<br.superdia.webservice.ItemVenda>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCarrinho", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.GetCarrinho")
+    @ResponseWrapper(localName = "getCarrinhoResponse", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.GetCarrinhoResponse")
+    @Action(input = "http://webservice.superdia.br/ClientService/getCarrinhoRequest", output = "http://webservice.superdia.br/ClientService/getCarrinhoResponse")
+    public List<ItemVenda> getCarrinho();
+
+    /**
+     * 
      * @return
      *     returns java.util.List<br.superdia.webservice.Produto>
      */
@@ -50,7 +77,7 @@ public interface ClientService {
     @Action(input = "http://webservice.superdia.br/ClientService/removeProdutoCarrinhoRequest", output = "http://webservice.superdia.br/ClientService/removeProdutoCarrinhoResponse")
     public Boolean removeProdutoCarrinho(
         @WebParam(name = "arg0", targetNamespace = "")
-        Long arg0);
+        ItemVenda arg0);
 
     /**
      * 
@@ -78,32 +105,5 @@ public interface ClientService {
     public Boolean endsBuy(
         @WebParam(name = "arg0", targetNamespace = "")
         Usuario arg0);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<br.superdia.webservice.Produto>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCarrinho", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.GetCarrinho")
-    @ResponseWrapper(localName = "getCarrinhoResponse", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.GetCarrinhoResponse")
-    @Action(input = "http://webservice.superdia.br/ClientService/getCarrinhoRequest", output = "http://webservice.superdia.br/ClientService/getCarrinhoResponse")
-    public List<Produto> getCarrinho();
-
-    /**
-     * 
-     * @param arg0
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "addProdutoCarrinho", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.AddProdutoCarrinho")
-    @ResponseWrapper(localName = "addProdutoCarrinhoResponse", targetNamespace = "http://webservice.superdia.br/", className = "br.superdia.webservice.AddProdutoCarrinhoResponse")
-    @Action(input = "http://webservice.superdia.br/ClientService/addProdutoCarrinhoRequest", output = "http://webservice.superdia.br/ClientService/addProdutoCarrinhoResponse")
-    public Boolean addProdutoCarrinho(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Long arg0);
 
 }

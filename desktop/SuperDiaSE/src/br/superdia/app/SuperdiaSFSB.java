@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 
 import br.superdia.webservice.ClientService;
 import br.superdia.webservice.ClientServiceService;
+import br.superdia.webservice.ItemVenda;
 import br.superdia.webservice.Produto;
 import br.superdia.webservice.UserService;
 import br.superdia.webservice.UserServiceService;
@@ -124,7 +125,10 @@ public class SuperdiaSFSB {
 					permitido.getVendidoPor(), permitido.getEstoqueMinimo(), permitido.getQuantidadeEstoque()),
 					NOME_PROGRAMA + "-" + ADICONA_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
 			if(op == YES_OPTION) {
-				client.addProdutoCarrinho(permitido.getId());
+				ItemVenda itemVenda = new ItemVenda();
+				itemVenda.setProduto(permitido);
+				itemVenda.setQuantidade(1L);
+				client.addProdutoCarrinho(itemVenda);
 				msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
 			}
 			else
@@ -137,18 +141,18 @@ public class SuperdiaSFSB {
 	}
 
 	public static void listaCaixa() {
-		List<Produto> produtos = client.getCarrinho();
+		List<ItemVenda> itemVendas = client.getCarrinho();
 		String lista = "";
 		JTextArea listaJT = new JTextArea(10, 50);
 
-		for (int i = 0; i < produtos.size(); i++) {
-			lista += "Código: " + produtos.get(i).getId() + "\n";
-			lista += "Nome: " + produtos.get(i).getNome() + "\n";
-			lista += "Descrição: " + produtos.get(i).getDescricao() + "\n";
-			lista += "Preço: R$" + produtos.get(i).getPreco() + "\n";
-			lista += "Vendido por: " + produtos.get(i).getVendidoPor() + "\n";
-			lista += "Estoque Mínimo: " + produtos.get(i).getEstoqueMinimo() + "\n";
-			lista += "Quantidade em Estoque: " + produtos.get(i).getQuantidadeEstoque() + "\n\n\n";
+		for (int i = 0; i < itemVendas.size(); i++) {
+			lista += "Código: " + itemVendas.get(i).getProduto().getId() + "\n";
+			lista += "Nome: " + itemVendas.get(i).getProduto().getNome() + "\n";
+			lista += "Descrição: " + itemVendas.get(i).getProduto().getDescricao() + "\n";
+			lista += "Preço: R$" + itemVendas.get(i).getProduto().getPreco() + "\n";
+			lista += "Vendido por: " + itemVendas.get(i).getProduto().getVendidoPor() + "\n";
+			lista += "Estoque Mínimo: " + itemVendas.get(i).getProduto().getEstoqueMinimo() + "\n";
+			lista += "Quantidade em Estoque: " + itemVendas.get(i).getProduto().getQuantidadeEstoque() + "\n\n\n";
 		}
 		listaJT.setText(lista);
 		msgInfo(new JScrollPane(listaJT), NOME_PROGRAMA + "-" + LISTA_PRODUTO_CAIXA);
@@ -175,7 +179,7 @@ public class SuperdiaSFSB {
 	public static void remove(){
 		listaCaixa();
 
-		List<Produto> produtos = client.getCarrinho();
+		List<ItemVenda> itemVendas = client.getCarrinho();
 
 		codigo = lerNumeroInteiro("Informe o Código do Produto que deseja remover do carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
@@ -184,7 +188,7 @@ public class SuperdiaSFSB {
 		if(codigo == null) return;
 		
 		permitido = null;
-		produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p;});
+		itemVendas.forEach(p -> {if(p.getProduto().getId() == codigo.longValue()) permitido = p.getProduto();});
 		
 		if (permitido != null) {
 			int op = showConfirmDialog(null, String.format("Código: %d\nNome: %s\nDescrição: %s\nPreço: %1.2f\nVendido Por: %s\nEstoque Mínimo: %d\n"
@@ -193,7 +197,10 @@ public class SuperdiaSFSB {
 					permitido.getVendidoPor(), permitido.getEstoqueMinimo(), permitido.getQuantidadeEstoque()),
 					NOME_PROGRAMA + "-" + REMOVE_PRODUTO, YES_NO_OPTION, QUESTION_MESSAGE);
 			if(op == YES_OPTION) {
-				client.removeProdutoCarrinho(permitido.getId());
+				ItemVenda itemVenda = new ItemVenda();
+				itemVenda.setProduto(permitido);
+				itemVenda.setQuantidade(1L);
+				client.removeProdutoCarrinho(itemVenda);
 				msgInfo("Produto removido com sucesso!", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 			}
 			else
