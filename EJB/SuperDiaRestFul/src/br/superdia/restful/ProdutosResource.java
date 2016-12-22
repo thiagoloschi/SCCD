@@ -9,11 +9,14 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import com.google.gson.Gson;
 
+import br.superdia.message.RespostasJSON;
 import br.superdia.modelo.Produto;
 import br.superdia.sessionbean.IDAO;
+import br.superdia.sessionbean.IValidaCompra;
 
 /*
  * Implementa as funcionalidades do web services para manipular os produtos em estoque.
@@ -25,6 +28,9 @@ public class ProdutosResource {
 	
 	@EJB
 	private IDAO<Produto> dao;
+	
+	@EJB
+	private IValidaCompra validaCompra;
 
 	public ProdutosResource() {
 	}
@@ -41,22 +47,25 @@ public class ProdutosResource {
 	@Path("listar")
 	@GET
 	@Produces("application/json")
-	public String getAll(){
-		return gson.toJson(dao.getAll(Produto.class));
+	public String getAll(final @QueryParam("token") String token){
+		return validaCompra.tokenIsValid(token) ? gson.toJson(dao.getAll(Produto.class)) 
+				: gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
 	}
 	
 	@Path("obter/{id}")
 	@GET
 	@Produces("application/json")
-	public String getById(final @PathParam("id") String id){
-		return gson.toJson(dao.getForId(Long.valueOf(id), Produto.class));
+	public String getById(final @PathParam("id") String id, final @QueryParam("token") String token){
+		return validaCompra.tokenIsValid(token) ? gson.toJson(dao.getForId(Long.valueOf(id), Produto.class))
+				: gson.toJson(RespostasJSON.ERRO_USUARIO_INVALIDO.getMensagem());
 	}
 	
-	@Path("remover")
+	@Path("remover/{id}")
 	@DELETE
 	@Consumes("application/json")
-	public void removeProdutc(String product){
-		dao.remove(gson.fromJson(product, Produto.class));
+	public void removeProdutc(final @PathParam("id") String id){
+		Produto p = dao.getForId(Long.valueOf(id), Produto.class);
+		dao.remove(p);
 	}
 	
 	@Path("atualizar")

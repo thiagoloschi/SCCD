@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
+import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Produto;
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.ICarrinho;
@@ -26,24 +27,26 @@ public class ClientService {
 		return produtos;
 	}
 	
-	public List<Produto> getCarrinho(){
-		return carrinho.getItens();
+	public List<ItemVenda> getCarrinho(){
+		return carrinho.getItemVendas();
 	}
 	
-	public Boolean addProdutoCarrinho(Long id){
+	public Boolean addProdutoCarrinho(ItemVenda itemVenda){
 		try {
-			Produto produto = produtosDao.getForId(id, Produto.class);
-			carrinho.addProduct(produto);
+			Produto produto = produtosDao.getForId(itemVenda.getProduto().getId(), Produto.class);
+			itemVenda.setProduto(produto);
+			carrinho.addProduct(itemVenda);
 		} catch (Exception e) {
 			return false;
 		}
 			return true;
 	}
 
-	public Boolean removeProdutoCarrinho(Long id){
+	public Boolean removeProdutoCarrinho(ItemVenda itemVenda){
 		try {
-			Produto produto = produtosDao.getForId(id, Produto.class);
-			carrinho.removeProduct(produto);
+			Produto produto = produtosDao.getForId(itemVenda.getProduto().getId(), Produto.class);
+			itemVenda.setProduto(produto);
+			carrinho.removeProduct(itemVenda);
 		} catch (Exception e) {
 			return false;
 		}

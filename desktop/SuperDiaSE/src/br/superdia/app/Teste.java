@@ -1,20 +1,18 @@
 package br.superdia.app;
 
-import br.superdia.webservice.UserService;
-import br.superdia.webservice.UserServiceService;
-import br.superdia.webservice.Usuario;
+import br.superdia.webservice.ValidateCard;
+import br.superdia.webservice.ValidateCardService;
 
 public class Teste {
 
 	public static void main(String[] args) {
-		UserServiceService service = new UserServiceService();
-		UserService userClient = service.getUserServicePort();
+		ValidateCardService service = new ValidateCardService();
+		ValidateCard userClient = service.getValidateCardPort();
 		
-		Usuario usuario = new Usuario();
-		usuario.setSenha("saw");
-		usuario.setUsuario("saw");
-		System.out.println(userClient.obtemUsuario(usuario).getPerfil());
-		
+		if(userClient.validaCartao("73", "4352345"))
+			System.out.println("Funcionou...");
+		else
+			System.out.println("Não Funciona...");
 	}
 
 }

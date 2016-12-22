@@ -4,6 +4,7 @@
 		<class>br.superdia.modelo.Produto</class>
 		<class>br.superdia.modelo.Usuario</class>
 		<class>br.superdia.modelo.Venda</class>
+		<class>br.superdia.modelo.ItemVenda</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cdsuperdia"/>
 			<property name="javax.persistence.jdbc.user" value="superdia"/>

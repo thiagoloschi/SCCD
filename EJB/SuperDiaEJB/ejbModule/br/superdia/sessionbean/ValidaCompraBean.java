@@ -4,8 +4,12 @@ import java.io.IOException;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import br.superdia.controller.RequestHTTP;
+import br.superdia.jpa.JPAUtil;
+import br.superdia.modelo.Usuario;
 
 @Stateless
 @Remote(IValidaCompra.class)
@@ -34,5 +38,21 @@ public class ValidaCompraBean implements IValidaCompra {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public boolean tokenIsValid(String token) {
+		EntityManager em = JPAUtil.getEntityManager();
+		String q = "SELECT u FROM Usuario u WHERE u.token = :token";
+		Usuario result;
+		try{
+			TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
+			query.setParameter("token", token);
+			result = query.getSingleResult();
+			em.close();
+		}catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 }//validaCartao()

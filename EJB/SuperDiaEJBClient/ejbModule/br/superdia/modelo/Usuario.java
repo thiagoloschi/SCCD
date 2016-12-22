@@ -80,6 +80,10 @@ public class Usuario implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getToken() {
+		return token;
+	}
 
 	public String generateToken() {
 		String token = this.usuario + ":" + this.senha + ":" + this.perfil;

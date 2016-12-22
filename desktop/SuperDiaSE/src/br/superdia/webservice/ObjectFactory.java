@@ -24,8 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _ObtemUsuario_QNAME = new QName("http://webservice.superdia.br/", "obtemUsuario");
-    private final static QName _ObtemUsuarioResponse_QNAME = new QName("http://webservice.superdia.br/", "obtemUsuarioResponse");
+    private final static QName _ValidaCartaoResponse_QNAME = new QName("http://webservice.superdia.br/", "validaCartaoResponse");
+    private final static QName _ValidaCartao_QNAME = new QName("http://webservice.superdia.br/", "validaCartao");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: br.superdia.webservice
@@ -35,45 +35,37 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ObtemUsuario }
+     * Create an instance of {@link ValidaCartaoResponse }
      * 
      */
-    public ObtemUsuario createObtemUsuario() {
-        return new ObtemUsuario();
+    public ValidaCartaoResponse createValidaCartaoResponse() {
+        return new ValidaCartaoResponse();
     }
 
     /**
-     * Create an instance of {@link ObtemUsuarioResponse }
+     * Create an instance of {@link ValidaCartao }
      * 
      */
-    public ObtemUsuarioResponse createObtemUsuarioResponse() {
-        return new ObtemUsuarioResponse();
+    public ValidaCartao createValidaCartao() {
+        return new ValidaCartao();
     }
 
     /**
-     * Create an instance of {@link Usuario }
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidaCartaoResponse }{@code >}}
      * 
      */
-    public Usuario createUsuario() {
-        return new Usuario();
+    @XmlElementDecl(namespace = "http://webservice.superdia.br/", name = "validaCartaoResponse")
+    public JAXBElement<ValidaCartaoResponse> createValidaCartaoResponse(ValidaCartaoResponse value) {
+        return new JAXBElement<ValidaCartaoResponse>(_ValidaCartaoResponse_QNAME, ValidaCartaoResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ObtemUsuario }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidaCartao }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservice.superdia.br/", name = "obtemUsuario")
-    public JAXBElement<ObtemUsuario> createObtemUsuario(ObtemUsuario value) {
-        return new JAXBElement<ObtemUsuario>(_ObtemUsuario_QNAME, ObtemUsuario.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ObtemUsuarioResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice.superdia.br/", name = "obtemUsuarioResponse")
-    public JAXBElement<ObtemUsuarioResponse> createObtemUsuarioResponse(ObtemUsuarioResponse value) {
-        return new JAXBElement<ObtemUsuarioResponse>(_ObtemUsuarioResponse_QNAME, ObtemUsuarioResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservice.superdia.br/", name = "validaCartao")
+    public JAXBElement<ValidaCartao> createValidaCartao(ValidaCartao value) {
+        return new JAXBElement<ValidaCartao>(_ValidaCartao_QNAME, ValidaCartao.class, null, value);
     }
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,9 @@ public class Venda implements Serializable {
 	private Long id;
 	@Temporal(TemporalType.DATE)
 	private Calendar data;
-	@OneToMany
-	private List<Produto> produtos;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<ItemVenda> itemVendas;
 	@ManyToOne
 	private Usuario usuario;
 	
@@ -48,12 +50,12 @@ public class Venda implements Serializable {
 		this.data = data;
 	}
 	
-	public List<Produto> getProdutos() {
-		return produtos;
+	public List<ItemVenda> getProdutos() {
+		return itemVendas;
 	}
 	
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public void setProdutos(List<ItemVenda> itemVendas) {
+		this.itemVendas = itemVendas;
 	}
 
 	public Usuario getUsuario() {
