@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.IDAO;
 import br.superdia.sessionbean.IUsuarioDAO;
+import br.superdia.utils.SessionUtil;
 
 /**
  * Gerencia o cadastro do usuario.
@@ -39,8 +40,18 @@ public class UsuarioMB {
 	
 	public String login(){
 		boolean loginValido = usuarioDAO.isValid(usuario);
-		if(loginValido)
-			return "produtos";
+		if(loginValido){
+			
+			usuario = usuarioDAO.getUser(usuario);
+			
+			SessionUtil.setParam("USUARIOLogado", usuario);
+			
+			if(usuario.getPerfil().equalsIgnoreCase("adm"))
+				return "controleEstoque";
+			else
+				return "produtos";
+			
+		}
 		else {
 			usuario = new Usuario();
 			return "login";

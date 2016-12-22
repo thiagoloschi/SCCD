@@ -17,4 +17,10 @@
     <param-name>BootsFaces_THEME</param-name>
     <param-value>flatly</param-value>
   </context-param>
+  
+  <filter>
+       <filter-name>ControleDeAcesso</filter-name>
+       <filter-class>br.superdia.autorizador.ControleDeAcesso</filter-class>     
+   </filter>
+  
 </web-app>
