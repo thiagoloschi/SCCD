@@ -13,8 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import org.apache.commons.validator.routines.CreditCardValidator;
-
 import com.google.gson.Gson;
 
 import br.superdia.message.RespostasJSON;
@@ -95,9 +93,8 @@ public class CarrinhoResource {
 		if (validarCompra.tokenIsValid(token)){
 			//Caso sejá, verifica se o cartão informado pelo usuário é válido.
 			//if(validarCompra.validaCartao(dados.getTipo(), dados.getNumero())){
-			CreditCardValidator creditCardValidator = new CreditCardValidator();
 			
-			if(creditCardValidator.isValid(dados.getNumero())){	
+			if(validarCompra.validaCartao(dados.getTipo(), dados.getNumero())){	
 				//Obtêm os dados do usuário e seta os itens no carrinho.
 				Usuario u = dao.getByToken(token);
 				itens.forEach(i -> { carrinho.addProduct(i); });
