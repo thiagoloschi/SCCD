@@ -81,6 +81,10 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 	
+	public void setToken(String token){
+		this.token = token;
+	}
+	
 	public String getToken() {
 		return token;
 	}
