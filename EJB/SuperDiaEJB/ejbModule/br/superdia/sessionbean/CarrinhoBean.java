@@ -42,18 +42,13 @@ public class CarrinhoBean implements ICarrinho {
 	}
 
 	public void endsBuy(Usuario usuario) {
+		DAOBean<Venda> dao = new DAOBean<>();
 		Venda venda = new Venda();
 		venda.setData(Calendar.getInstance());
 		venda.setUsuario(usuario);
-		venda.setProdutos(geraItensVendas(venda));
-		DAOBean<Venda> dao = new DAOBean<>();
+		venda.setProdutos(itemVendas);
 		dao.add(venda);
 		clearItens();
-	}
-	
-	private List<ItemVenda> geraItensVendas(Venda venda){
-		itemVendas.forEach(p -> {p.setVenda(venda);});
-		return itemVendas;
 	}
 	
 }

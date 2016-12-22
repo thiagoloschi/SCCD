@@ -1,10 +1,13 @@
 package br.superdia.sessionbean;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -57,23 +60,28 @@ public class DAOBean<T> implements IDAO<T> {
 		return t;
 	}
 	
-	public String authenticate(Usuario usuario) {
+	public Usuario authenticate(Usuario usuario) {
 		em = JPAUtil.getEntityManager();
 		String q = "SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha";
-		Usuario result;
+		Usuario result = null;
 
-		try{
+		
 			TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
 			query.setParameter("usuario", usuario.getUsuario());
 			query.setParameter("senha", usuario.getSenha());
-			result = query.getSingleResult();
-			result.setToken(result.generateToken());
+			
+			try {
+				result = query.getSingleResult();
+				result.setToken(result.generateToken());
+			} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NoResultException ne){
+				return null;
+			}
 			update(((T)result));
-			em.close();
-		}catch(Exception e){
-			return null;
-		}
-		return result.getToken();
+		
+		return result;
 	}
 	
 }

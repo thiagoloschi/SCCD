@@ -17,9 +17,6 @@ public class ItemVenda {
 	private Long id;
 	
 	@OneToOne
-	private Venda venda;
-	
-	@OneToOne
 	private Produto produto;
 	
 	@Column(nullable=false)
@@ -27,8 +24,7 @@ public class ItemVenda {
 
 	public ItemVenda() {}
 
-	public ItemVenda(Venda venda, Produto produto, Long quantidade) {
-		this.venda = venda;
+	public ItemVenda(Produto produto, Long quantidade) {
 		this.produto = produto;
 		this.quantidade = quantidade;
 	}
@@ -39,14 +35,6 @@ public class ItemVenda {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Venda getVenda() {
-		return venda;
-	}
-
-	public void setVenda(Venda venda) {
-		this.venda = venda;
 	}
 
 	public Produto getProduto() {

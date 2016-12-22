@@ -89,23 +89,21 @@ public class Usuario implements Serializable {
 		return token;
 	}
 
-	public String generateToken() {
+	public String generateToken() throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		String token = this.usuario + ":" + this.senha + ":" + this.perfil;
 
-		MessageDigest algorithm;
 		
-		try {
-			algorithm = MessageDigest.getInstance("SHA-256");
-			byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
-
-			token = new String(messageDigest, StandardCharsets.UTF_8);
-			this.token = token;
-			return token;
-			
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return null;
+			MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+	        byte messageDigest[] = algorithm.digest(token.getBytes("UTF-8"));
+	         
+	        StringBuilder hexString = new StringBuilder();
+	        for (byte b : messageDigest) {
+	          hexString.append(String.format("%02X", 0xFF & b));
+	        }
+	        String senhahex = hexString.toString();
+	        
+	        this.token = senhahex;
+	        return senhahex;
 	}
 
 }

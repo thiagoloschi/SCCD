@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </h:head>
 <h:body>
-	<h:form>
-		Olá #{usuarioMB.usuario.usuario},
-		clique <h:commandLink action="#{usuarioMB.logout}">Sair</h:commandLink> 
-		para sair
-	</h:form>
-	
+	<h:form class="loginout">
+		Olá #{usuarioMB.usuario.usuario}, <h:commandLink action="#{usuarioMB.logout}">Sair</h:commandLink>
+	</h:form>	
+
 </h:body>
 </html>
