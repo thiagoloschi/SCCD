@@ -49,5 +49,21 @@ public class UsuarioDAOBean implements IUsuarioDAO {
 		}
 		return result;
 	}
+
+	@Override
+	public Usuario getByToken(String token) {
+		EntityManager em = JPAUtil.getEntityManager();
+		String q = "SELECT u FROM Usuario u WHERE u.token = :token";
+		Usuario result;
+		try{
+			TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
+			query.setParameter("token", token);
+			result = query.getSingleResult();
+			em.close();
+		}catch(Exception e){
+			return null;
+		}
+		return result;
+	}
 	
 }
