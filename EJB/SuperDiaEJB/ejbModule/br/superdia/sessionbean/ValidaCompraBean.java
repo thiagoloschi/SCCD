@@ -35,4 +35,20 @@ public class ValidaCompraBean implements IValidaCompra {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean tokenIsValid(String token) {
+		EntityManager em = JPAUtil.getEntityManager();
+		String q = "SELECT u FROM Usuario u WHERE u.token = :token";
+		Usuario result;
+		try{
+			TypedQuery<Usuario> query = em.createQuery(q, Usuario.class);
+			query.setParameter("usuario", token);
+			result = query.getSingleResult();
+			em.close();
+		}catch(Exception e){
+			return false;
+		}
+		return true;
+	}
 }//validaCartao()
