@@ -24,8 +24,17 @@
 			<b:dataTableColumn value="#{pr.descricao}" />
 			<b:dataTableColumn value="#{pr.preco}" />
 			<b:dataTableColumn label="Adicionar carrinho">
-				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr, 1)}">
+				<h:commandLink action="#{carrinhoMB.addProdutoCarrinho(pr, pr.quantidadeEstoque)}">
 					<b:icon name="shopping-cart"  size="2x"/>
+				</h:commandLink>
+			</b:dataTableColumn>
+			<b:dataTableColumn label="Quantidade">
+				<h:commandLink action="#{produtoMB.aumentarQtdEstoque(pr)}">
+					<b:icon name="plus"  size="2x"/>
+				</h:commandLink>
+				<h:outputLabel value="#{pr.quantidadeEstoque}" ></h:outputLabel>
+				<h:commandLink action="#{produtoMB.diminuirQtdEstoque(pr)}">
+					<b:icon name="minus"  size="2x"/>
 				</h:commandLink>
 			</b:dataTableColumn>
 		</b:dataTable>

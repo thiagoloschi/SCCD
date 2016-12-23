@@ -23,6 +23,14 @@ public class ProdutoMB {
 	
 	private Produto produto = new Produto();
 	
+	public void aumentarQtdEstoque(Produto produto){
+		produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + 1);
+	}
+	
+	public void diminuirQtdEstoque(Produto produto){
+		produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - 1);
+	}
+	
 	public void gravaProduto(){		
 		if(produto.getId() == null)
 			iProduto.add(produto);
