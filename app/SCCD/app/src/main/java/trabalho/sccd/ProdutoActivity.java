@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +33,7 @@ import trabalho.sccd.adapter.AdapterListViewMain;
 import trabalho.sccd.controller.RequestURL;
 import trabalho.sccd.model.Produto;
 import trabalho.sccd.utils.Constantes;
+import trabalho.sccd.utils.Preferencias;
 
 public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -40,6 +44,8 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     @BindView(R.id.activity_produto_descricao) TextView descricaoProduto;
     @BindView(R.id.activity_produto_vendidopor) TextView vendidoPorProduto;
     @BindView(R.id.activity_produto_quantidade_estoque) TextView quantidadeProduto;
+
+    private Produto produto;
 
     private FragmentDrawer mDrawerFragment;
 
@@ -61,7 +67,7 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
 
     private void carregaInforActivity(Bundle bundle) {
         String produtoJson = bundle.getString("produto");
-        Produto produto = new Gson().fromJson(produtoJson, Produto.class);
+        produto = new Gson().fromJson(produtoJson, Produto.class);
 
         nomeProduto.setText(produto.getNome());
         descricaoProduto.setText(produto.getDescricao());
@@ -134,8 +140,41 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     }
 
     @OnClick(R.id.activity_produto_btn_carrinho)
-    void abrirCarrinho(View view) {
-        //cadastrar o produto na api carrinho
+    void adicionarAoCarrinho(View view) {
+        Preferencias preferencias = new Preferencias(this);
+        String token = preferencias.getToken();
+
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.put("id", produto.getId());
+            jsonBody.put("nome", produto.getNome());
+            jsonBody.put("descricao", produto.getDescricao());
+            jsonBody.put("preco", produto.getPreco());
+            jsonBody.put("vendidoPor", produto.getVendidoPor());
+            jsonBody.put("estoqueMinimo", produto.getEstoqueMinimo());
+            jsonBody.put("quantidadeEstoque", produto.getQuantidadeEstoque());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final String requestBody = jsonBody.toString();
+
+        RequestURL req = new RequestURL(this);
+        req.request_POST_URL(String.format(Constantes.URL_API_ADD_PRODUTO_CARRINHO.replace("#{token}",token)), requestBody, new RequestURL.VolleyCallback() {
+            @Override
+            public void onSuccess(String response) {
+                System.out.println("ADD NO CARRINHO:" + response);
+                Gson gson = new Gson();
+                try{
+                    /*List<Produto> produtosJSON = Arrays.asList(gson.fromJson(response, Produto[].class));
+
+                    produtos.addAll(produtosJSON);
+                    carregaRecyclerView();*/
+                }catch (Exception e){
+
+                }
+            }
+        });
         //ir para tela do carrinho
     }
 }

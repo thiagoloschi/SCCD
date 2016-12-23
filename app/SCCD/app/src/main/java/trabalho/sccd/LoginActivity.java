@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void finalizarLogin(Usuario usuario){
 
-        Preferencias preferencias = new Preferencias(getApplicationContext());
+        Preferencias preferencias = new Preferencias(this);
         preferencias.setUsuario(usuario.getUsuario());
         preferencias.setSenha(usuario.getSenha());
         preferencias.setToken(usuario.getToken());

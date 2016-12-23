@@ -8,4 +8,6 @@ public final class Constantes {
     public static final String URL_API_LISTAR_PRODUTOS = URL_API + "/SuperDiaRestFul/rest/produtos/listar?token=#{token}";
     public static final String URL_API_AUTENTICAR = URL_API + "/SuperDiaRestFul/rest/usuarios/autenticar";
 
+    public static final String URL_API_ADD_PRODUTO_CARRINHO = URL_API + "/SuperDiaRestFul/rest/carrinho/inserir?token=#{token}";
+
 }
