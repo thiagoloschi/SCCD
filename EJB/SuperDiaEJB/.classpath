@@ -21,8 +21,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+
 	<classpathentry kind="lib" path="/var/lib/glassfish4/glassfish/lib/postgresql-9.4-1201.jdbc4.jar"/>
 	<classpathentry kind="lib" path="/home/mjunior/.m2/repository/commons-validator/commons-validator/1.4.0/commons-validator-1.4.0.jar"/>
+
 	<classpathentry exported="true" kind="lib" path="ejbModule/META-INF/lib/postgresql-9.4-1201.jdbc4.jar"/>
 	<classpathentry exported="true" kind="lib" path="ejbModule/META-INF/lib/commons-validator-1.4.0.jar" sourcepath="ejbModule/META-INF/lib/commons-validator-1.4.0.jar">
 		<attributes>
