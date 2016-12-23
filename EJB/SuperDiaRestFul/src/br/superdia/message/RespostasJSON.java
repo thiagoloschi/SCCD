@@ -3,7 +3,7 @@ package br.superdia.message;
 public enum RespostasJSON {
 	
 	//JSON Usuário
-	ERRO_USUARIO_INVALIDO("{'cod' : 401, 'msg':'Usuário não encontrado.'}"),
+	ERRO_USUARIO_INVALIDO("{'cod' : 401, 'msg':'Usuário não tem permissão para realizar esta operação.'}"),
 	
 	//JSON Carrinho
 	CARRINHO_VAZIO("{'cod': 204, 'msg': 'Carrinho vazio.'}"),
