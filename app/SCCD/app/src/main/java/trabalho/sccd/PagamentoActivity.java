@@ -40,8 +40,10 @@ import trabalho.sccd.utils.Preferencias;
 public class PagamentoActivity extends AppCompatActivity {
 
     @BindView(R.id.cartao_numero) EditText cartaoNumeroField;
-    @BindView(R.id.cartao_cvv) EditText cartaoCvvField;
-    @BindView(R.id.cartao_data) EditText cartaoDataField;
+    @BindView(R.id.cartao_tipo) EditText cartaoTipoField;
+
+    //@BindView(R.id.cartao_cvv) EditText cartaoCvvField;
+    //@BindView(R.id.cartao_data) EditText cartaoDataField;
 
     SharedPreferences pref;
     SharedPreferences.Editor editor ;
@@ -66,7 +68,8 @@ public class PagamentoActivity extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("cartao", cartaoNumeroField.getText());
+            jsonBody.put("tipo", cartaoTipoField.getText());
+            jsonBody.put("numero", cartaoNumeroField.getText());
         } catch (JSONException e) {
             e.printStackTrace();
         }
