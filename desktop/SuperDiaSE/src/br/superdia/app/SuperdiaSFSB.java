@@ -29,19 +29,19 @@ import br.superdia.webservice.Usuario;
 
 public class SuperdiaSFSB {
 
-	private static final String NOME_PROGRAMA = "Caixa Super Dia";
-	private static final String ADICONA_PRODUTO = "Adicionar Produto";
-	private static final String LISTA_PRODUTO = "Lista Produto";
-	private static final String LISTA_PRODUTO_CAIXA = "Lista Produto Caixa";
-	private static final String REMOVE_PRODUTO = "Remove Produto";
-	private static final String FINALIZA_COMPRA = "Finaliza Produto";
-	private static final String LOGIN = "Login";
+	private final String NOME_PROGRAMA = "Caixa Super Dia";
+	private final String ADICONA_PRODUTO = "Adicionar Produto";
+	private final String LISTA_PRODUTO = "Lista Produto";
+	private final String LISTA_PRODUTO_CAIXA = "Lista Produto Caixa";
+	private final String REMOVE_PRODUTO = "Remove Produto";
+	private final String FINALIZA_COMPRA = "Finaliza Produto";
+	private final String LOGIN = "Login";
 
-	private static ClientService client;
-	private static Produto produto;
-	private static Usuario usuario;
-	private static Produto permitido;
-	private static Integer codigo;
+	private ClientService client;
+	private Produto produto;
+	private Usuario usuario;
+	private Produto permitido;
+	private Integer codigo;
 
 	public SuperdiaSFSB() {
 		produto = new Produto();
@@ -60,7 +60,7 @@ public class SuperdiaSFSB {
 		}
 	}
 
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		new SuperdiaSFSB();
 	}
 
@@ -79,12 +79,12 @@ public class SuperdiaSFSB {
 		utilizar a questões do usuario.
 		client.endsBuy(Usuario usuario);
 	 */
-	private static void criaConexao(){
+	private void criaConexao(){
 		ClientServiceService service = new ClientServiceService();
 		client = service.getClientServicePort();
 	}
 
-	private static void menu(){
+	private void menu(){
 
 		int opcao;
 		String opcoes[] = {"Adicionar", "Listar Caixa", "Remover", "Finalizar Compra", "Sair"};
@@ -119,7 +119,7 @@ public class SuperdiaSFSB {
 		System.out.println("Teste");
 	}
 
-	public static void login() {
+	public void login() {
 		UserServiceService userServiceService = new UserServiceService();
 		UserService userService = userServiceService.getUserServicePort();
 
@@ -142,7 +142,7 @@ public class SuperdiaSFSB {
 		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
 	}
 
-	public static Produto adiciona() {
+	public Produto adiciona() {
 		if (client.getProdutos().isEmpty()) {
 			msgInfo("Nenhum produto cadastrado!!!", NOME_PROGRAMA + LISTA_PRODUTO);
 		}
@@ -189,7 +189,7 @@ public class SuperdiaSFSB {
 
 	}
 
-	public static void listaCaixa() {
+	public void listaCaixa() {
 		List<ItemVenda> itemVendas = client.getCarrinho();
 		String lista = "";
 		JTextArea listaJT = new JTextArea(10, 50);
@@ -207,7 +207,7 @@ public class SuperdiaSFSB {
 		msgInfo(new JScrollPane(listaJT), NOME_PROGRAMA + "-" + LISTA_PRODUTO_CAIXA);
 	}
 
-	public static void listaProduto() {
+	public void listaProduto() {
 		List<Produto> produtos = client.getProdutos();
 		String lista = "";
 		JTextArea listaJT = new JTextArea(10, 50);
@@ -225,7 +225,7 @@ public class SuperdiaSFSB {
 		msgInfo(new JScrollPane(listaJT), NOME_PROGRAMA + "-" + LISTA_PRODUTO);
 	}
 
-	public static void remove(){
+	public void remove(){
 		listaCaixa();
 
 		List<ItemVenda> itemVendas = client.getCarrinho();
@@ -258,7 +258,7 @@ public class SuperdiaSFSB {
 			msgInfo("Código não registrado...", NOME_PROGRAMA + "-" + REMOVE_PRODUTO);
 	}
 
-	public static void finalizaCompra(Usuario usuario) {
+	public void finalizaCompra(Usuario usuario) {
 		if(cartao()){
 			client.endsBuy(usuario);
 			client.cleanCarrinho();
@@ -269,7 +269,7 @@ public class SuperdiaSFSB {
 		}
 	}
 	
-	public static Boolean cartao() {
+	public Boolean cartao() {
 		CreditCardValidator creditCardValidator = new CreditCardValidator();
 		
 		String nome = lerString("Nome do Titular: ", "Você deve fornecer o nome", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
@@ -287,7 +287,7 @@ public class SuperdiaSFSB {
 		}
 	}
 
-	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {
+	public String lerString(String prompt, String msgErro, String modulo, boolean vazia) {
 		String string;
 
 		do {
@@ -301,7 +301,7 @@ public class SuperdiaSFSB {
 		return string;
 	}
 
-	public static Double lerNumeroReal(String prompt, String msgErro, String modulo, boolean vazio) {
+	public Double lerNumeroReal(String prompt, String msgErro, String modulo, boolean vazio) {
 		String valor;
 
 		do {
@@ -317,7 +317,7 @@ public class SuperdiaSFSB {
 		return Double.parseDouble(valor);
 	}
 
-	public static Integer lerNumeroInteiro(String prompt, String msgErro, String modulo, boolean vazio) {
+	public Integer lerNumeroInteiro(String prompt, String msgErro, String modulo, boolean vazio) {
 		String valor;
 
 		do {
@@ -333,11 +333,11 @@ public class SuperdiaSFSB {
 		return Integer.parseInt(valor.trim());
 	}
 
-	private static void msgInfo(Object mensagem, String titulo) {
+	private void msgInfo(Object mensagem, String titulo) {
 		showMessageDialog(null, mensagem, titulo, INFORMATION_MESSAGE);
 	}
 
-	private static void msgErro(Object mensagem, String titulo) {
+	private void msgErro(Object mensagem, String titulo) {
 		showMessageDialog(null, mensagem, titulo, ERROR_MESSAGE);
 	}
 }
