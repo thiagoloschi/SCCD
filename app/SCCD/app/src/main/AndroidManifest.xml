@@ -36,9 +36,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/MyMaterialTheme"></activity>
-
-
+            android:theme="@style/MyMaterialTheme" />
+        <activity android:name=".CadastroActivity"></activity>
     </application>
 
 </manifest>
