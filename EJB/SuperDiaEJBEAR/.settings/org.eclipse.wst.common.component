@@ -9,10 +9,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="SuperDiaWeb.war" deploy-path="/" handle="module:/resource/SuperDiaWeb/SuperDiaWeb">
-            <dependent-object/>
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="SuperDiaWeb.war" deploy-path="/" handle="module:/resource/SuperDiaWeb/SuperDiaWeb">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="SuperDiaRestFul.war" deploy-path="/" handle="module:/resource/SuperDiaRestFul/SuperDiaRestFul">

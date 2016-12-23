@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import br.superdia.modelo.Perfil;
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.IDAO;
 
@@ -41,12 +42,11 @@ public class CadastraUserMB {
 		this.usuario = usuario;
 	}
 	
-	public String cadastrarCliente(){
+	public String cadastrarUsuario(){
 	
 		// Verifica se as duas senhas batem.
 		if(senha2.equalsIgnoreCase(usuario.getSenha())){
 			
-			usuario.setPerfil("cliente");
 			iUsuario.add(usuario);
 			
 			usuario = new Usuario();
@@ -58,5 +58,24 @@ public class CadastraUserMB {
 		return "cadastrarCliente";
 		
 	}
+	
+	public String cadastrarCliente(){
+		
+		// Verifica se as duas senhas batem.
+		if(senha2.equalsIgnoreCase(usuario.getSenha())){
+			
+			usuario.setPerfil(Perfil.CLIENTE.getPerfil());
+			iUsuario.add(usuario);
+			
+			usuario = new Usuario();
+			
+			return "login";
+			
+		}
+		
+		return "cadastrarCliente";
+		
+	}
+	
 	
 }

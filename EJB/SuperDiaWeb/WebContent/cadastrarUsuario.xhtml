@@ -33,8 +33,14 @@
 			<b:inputText class="total" type="password" label="Repita a senha" render-label="true" label-style="width:150px" 
 				value="#{cadastraUserMB.senha2}" />
 		</b:row>
+		<br />
+		<b:panelGrid class="perfil" size="md" columns="3">
+	    	<b:radiobutton value="#{cadastraUserMB.usuario.perfil}" itemLabel="Administrador" itemValue="ADMINISTRADOR" />
+			<b:radiobutton value="#{cadastraUserMB.usuario.perfil}" itemLabel="Caixa" itemValue="CAIXA" />
+			<b:radiobutton value="#{cadastraUserMB.usuario.perfil}" itemLabel="Cliente" itemValue="CLIENTE" />
+		</b:panelGrid>
 		<br/>
-		<b:commandButton class="botaoVerde" action="#{cadastraUserMB.cadastrarCliente}" value="Cadastrar" />
+		<b:commandButton class="botaoVerde" action="#{cadastraUserMB.cadastrarUsuario}" value="Cadastrar" />
 
 		</center>
 	</b:form>
