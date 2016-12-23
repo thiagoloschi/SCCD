@@ -31,6 +31,9 @@
             android:name=".ProdutoActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".CarrinhoActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".InfoActivity"
             android:screenOrientation="portrait" />
         <activity
