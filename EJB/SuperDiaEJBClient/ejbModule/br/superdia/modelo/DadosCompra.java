@@ -6,14 +6,14 @@ import java.util.List;
 public class DadosCompra {
 	private String tipo;
 	private String numero;
-	private List<ItemVenda> itensVenda = new ArrayList<>();
+	private List<ItemVenda> itens_venda = new ArrayList<>();
 	
-	public List<ItemVenda> getItensVenda() {
-		return itensVenda;
+	public List<ItemVenda> getItens_venda() {
+		return itens_venda;
 	}
 
-	public void setItensVenda(List<ItemVenda> itensVenda) {
-		this.itensVenda = itensVenda;
+	public void setItens_venda(List<ItemVenda> itens_venda) {
+		this.itens_venda = itens_venda;
 	}
 
 	public String getNumero() {
