@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SuperDiaEJBClient"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/BootsFaces-OSP-1.0.0-dist.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-validator-1.4.0.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
@@ -9,14 +8,9 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SuperDiaEJBClient"/>
-=======
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="src" path="src"/>
->>>>>>> 84cc2ea9b9e1716ab2bf2b7cc8e040ec10642684
+	<classpathentry combineaccessrules="false" kind="src" path="/SuperDiaEJBClient"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
