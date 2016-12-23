@@ -19,7 +19,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="trabalho.sccd.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,13 +27,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ProdutoActivity"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".InfoActivity"
-                  android:screenOrientation="portrait" />
+        <activity
+            android:name=".InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>

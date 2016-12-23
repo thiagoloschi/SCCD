@@ -2,6 +2,7 @@ package trabalho.sccd;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -42,11 +44,24 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private List<Produto> produtos = new ArrayList<>();
 
     private Button filtroButton;
-
+    private  SharedPreferences pref;
+    private  SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //==========================================
+        // USUARIO NÃO LOGADO VAI PRA TELA DE LOGIN
+        // TOKEN VAZIO = SEM LOGIN
+        //=========================================== //
+        pref = getApplicationContext().getSharedPreferences("Login", 0); // 0 - for private mode
+        editor = pref.edit();
+        verificarLogin();
+
+
+
 
         //Define o ButterKnife para gerenciar as activities e ativa o modo de debugação.
         ButterKnife.bind(this);
@@ -111,9 +126,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private void carregaRecyclerView() {
         createRecyclerView();
+        Log.d("LOGIN","carregaRecyclerView -----");
     }
 
     public void infoActivity(View view) {
+
+        Log.d("LOGIN","infoActivity -----");
+
         Intent infoActivity = new Intent(this, InfoActivity.class);
         startActivity(infoActivity);
     }
@@ -132,6 +151,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        Log.d("LOGIN","onOptionsItemSelected -----");
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -143,6 +164,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             //case 2: favoriteActivity(view); break;
             case 4: infoActivity(view); break;
             default: Log.i("ERRO","POSITION ERROR"); break;
+        }
+    }
+
+    public void verificarLogin(){
+        String token = pref.getString("token","");
+        String usr = pref.getString("usuario","");
+        if(token.trim().isEmpty()){
+            Log.i("Login","Redirecionando pra tela de login");
+            Toast.makeText(getApplicationContext(),"Efetue login para continuar!", Toast.LENGTH_SHORT).show();
+            Intent infoActivity = new Intent(this, LoginActivity.class);
+            startActivity(infoActivity);
+        }else{
+            Log.i("Login",usr);
+            Log.i("Login",token);
+            Toast.makeText(getApplicationContext(),"Logado como: "+ pref.getString("usuario",""), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -35,5 +35,6 @@
         Desenvolvido pelos formandos do 6º Período do Curso Superior de Tecnologia em Sistemas para
         Internet, no ano de 2016.</string>
     <string name="version">Versão 1.1</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>
