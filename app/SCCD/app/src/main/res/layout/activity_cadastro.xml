@@ -20,7 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="114dp"
-        android:id="@+id/editText"
+        android:id="@+id/emailCadastro"
         android:background="#fff"
         android:padding="5dp" />
 
@@ -31,29 +31,29 @@
         android:ems="10"
         android:hint="Senha"
         android:layout_marginTop="26dp"
-        android:id="@+id/editText2"
+        android:id="@+id/passwordCadastro"
         android:background="#fff"
         android:padding="5dp"
-        android:layout_below="@+id/editText"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_below="@+id/emailCadastro"
+        android:layout_alignStart="@+id/emailCadastro" />
 
     <Button
         android:text="Finalizar Cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
+        android:id="@+id/cadastrar"
+        android:layout_below="@+id/passwordCadastro"
+        android:layout_alignStart="@+id/passwordCadastro"
         android:layout_marginTop="17dp"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignEnd="@+id/passwordCadastro" />
 
     <TextView
         android:text="Registre-se "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignStart="@+id/email"
         android:layout_marginTop="27dp"
         android:id="@+id/textView"
-        android:layout_alignEnd="@+id/editText" />
+        android:layout_alignEnd="@+id/email" />
 </RelativeLayout>
