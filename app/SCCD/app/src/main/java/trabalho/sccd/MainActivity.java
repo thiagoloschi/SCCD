@@ -113,9 +113,24 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         createRecyclerView();
     }
 
+    public void mainActivity(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void carrinhoActivity(View view) {
+        //startActivity(new Intent(this, CarrinhoActivity.class));
+    }
+
+    public void loginActivity(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    public void registrarActivity(View view) {
+        //startActivity(new Intent(this, RegistrarActivity.class));
+    }
+
     public void infoActivity(View view) {
-        Intent infoActivity = new Intent(this, InfoActivity.class);
-        startActivity(infoActivity);
+        startActivity(new Intent(this, InfoActivity.class));
     }
 
     @Override
@@ -138,9 +153,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @Override
     public void onDrawerItemSelected(View view, int position) {
         switch (position){
-            case 0: break;
-            //case 1: searchActivity(view); break;
-            //case 2: favoriteActivity(view); break;
+            //case 0: mainActivity(view); break;
+            case 1: carrinhoActivity(view); break;
+            case 2: loginActivity(view); break;
+            case 3: registrarActivity(view); break;
             case 4: infoActivity(view); break;
             default: Log.i("ERRO","POSITION ERROR"); break;
         }

@@ -5,69 +5,37 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import trabalho.sccd.activity.FragmentDrawer;
-import trabalho.sccd.adapter.AdapterListViewMain;
-import trabalho.sccd.controller.RequestURL;
 import trabalho.sccd.model.Produto;
-import trabalho.sccd.utils.Constantes;
 
-public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class LoginActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
-    @BindView(R.id.toolbar_produto) Toolbar mToolbar;
-
-    @BindView(R.id.activity_produto_nome) TextView nomeProduto;
-    @BindView(R.id.activity_produto_preco) TextView precoProduto;
-    @BindView(R.id.activity_produto_descricao) TextView descricaoProduto;
-    @BindView(R.id.activity_produto_vendidopor) TextView vendidoPorProduto;
-    @BindView(R.id.activity_produto_quantidade_estoque) TextView quantidadeProduto;
+    @BindView(R.id.toolbar_login) Toolbar mToolbar;
 
     private FragmentDrawer mDrawerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produto);
+        setContentView(R.layout.activity_login);
 
         //Define o ButterKnife para gerenciar as activities e ativa o modo de debugação.
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
 
-        Bundle extras = getIntent().getExtras();
-
-        carregaInforActivity(extras);
-
         createToolbar();
-    }
-
-    private void carregaInforActivity(Bundle bundle) {
-        String produtoJson = bundle.getString("produto");
-        Produto produto = new Gson().fromJson(produtoJson, Produto.class);
-
-        nomeProduto.setText(produto.getNome());
-        descricaoProduto.setText(produto.getDescricao());
-        precoProduto.setText("R$ " + produto.getPreco().toString());
-        vendidoPorProduto.setText("Vendido Por: " + produto.getVendidoPor());
-        quantidadeProduto.setText("Quantidade em Estoque: " + produto.getQuantidadeEstoque().toString());
     }
 
     private void createToolbar(){
@@ -75,13 +43,8 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mDrawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout_produto), mToolbar);
+        mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout_login), mToolbar);
         mDrawerFragment.setDrawerListener(this);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        //mRecyclerView.scrollToPosition((int)data.getExtras().get("position"));
     }
 
     public void mainActivity(View view) {
@@ -126,16 +89,14 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
         switch (position){
             case 0: mainActivity(view); break;
             case 1: carrinhoActivity(view); break;
-            case 2: loginActivity(view); break;
+            //case 2: loginActivity(view); break;
             case 3: registrarActivity(view); break;
             case 4: infoActivity(view); break;
             default: Log.i("ERRO","POSITION ERROR"); break;
         }
     }
 
-    @OnClick(R.id.activity_produto_btn_carrinho)
-    void abrirCarrinho(View view) {
-        //cadastrar o produto na api carrinho
-        //ir para tela do carrinho
+    @OnClick(R.id.activity_login_btn_logar)
+    void logar(View view) {
     }
 }

@@ -6,16 +6,17 @@
 
     <string name="nav_item_home">Home</string>
 
-    <string name="nav_item_vagas_favoritas">Vagas Favoritas</string>
-    <string name="nav_item_media_salarial">Media salarial</string>
+    <string name="nav_item_tela_carrinho">Carrinho</string>
+    <string name="nav_item_tela_login">Login</string>
+    <string name="nav_item_tela_registrar">Registrar</string>
     <string name="nav_item_sobre">Sobre</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
-        <item>@string/search_vaga</item>
-        <item>@string/nav_item_vagas_favoritas</item>
-        <item>@string/nav_item_media_salarial</item>
+        <item>@string/nav_item_tela_carrinho</item>
+        <item>@string/nav_item_tela_login</item>
+        <item>@string/nav_item_tela_registrar</item>
         <item>@string/nav_item_sobre</item>
     </string-array>
 
@@ -38,5 +39,11 @@
 
     <!-- Produto -->
     <string name="btn_carrinho">Adicionar ao Carrinho</string>
+
+    <!-- Login -->
+    <string name="activity_login_usuario">Usuário:</string>
+    <string name="activity_login_senha">Senha:</string>
+    <string name="activity_btn_logar">Entrar</string>
+    <string name="btn_login">Entrar</string>
 
 </resources>
