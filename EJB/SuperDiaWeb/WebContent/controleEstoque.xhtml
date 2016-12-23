@@ -13,6 +13,7 @@
 <h:body>
 	<ui:insert name="menu">
 		<ui:include src="navbar.xhtml" />
+		<ui:include src="logout.xhtml" />
 	</ui:insert>
 	<div class="body">
 
@@ -21,7 +22,6 @@
 
 		<b:form  id="cadastro">
 			<center>
-	
 				<b:row>
 				<b:inputText large-screen="one-fourth" label="Nome:" render-label="true"
 						label-style="width:150px" value="#{produtoMB.produto.nome}"

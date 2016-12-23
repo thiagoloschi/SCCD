@@ -19,6 +19,7 @@ icon{
 
 .loginout{
 	float: right;
+	padding-right: 25px;
 }
 
 .tema{
@@ -34,5 +35,15 @@ icon{
     padding: 10px 15px;
     line-height: 1.428571429;
     text-decoration: none;
+    margin-right: 20px;
 }
+
+.total{
+	width: 200px;
+	font-size: 30px;
+	text-align: right;
+}
+
+.perfil{
+	width: 30%;
 }

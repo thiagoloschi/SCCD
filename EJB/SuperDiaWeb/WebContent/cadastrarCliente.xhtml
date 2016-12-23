@@ -1,31 +1,50 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+   	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
-<title>Super dia - Cadastro de cliente</title>
+<title>SuperDia Clientes </title>
 </h:head>
 <h:body>
-	<h2>Cadastrar cliente</h2>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Usuario: " for="usuario" />
-			<h:inputText id="usuario" value="#{usuarioMB.usuario.usuario}" />
-			<h:outputLabel value="Senha:" for="senha" />
-			<h:inputSecret value="#{usuarioMB.usuario.senha}" id="senha" />
-			<h:outputLabel value="Repita senha:" for="senha2" />
-			<h:inputSecret value="#{usuarioMB.senha2}" id="senha2" />		
-		</h:panelGrid>
-		<h:panelGrid columns="1">
-				<h:selectOneRadio>
-				<f:selectItem itemValue="" itemLabel="Administrador" />
-				<f:selectItem itemValue="" itemLabel="Caixa" />
-				<f:selectItem itemValue="" itemLabel="Cliente" />
-			</h:selectOneRadio>
-			<h:commandButton action="#{usuarioMB.cadastrarCliente}" value="Cadastrar" />
-		</h:panelGrid>
-	</h:form>
+	<ui:insert name="menu">
+		<ui:include src="navbar.xhtml" />
+		<ui:include src="logout.xhtml" />
+	</ui:insert>
+	<div class="body">
+
+		<h4>Cadastro de Clientes</h4><hr/><br/>
+	<b:form>
+		<center>
+
+		<b:row>
+			<b:inputText class="total" label="Nome:" render-label="true" label-style="width:150px" 
+				value="#{usuarioMB.usuario.usuario}" />
+		</b:row>
+		<b:row>
+			<b:inputText class="total" type="password" label="Senha" render-label="true" label-style="width:150px" 
+				value="#{usuarioMB.usuario.senha}" />
+		</b:row>
+		<b:row>
+			<b:inputText class="total" type="password" label="Repita a senha" render-label="true" label-style="width:150px" 
+				value="#{usuarioMB.senha2}" />
+		</b:row>
+		<br />
+		<b:panelGrid class="perfil" size="md" columns="3">
+	    	<b:radiobutton value="#{usuarioMB.usuario.perfil}" itemLabel="Administrador" itemValue="Administrador" />
+			<b:radiobutton value="#{usuarioMB.usuario.perfil}" itemLabel="Caixa" itemValue="Caixa" />
+			<b:radiobutton value="#{usuarioMB.usuario.perfil}" itemLabel="Cliente" itemValue="Cliente" />
+		</b:panelGrid>
+		<br/>
+		<b:commandButton class="botaoVerde" action="#{usuarioMB.cadastrarCliente}" value="Cadastrar" />
+
+		</center>
+	</b:form>
+	
+	</div>
 </h:body>
 </html>
