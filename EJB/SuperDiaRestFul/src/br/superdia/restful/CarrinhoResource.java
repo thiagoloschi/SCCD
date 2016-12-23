@@ -16,7 +16,7 @@ import javax.ws.rs.QueryParam;
 import com.google.gson.Gson;
 
 import br.superdia.message.RespostasJSON;
-import br.superdia.modelo.DadosCartao;
+import br.superdia.modelo.DadosCompra;
 import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Usuario;
 import br.superdia.modelo.Venda;
@@ -87,7 +87,7 @@ public class CarrinhoResource {
 	@POST
 	@Consumes("application/json")
 	public String buy(final @QueryParam("token") String token, String info){
-		DadosCartao dados = gson.fromJson(info, DadosCartao.class);
+		DadosCompra dados = gson.fromJson(info, DadosCompra.class);
 		
 		//Verifica se o token do usuário é válido através do seu token.
 		if (validarCompra.tokenIsValid(token)){
@@ -97,7 +97,8 @@ public class CarrinhoResource {
 			if(validarCompra.validaCartao(dados.getTipo(), dados.getNumero())){	
 				//Obtêm os dados do usuário e seta os itens no carrinho.
 				Usuario u = dao.getByToken(token);
-				itens.forEach(i -> { carrinho.addProduct(i); });
+				itens.clear();
+				dados.getItensVenda().forEach( d -> { itens.add(d); });
 				
 				//Seta os dados da venda.
 				Venda venda = new Venda();
