@@ -6,10 +6,9 @@ import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
-import javax.jws.WebService;
-import javax.ws.rs.Path;
 
 import br.superdia.modelo.ItemVenda;
+import br.superdia.modelo.Produto;
 import br.superdia.modelo.Usuario;
 import br.superdia.modelo.Venda;
 
@@ -20,8 +19,6 @@ import br.superdia.modelo.Venda;
 
 @Stateful
 @Remote(ICarrinho.class)
-@WebService
-@Path("/cliente/carrinho")
 public class CarrinhoBean implements ICarrinho {
 	private List<ItemVenda> itemVendas = new ArrayList<>();
 	
@@ -30,10 +27,11 @@ public class CarrinhoBean implements ICarrinho {
 	}
 
 	public void removeProduct(ItemVenda itemVenda) {
-		itemVendas.removeIf( p -> p.getId() == itemVenda.getProduto().getId());
+		itemVendas.removeIf( p -> p.getProduto().getId() == itemVenda.getProduto().getId());
 	}
 
 	public void clearItens() {
+		itemVendas.removeAll(itemVendas);
 		itemVendas.clear();		
 	}
 	
@@ -46,9 +44,18 @@ public class CarrinhoBean implements ICarrinho {
 		Venda venda = new Venda();
 		venda.setData(Calendar.getInstance());
 		venda.setUsuario(usuario);
-		venda.setProdutos(itemVendas);
+		venda.setProdutos(atualizaQuantidade());
 		dao.add(venda);
 		clearItens();
+	}
+	
+	public List<ItemVenda> atualizaQuantidade(){
+		DAOBean<Produto> dao = new DAOBean<>();
+		this.itemVendas.forEach(p-> {
+			p.getProduto().setQuantidadeEstoque(p.getProduto().getQuantidadeEstoque()-p.getQuantidade().intValue());
+			dao.update(p.getProduto());
+		});
+		return this.itemVendas;
 	}
 	
 }

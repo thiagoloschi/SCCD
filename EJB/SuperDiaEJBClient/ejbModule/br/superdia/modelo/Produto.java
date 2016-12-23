@@ -8,9 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 @Entity
 public class Produto implements Serializable{
 
@@ -25,7 +23,7 @@ public class Produto implements Serializable{
 	@Column(nullable = false, length = 300)
 	private String descricao;
 	@Column(nullable = false)
-	private double preco;
+	private Double preco;
 	@Column(nullable=false)
 	private String vendidoPor;
 	private int estoqueMinimo;
