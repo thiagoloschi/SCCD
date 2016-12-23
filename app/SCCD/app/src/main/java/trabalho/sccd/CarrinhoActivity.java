@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -61,14 +60,11 @@ public class CarrinhoActivity extends AppCompatActivity implements FragmentDrawe
         editor = pref.edit();
         verificarLogin();
 
-
-
-
         //Define o ButterKnife para gerenciar as activities e ativa o modo de debugação.
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
 
-        obtemVagasAPI(); //TODO: Apagar
+        obtemProdutosCarrinho();
 
         createToolbar();
         verificaFiltroSelecionado();
@@ -108,13 +104,13 @@ public class CarrinhoActivity extends AppCompatActivity implements FragmentDrawe
     }
 
     // obtem os produtos da api.
-    public void obtemVagasAPI(){
+    public void obtemProdutosCarrinho(){
         RequestURL req = new RequestURL(this);
 
-        req.requestURL(String.format(Constantes.URL_API_LISTAR_PRODUTOS.replace("#{token}",token)), new RequestURL.VolleyCallback() {
+        req.requestURL(String.format(Constantes.URL_API_LISTAR_CARRINHO.replace("#{token}",token)), new RequestURL.VolleyCallback() {
             @Override
             public void onSuccess(String response) {
-                System.out.println("GET PRODUTOS:" + response);
+                System.out.println("GET CARRINHO:" + response);
                 Gson gson = new Gson();
                 try{
                     List<Produto> produtosJSON = Arrays.asList(gson.fromJson(response, Produto[].class));
@@ -134,7 +130,7 @@ public class CarrinhoActivity extends AppCompatActivity implements FragmentDrawe
     }
 
     public void mainActivity(View view) {
-        startActivity(new Intent(this, CarrinhoActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void carrinhoActivity(View view) {
