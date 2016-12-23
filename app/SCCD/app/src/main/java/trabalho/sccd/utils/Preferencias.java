@@ -15,6 +15,7 @@ public class Preferencias {
     private static final String VERSION_CODE = "version_code";
     private static final String USUARIO = "usuario";
     private static final String SENHA = "senha";
+    private static final String TOKEN = "token";
 
 
     public Preferencias(Context contexto) {
@@ -73,5 +74,13 @@ public class Preferencias {
 
     public String getSenha(){
         return settings.getString(SENHA, null);
+    }
+
+    public void setToken(String token){
+        this.addPreferencia(TOKEN, token);
+    }
+
+    public String getToken(){
+        return settings.getString(TOKEN, null);
     }
 }

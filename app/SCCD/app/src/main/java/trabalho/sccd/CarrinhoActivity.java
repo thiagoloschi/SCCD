@@ -31,10 +31,10 @@ import trabalho.sccd.controller.RequestURL;
 import trabalho.sccd.model.Produto;
 import trabalho.sccd.utils.Constantes;
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class CarrinhoActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
-    @BindView(R.id.list_produtos) RecyclerView mRecyclerView;
-    @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.list_carrinho) RecyclerView mRecyclerView;
+    @BindView(R.id.toolbar_carrinho) Toolbar mToolbar;
 
     private AdapterListViewMain mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -43,14 +43,14 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private List<Produto> produtos = new ArrayList<>();
 
-    private  Button filtroButton;
     private  SharedPreferences pref;
     private  SharedPreferences.Editor editor;
     private  String token = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_carrinho);
 
 
         //==========================================
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
 
-        filtroButton = (Button) findViewById(R.id.filterProdutos);
-
         obtemVagasAPI(); //TODO: Apagar
 
         createToolbar();
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         mDrawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        mDrawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout_carrinho), mToolbar);
         mDrawerFragment.setDrawerListener(this);
     }
 
@@ -121,8 +119,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 try{
                     List<Produto> produtosJSON = Arrays.asList(gson.fromJson(response, Produto[].class));
 
-
-
                     produtos.addAll(produtosJSON);
                     carregaRecyclerView();
                 }catch (Exception e){
@@ -138,11 +134,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     public void mainActivity(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, CarrinhoActivity.class));
     }
 
     public void carrinhoActivity(View view) {
-        startActivity(new Intent(this, CarrinhoActivity.class));
+        //startActivity(new Intent(this, CarrinhoActivity.class));
     }
 
     public void loginActivity(View view) {
@@ -182,8 +178,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @Override
     public void onDrawerItemSelected(View view, int position) {
         switch (position){
-            //case 0: mainActivity(view); break;
-            case 1: carrinhoActivity(view); break;
+            case 0: mainActivity(view); break;
+            //case 1: carrinhoActivity(view); break;
             case 2: loginActivity(view); break;
             case 3: registrarActivity(view); break;
             case 4: infoActivity(view); break;

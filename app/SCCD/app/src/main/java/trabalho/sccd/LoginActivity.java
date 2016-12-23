@@ -52,6 +52,7 @@ import trabalho.sccd.model.Login;
 import trabalho.sccd.model.Produto;
 import trabalho.sccd.model.Usuario;
 import trabalho.sccd.utils.Constantes;
+import trabalho.sccd.utils.Preferencias;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -160,6 +161,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void finalizarLogin(Usuario usuario){
+
+        Preferencias preferencias = new Preferencias(getApplicationContext());
+        preferencias.setUsuario(usuario.getUsuario());
+        preferencias.setSenha(usuario.getSenha());
+        preferencias.setToken(usuario.getToken());
 
         editor.putString("token", usuario.getToken()); // Storing string
         editor.putString("usuario", usuario.getUsuario()); // Storing string

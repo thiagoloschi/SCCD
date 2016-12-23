@@ -89,7 +89,7 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     }
 
     public void carrinhoActivity(View view) {
-        //startActivity(new Intent(this, CarrinhoActivity.class));
+        startActivity(new Intent(this, CarrinhoActivity.class));
     }
 
     public void loginActivity(View view) {
