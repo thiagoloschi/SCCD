@@ -60,6 +60,7 @@ public class DAOBean<T> implements IDAO<T> {
 		return t;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Usuario authenticate(Usuario usuario) {
 		em = JPAUtil.getEntityManager();
 		String q = "SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha";

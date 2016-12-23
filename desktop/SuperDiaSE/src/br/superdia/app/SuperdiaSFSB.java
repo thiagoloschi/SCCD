@@ -1,6 +1,12 @@
 package br.superdia.app;
 
-import static javax.swing.JOptionPane.*;
+import static javax.swing.JOptionPane.CLOSED_OPTION;
+import static javax.swing.JOptionPane.DEFAULT_OPTION;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.QUESTION_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.YES_OPTION;
 import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showInputDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -11,6 +17,7 @@ import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import org.apache.commons.validator.routines.CreditCardValidator;
 
 import br.superdia.webservice.ClientService;
 import br.superdia.webservice.ClientServiceService;
@@ -108,7 +115,8 @@ public class SuperdiaSFSB {
 			}
 			else  
 				login();
-		}while(opcao != CLOSED_OPTION && opcao==4);
+		}while(opcao != CLOSED_OPTION || opcao==4);
+		System.out.println("Teste");
 	}
 
 	public static void login() {
@@ -122,7 +130,6 @@ public class SuperdiaSFSB {
 			usuario.setUsuario(login);
 
 			String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + LOGIN, false);
-			if (senha == null) System.exit(0);
 
 			usuario.setSenha(senha);
 
@@ -130,13 +137,11 @@ public class SuperdiaSFSB {
 
 			if (usuario == null) return;
 
-			System.out.println(usuario.getPerfil());
-
+			if (!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())))
+				msgErro(usuario.getUsuario() + " é do perfil: " + usuario.getPerfil() + " - não tem acesso ao Caixa!", NOME_PROGRAMA + "-" + LOGIN);
 		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
-
-		//return usuario;
 	}
-	
+
 	public static Produto adiciona() {
 		if (client.getProdutos().isEmpty()) {
 			msgInfo("Nenhum produto cadastrado!!!", NOME_PROGRAMA + LISTA_PRODUTO);
@@ -248,16 +253,28 @@ public class SuperdiaSFSB {
 	}
 
 	public static void finalizaCompra(Usuario usuario) {
-		//usuario;// = obterUsuario();
-
-		if (usuario == null)
-			msgErro("Usuário Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-		else{
-			client.endsBuy(usuario);
-			client.cleanCarrinho();
-			msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-			criaConexao();
-		}
+		client.endsBuy(usuario);
+		client.cleanCarrinho();
+		msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		msgInfo("Total: R$" + client.getCarrinho(), NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		client = null;
+		criaConexao();
+	}
+	
+	public static void cartao() {
+		CreditCardValidator creditCardValidator = new CreditCardValidator();
+		
+		
+		String nome = lerString("Nome do Titular: ", "Você deve fornecer o nome", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+		if (nome == null) return;
+		
+		String numeroCartao = lerString("Número do Cartão: ", "Você deve fornecer o número do cartão!", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+		if (numeroCartao == null) return;
+		
+		if(creditCardValidator.isValid(numeroCartao))
+			msgInfo("Transação Autorizada!", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		else
+			msgErro("Cartão Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
 	}
 
 	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {
@@ -265,7 +282,7 @@ public class SuperdiaSFSB {
 
 		do {
 			string = showInputDialog(null, prompt, modulo, QUESTION_MESSAGE);
-			
+
 			if (string == null) break;
 
 			if (string.equals("") && !vazia)
@@ -303,7 +320,7 @@ public class SuperdiaSFSB {
 		} while (valor.equals("") && !vazio);
 
 		// COnverte a string lida pra inteiro.
-		return Integer.parseInt(valor);
+		return Integer.parseInt(valor.trim());
 	}
 
 	private static void msgInfo(Object mensagem, String titulo) {

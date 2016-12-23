@@ -3,6 +3,7 @@ package br.superdia.managebean;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.IDAO;
@@ -58,8 +59,11 @@ public class UsuarioMB {
 		}			
 	}
 	
-	public String logout(){		
-		usuario = new Usuario();
+	public String logout(){
+		
+		SessionUtil.remove("USUARIOLogado");
+		SessionUtil.invalidate();
+		
 		return "login";	
 	}
 	

@@ -23,14 +23,15 @@ public class ProdutoMB {
 	
 	private Produto produto = new Produto();
 	
-	public ProdutoMB() {
-		System.out.println("\n\n\n******************** AQUI PRODUTOS\n\n\n");
+	public void aumentarQtdEstoque(Produto produto){
+		produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() + 1);
 	}
-
-	public void gravaProduto(){
-		
-		produto.setVendidoPor("");
-		
+	
+	public void diminuirQtdEstoque(Produto produto){
+		produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - 1);
+	}
+	
+	public void gravaProduto(){		
 		if(produto.getId() == null)
 			iProduto.add(produto);
 		else iProduto.update(produto);

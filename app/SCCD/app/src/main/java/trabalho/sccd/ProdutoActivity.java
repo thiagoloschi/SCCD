@@ -24,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import trabalho.sccd.activity.FragmentDrawer;
 import trabalho.sccd.adapter.AdapterListViewMain;
 import trabalho.sccd.controller.RequestURL;
@@ -39,7 +40,6 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     @BindView(R.id.activity_produto_descricao) TextView descricaoProduto;
     @BindView(R.id.activity_produto_vendidopor) TextView vendidoPorProduto;
     @BindView(R.id.activity_produto_quantidade_estoque) TextView quantidadeProduto;
-    @BindView(R.id.activity_produto_btn_carrinho) TextView btnCarrinho;
 
     private FragmentDrawer mDrawerFragment;
 
@@ -54,7 +54,6 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
 
         Bundle extras = getIntent().getExtras();
 
-        System.out.println(extras.getString("produto"));
         carregaInforActivity(extras);
 
         createToolbar();
@@ -63,6 +62,12 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     private void carregaInforActivity(Bundle bundle) {
         String produtoJson = bundle.getString("produto");
         Produto produto = new Gson().fromJson(produtoJson, Produto.class);
+
+        nomeProduto.setText(produto.getNome());
+        descricaoProduto.setText(produto.getDescricao());
+        precoProduto.setText("R$ " + produto.getPreco().toString());
+        vendidoPorProduto.setText("Vendido Por: " + produto.getVendidoPor());
+        quantidadeProduto.setText("Quantidade em Estoque: " + produto.getQuantidadeEstoque().toString());
     }
 
     private void createToolbar(){
@@ -79,10 +84,24 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
         //mRecyclerView.scrollToPosition((int)data.getExtras().get("position"));
     }
 
+    public void mainActivity(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void carrinhoActivity(View view) {
+        //startActivity(new Intent(this, CarrinhoActivity.class));
+    }
+
+    public void loginActivity(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    public void registrarActivity(View view) {
+        //startActivity(new Intent(this, RegistrarActivity.class));
+    }
 
     public void infoActivity(View view) {
-        Intent infoActivity = new Intent(this, InfoActivity.class);
-        startActivity(infoActivity);
+        startActivity(new Intent(this, InfoActivity.class));
     }
 
     @Override
@@ -105,11 +124,18 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     @Override
     public void onDrawerItemSelected(View view, int position) {
         switch (position){
-            case 0: break;
-            //case 1: searchActivity(view); break;
-            //case 2: favoriteActivity(view); break;
+            case 0: mainActivity(view); break;
+            case 1: carrinhoActivity(view); break;
+            case 2: loginActivity(view); break;
+            case 3: registrarActivity(view); break;
             case 4: infoActivity(view); break;
             default: Log.i("ERRO","POSITION ERROR"); break;
         }
+    }
+
+    @OnClick(R.id.activity_produto_btn_carrinho)
+    void abrirCarrinho(View view) {
+        //cadastrar o produto na api carrinho
+        //ir para tela do carrinho
     }
 }

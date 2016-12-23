@@ -52,5 +52,10 @@ public class ItemVenda {
 	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemVenda [id=" + id + ", produto=" + produto + ", quantidade=" + quantidade + "]";
+	}
 	
 }
