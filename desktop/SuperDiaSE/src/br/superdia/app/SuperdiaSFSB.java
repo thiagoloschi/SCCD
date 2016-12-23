@@ -127,10 +127,11 @@ public class SuperdiaSFSB {
 			usuario.setSenha(senha);
 
 			usuario = userService.obtemUsuario(usuario);
+			
+			if (!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())))
+					msgErro(usuario.getUsuario() + " é do perfil: " + usuario.getPerfil() + " não tem acesso ao Caixa!", NOME_PROGRAMA + "-" + LOGIN);
 
 			if (usuario == null) return;
-
-			System.out.println(usuario.getPerfil());
 
 		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
 
