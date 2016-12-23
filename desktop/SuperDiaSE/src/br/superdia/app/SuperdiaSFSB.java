@@ -155,8 +155,14 @@ public class SuperdiaSFSB {
 			codigo = lerNumeroInteiro("Informe o Código do Produto que deseja adicionar ao carrinho: ", 
 					"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
 							ADICONA_PRODUTO, false);
-
+			
 			if (codigo == null) return null;
+			
+			Integer quantidade = lerNumeroInteiro("Informe a Quantidade de Produto que deseja adicionar ao carrinho: ", 
+					"Você deve A quantidade de produto a ser adicionado", NOME_PROGRAMA + "-" + 
+							ADICONA_PRODUTO, false);
+
+			if (quantidade == null) return null;
 
 			permitido = null;
 			produtos.forEach(p -> {if(p.getId() == codigo.longValue()) permitido = p;});
@@ -170,7 +176,7 @@ public class SuperdiaSFSB {
 				if(op == YES_OPTION) {
 					ItemVenda itemVenda = new ItemVenda();
 					itemVenda.setProduto(permitido);
-					itemVenda.setQuantidade(1L);
+					itemVenda.setQuantidade(quantidade.longValue());
 					client.addProdutoCarrinho(itemVenda);
 					msgInfo("Produto adicionado com sucesso!", NOME_PROGRAMA + "-" + ADICONA_PRODUTO);
 				}
@@ -227,7 +233,7 @@ public class SuperdiaSFSB {
 		codigo = lerNumeroInteiro("Informe o Código do Produto que deseja remover do carrinho: ", 
 				"Você deve fornecer o produto a ser adicionado", NOME_PROGRAMA + "-" + 
 						REMOVE_PRODUTO, false);
-
+		
 		if(codigo == null) return;
 
 		permitido = null;
@@ -253,28 +259,32 @@ public class SuperdiaSFSB {
 	}
 
 	public static void finalizaCompra(Usuario usuario) {
-		client.endsBuy(usuario);
-		client.cleanCarrinho();
-		msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-		msgInfo("Total: R$" + client.getCarrinho(), NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-		client = null;
-		criaConexao();
+		if(cartao()){
+			client.endsBuy(usuario);
+			client.cleanCarrinho();
+			msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+			msgInfo("Total: R$" + client.getCarrinho(), NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+			client = null;
+			criaConexao();
+		}
 	}
 	
-	public static void cartao() {
+	public static Boolean cartao() {
 		CreditCardValidator creditCardValidator = new CreditCardValidator();
 		
-		
 		String nome = lerString("Nome do Titular: ", "Você deve fornecer o nome", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
-		if (nome == null) return;
+		if (nome == null) return false;
 		
 		String numeroCartao = lerString("Número do Cartão: ", "Você deve fornecer o número do cartão!", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
-		if (numeroCartao == null) return;
+		if (numeroCartao == null) return false;
 		
-		if(creditCardValidator.isValid(numeroCartao))
+		if(creditCardValidator.isValid(numeroCartao)){
 			msgInfo("Transação Autorizada!", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-		else
+			return true;
+		}else{
 			msgErro("Cartão Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+			return false;
+		}
 	}
 
 	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {

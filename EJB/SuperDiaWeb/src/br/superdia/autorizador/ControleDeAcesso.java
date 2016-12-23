@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.superdia.modelo.Perfil;
 import br.superdia.modelo.Usuario;
 
 @WebFilter(value = "*.xhtml")
@@ -28,8 +29,8 @@ public class ControleDeAcesso implements Filter {
 		
 		if ((user != null)) {
 			
-			// Se o jovem for cliente n„o deixa ir para controle de estoque.
-			if(user.getPerfil().equalsIgnoreCase("cliente") && 
+			// Se o jovem for cliente n√£o deixa ir para controle de estoque.
+			if(user.getPerfil().equalsIgnoreCase(Perfil.CLIENTE.getPerfil()) && 
 					req.getRequestURI().endsWith("controleEstoque.xhtml"))
 				redireciona("/SuperDiaWeb/produtos.xhtml", response);
 			
