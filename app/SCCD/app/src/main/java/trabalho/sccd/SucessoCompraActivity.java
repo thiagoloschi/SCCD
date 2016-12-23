@@ -15,7 +15,6 @@ import butterknife.OnClick;
 public class SucessoCompraActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.valorCompra) TextView valorCompraField;
     @BindView(R.id.back) Button backButton;
 
     @Override
@@ -26,10 +25,6 @@ public class SucessoCompraActivity extends AppCompatActivity {
         //Define o ButterKnife para gerenciar as activities e ativa o modo de debugação.
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
-
-        Double valorCompra = getIntent().getDoubleExtra("valorCompra",0);
-
-        valorCompraField.setText("R$ "+String.valueOf(valorCompra).replace(".",","));
 
 
     }

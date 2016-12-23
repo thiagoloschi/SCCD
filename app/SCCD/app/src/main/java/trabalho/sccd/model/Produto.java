@@ -8,6 +8,7 @@ public class Produto{
     private String vendidoPor;
     private String estoqueMinimo;
     private Integer quantidadeEstoque;
+    private Integer quantidade = 1;
 
     public Integer getQuantidadeEstoque() {
         return quantidadeEstoque;
@@ -64,4 +65,6 @@ public class Produto{
     public void setId(Long id) {
         this.id = id;
     }
+
+
 }

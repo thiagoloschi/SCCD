@@ -32,6 +32,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import trabalho.sccd.controller.RequestURL;
+import trabalho.sccd.model.Carrinho;
+import trabalho.sccd.model.Produto;
 import trabalho.sccd.model.Usuario;
 import trabalho.sccd.utils.Constantes;
 import trabalho.sccd.utils.Preferencias;
@@ -45,6 +47,7 @@ public class PagamentoActivity extends AppCompatActivity {
     //@BindView(R.id.cartao_cvv) EditText cartaoCvvField;
     //@BindView(R.id.cartao_data) EditText cartaoDataField;
 
+
     SharedPreferences pref;
     SharedPreferences.Editor editor ;
 
@@ -57,6 +60,11 @@ public class PagamentoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
 
+        for (Produto produto : Carrinho.getCarrinho()   ) {
+            Log.d("CARR: ",produto.getNome());
+            Log.d("CARR: ",produto.getDescricao());
+        }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_pagamento);
         setSupportActionBar(toolbar);
     }
@@ -68,19 +76,27 @@ public class PagamentoActivity extends AppCompatActivity {
 
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("tipo", cartaoTipoField.getText());
+            jsonBody.put("tipo", "VISA");
             jsonBody.put("numero", cartaoNumeroField.getText());
+            jsonBody.put("itens_venda",new Gson().toJson(Carrinho.getCarrinho()).replace("\\","").replace("\"[", "[").replace("]\"","]").replace("\"id\"","\"pid\""));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        final String requestBody = jsonBody.toString();
+        final String requestBody = jsonBody.toString().replace("\\","").replace("\"[", "[").replace("]\"","]").replace("\"id\"","\"pid\"");
+
+        Log.i("---->",requestBody);
 
         RequestURL req = new RequestURL(this);
+
         req.request_POST_URL(String.format(Constantes.URL_API_FINALIZAR_CARRINHO.replace("#{token}",token)), requestBody, new RequestURL.VolleyCallback() {
             @Override
             public void onSuccess(String response) {
                 System.out.println("Finalizar Carrinho:" + response);
+
+                abrirSucesso();
+
                 Gson gson = new Gson();
                 try{
 
@@ -89,5 +105,10 @@ public class PagamentoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+     public void abrirSucesso(){
+        Intent main = new Intent(this, SucessoCompraActivity.class);
+        startActivity(main);
     }
 }
