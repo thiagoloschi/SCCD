@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SuperDiaEJBClient"/>
-	<classpathentry exported="true" kind="lib" path="../SuperDiaRestFul/WebContent/WEB-INF/lib/SuperDiaClient.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/BootsFaces-OSP-1.0.0-dist.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-validator-1.4.0.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/SuperDiaClient.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="oracle.eclipse.tools.glassfish.lib.system">
 		<attributes>
