@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<title>Bem-vindo ao SuperDia</title>
+	<style>
+		h2{
+			text-align:center;
+		}
+	</style>
+</h:head>
+<h:body>
+	<b:container>
+	
+	<b:row>
+		<b:column>
+			<h2>Centro de Distribuição SuperDia</h2>
+		</b:column>
+	</b:row>
+	
+	<b:row>
+		<b:column>
+		<h:form id="loginForm">
+		<b:container layout="fluid">
+			<b:panel >
+				<b:row>
+					<!-- <b:column offset-md="3" medium-screen="2">
+						<h:outputText value="Usuário:" for="username" />
+					</b:column> -->
+					<b:column offset-md="4" medium-screen="4">
+						<b:inputText placeholder="Usuário" id="username" 
+						 value="#{usuarioMB.usuario.usuario}" required="required">
+							<f:facet name="prepend">
+								<b:icon name="user" />
+							</f:facet>
+						</b:inputText>
+					</b:column>
+				</b:row>
+				
+				<b:row >
+					<!-- <b:column offset-md="3" medium-screen="2">
+						<h:outputText value="Senha:" />
+					</b:column> -->
+					<b:column offset-md="4" medium-screen="4">
+						<b:inputSecret placeholder="Senha" id="senha"
+							 value="#{usuarioMB.usuario.senha}" required="required">
+							<f:facet name="prepend">
+								<b:iconAwesome name="key" />
+							</f:facet>
+						</b:inputSecret>
+					</b:column>
+					
+				</b:row>
+				
+				<b:row>
+					<b:column offset-md="4" span="4">
+						<h:commandButton class="botaoVerde" value="Entrar" action="#{usuarioMB.login}"
+							 style="width:100%" />
+
+					</b:column>
+					
+				</b:row>
+				
+			</b:panel>
+		</b:container>
+	</h:form>
+		</b:column>
+	</b:row>	
+</b:container>
+</h:body>
+</html>

@@ -8,10 +8,11 @@
         <dependent-module archiveName="SuperDiaEJBClient.jar" deploy-path="/" handle="module:/resource/SuperDiaEJBClient/SuperDiaEJBClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="SuperDiaWeb.war" deploy-path="/" handle="module:/resource/SuperDiaWeb/SuperDiaWeb">
+        <dependent-module archiveName="SuperDiaRestFul.war" deploy-path="/" handle="module:/resource/SuperDiaRestFul/SuperDiaRestFul">
+            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="SuperDiaRestFul.war" deploy-path="/" handle="module:/resource/SuperDiaRestFul/SuperDiaRestFul">
+        <dependent-module archiveName="SuperDiaWebPro.war" deploy-path="/" handle="module:/resource/SuperDiaWebPro/SuperDiaWebPro">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>

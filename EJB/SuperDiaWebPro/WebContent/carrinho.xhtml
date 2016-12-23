@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<title>Superdia - Carrinho</title>
+</h:head>
+<h:body>
+
+	<ui:insert name="menu">
+		<ui:include src="navbar.xhtml" />
+		<ui:include src="logout.xhtml" />
+	</ui:insert>
+	<div class="body">
+	<h4>Carrinho de compras</h4><hr/><br/>
+	
+
+	<h:form >
+
+
+		<b:dataTable value="#{carrinhoMB.produtos}" var="pr">
+			<b:dataTableColumn label="Nome" value="#{pr.getProduto().getNome()}" />
+			<b:dataTableColumn label="Descrição" value="#{pr.getProduto().getDescricao()}" />
+			<b:dataTableColumn label="Preço" value="#{pr.getProduto().getPreco()}" />
+			<b:dataTableColumn label="Ações">
+				<h:commandLink value="Remover"
+					action="#{carrinhoMB.removerProdutoCarrinho(pr,1)}" />
+			</b:dataTableColumn>
+		</b:dataTable>
+
+		<br></br><br></br>
+		<center>
+		<b:inputText class="total" label="Total" render-label="true"
+						label-style="width:150px" value="#{carrinhoMB.total}"
+						disabled="true"/><br/><br/>
+						<br/>
+		<h:commandButton class="botaoVerde" value="Limpar carrinho" action="#{carrinhoMB.clearCarrinho()}"></h:commandButton>
+		<b:button  onclick="$('.modalPseudoClass').modal()" class="botaoVerde" value="Finalizar compra"></b:button>
+		</center>
+		
+		<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
+    		<b:inputText placeholder="N° cartão" value="#{carrinhoMB.numeroCartao}"></b:inputText>
+    		<f:facet name="footer">
+        		<h:commandButton class="botaoVerde" value="close" dismiss="modal" onclick="return false;"/>
+        		<h:commandButton id="mmodal" class="botaoVerde" value="Ok" action="#{carrinhoMB.endsBuy()}"></h:commandButton>
+    		</f:facet>
+		</b:modal>
+		
+	</h:form>
+	</div>
+</h:body>
+</html>
