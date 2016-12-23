@@ -6,12 +6,6 @@
   </module>
   <module>
     <web>
-      <web-uri>SuperDiaWeb.war</web-uri>
-      <context-root>SuperDiaWeb</context-root>
-    </web>
-  </module>
-  <module>
-    <web>
       <web-uri>SuperDiaRestFul.war</web-uri>
       <context-root>SuperDiaRestFul</context-root>
     </web>
