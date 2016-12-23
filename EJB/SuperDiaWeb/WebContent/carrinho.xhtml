@@ -17,25 +17,32 @@
 		<ui:include src="logout.xhtml" />
 	</ui:insert>
 	<div class="body">
+	<h4>Carrinho de compras</h4><hr/><br/>
+	
+
 	<h:form >
 
-		<h:outputText value="#{carrinhoMB.total}" />
-		<br></br>
-		<h:commandButton value="Limpar" action="#{carrinhoMB.clearCarrinho()}"></h:commandButton>
 
 		<b:dataTable value="#{carrinhoMB.produtos}" var="pr">
 			<b:dataTableColumn label="Nome" value="#{pr.getProduto().getNome()}" />
 			<b:dataTableColumn label="Descrição" value="#{pr.getProduto().getDescricao()}" />
 			<b:dataTableColumn label="Preço" value="#{pr.getProduto().getPreco()}" />
-			<b:dataTableColumn label="Remover carrinho">
+			<b:dataTableColumn label="Ações">
 				<h:commandLink value="Remover"
 					action="#{carrinhoMB.removerProdutoCarrinho(pr,1)}" />
 			</b:dataTableColumn>
 		</b:dataTable>
 
 		<br></br><br></br>
-		<h:commandButton value="Finalizar" action="#{carrinhoMB.endsBuy()}"></h:commandButton>
-
+		<center>
+		<b:inputText class="total" label="Total" render-label="true"
+						label-style="width:150px" value="#{carrinhoMB.total}"
+						disabled="true"/><br/><br/>
+						<br/>
+		<h:commandButton class="botaoVerde" value="Limpar carrinho" action="#{carrinhoMB.clearCarrinho()}"></h:commandButton>
+		<h:commandButton class="botaoVerde" value="Finalizar compra" action="#{carrinhoMB.endsBuy()}"></h:commandButton>
+		</center>
+		
 	</h:form>
 	</div>
 </h:body>

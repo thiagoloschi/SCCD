@@ -6,7 +6,8 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Super dia - Login</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<title>Bem-vindo ao SuperDia</title>
 	<style>
 		h2{
 			text-align:center;
@@ -18,7 +19,7 @@
 	
 	<b:row>
 		<b:column>
-			<h2>Centro de Distribuição Super dia</h2>
+			<h2>Centro de Distribuição SuperDia</h2>
 		</b:column>
 	</b:row>
 	
@@ -58,8 +59,9 @@
 				
 				<b:row>
 					<b:column offset-md="4" span="4">
-						<b:commandButton value="Entrar" action="#{usuarioMB.login}"
-							look="primary" style="width:100%" />
+						<h:commandButton class="botaoVerde" value="Entrar" action="#{usuarioMB.login}"
+							 style="width:100%" />
+
 					</b:column>
 					
 				</b:row>
