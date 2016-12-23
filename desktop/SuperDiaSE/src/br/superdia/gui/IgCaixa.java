@@ -274,7 +274,84 @@ public class IgCaixa extends JDialog {
 		}		
 		return produtosComprados;		
 	}
-	
-	
-	
+
+	public JList<String> getProdutosJList() {
+		return produtosJList;
+	}
+
+	public void setProdutosJList(JList<String> produtosJList) {
+		this.produtosJList = produtosJList;
+	}
+
+	public DefaultListModel<String> getProdutosListModel() {
+		return produtosListModel;
+	}
+
+	public void setProdutosListModel(DefaultListModel<String> produtosListModel) {
+		this.produtosListModel = produtosListModel;
+	}
+
+	public DefaultListModel<String> getCaixaListModel() {
+		return caixaListModel;
+	}
+
+	public void setCaixaListModel(DefaultListModel<String> caixaListModel) {
+		this.caixaListModel = caixaListModel;
+	}
+
+	public JList<String> getCaixaJList() {
+		return caixaJList;
+	}
+
+	public void setCaixaJList(JList<String> caixaJList) {
+		this.caixaJList = caixaJList;
+	}
+
+	public JButton getAddicionarButton() {
+		return addicionarButton;
+	}
+
+	public void setAddicionarButton(JButton addicionarButton) {
+		this.addicionarButton = addicionarButton;
+	}
+
+	public JButton getRemoverButton() {
+		return removerButton;
+	}
+
+	public void setRemoverButton(JButton removerButton) {
+		this.removerButton = removerButton;
+	}
+
+	public JButton getFinalizarCompraButton() {
+		return finalizarCompraButton;
+	}
+
+	public void setFinalizarCompraButton(JButton finalizarCompraButton) {
+		this.finalizarCompraButton = finalizarCompraButton;
+	}
+
+	public JLabel getUsuarioLogadoLabel() {
+		return usuarioLogadoLabel;
+	}
+
+	public void setUsuarioLogadoLabel(JLabel usuarioLogadoLabel) {
+		this.usuarioLogadoLabel = usuarioLogadoLabel;
+	}
+
+	public IgLogin getIgLogin() {
+		return igLogin;
+	}
+
+	public void setIgLogin(IgLogin igLogin) {
+		this.igLogin = igLogin;
+	}
+
+	public SuperDiaApp getSuperDiaApp() {
+		return superDiaApp;
+	}
+
+	public void setSuperDiaApp(SuperDiaApp superDiaApp) {
+		this.superDiaApp = superDiaApp;
+	}	
 } // class IgComboBoxList

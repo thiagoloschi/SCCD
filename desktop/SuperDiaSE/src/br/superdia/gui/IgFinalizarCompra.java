@@ -1,45 +1,39 @@
 package br.superdia.gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class IgFinalizarCompra extends JDialog {
 	private JButton cartaoButton;
 	private JFormattedTextField cartaoFormattedTextField;
 	private JLabel mensagemPagamentoLabel;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			IgFinalizarCompra dialog = new IgFinalizarCompra();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	private IgCaixa igCaixa;
+	
 	/**
 	 * Create the dialog.
 	 */
-	public IgFinalizarCompra() {
+	public IgFinalizarCompra(IgCaixa igCaixa) {
+		this.igCaixa = igCaixa;
 		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
-		setTitle("Pagamento");
-		setBounds(100, 100, 330, 285);
-		getContentPane().setLayout(null);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				System.out.println("clicou em fechar igFinalizarCompra");
+				fechar();
+				
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -74,5 +68,41 @@ public class IgFinalizarCompra extends JDialog {
 		mensagemPagamentoLabel.setBorder(new TitledBorder(null, "Situa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		mensagemPagamentoLabel.setBounds(10, 155, 304, 90);
 		getContentPane().add(mensagemPagamentoLabel);
+		
+		setTitle("Pagamento");
+		setBounds(100, 100, 330, 285);
+		getContentPane().setLayout(null);
+		setVisible(true);
 	}
+	
+	/**Fecha a janela do caixa*/
+	private void fechar(){
+		this.dispose();
+	}
+
+	public JButton getCartaoButton() {
+		return cartaoButton;
+	}
+
+	public void setCartaoButton(JButton cartaoButton) {
+		this.cartaoButton = cartaoButton;
+	}
+
+	public JFormattedTextField getCartaoFormattedTextField() {
+		return cartaoFormattedTextField;
+	}
+
+	public void setCartaoFormattedTextField(JFormattedTextField cartaoFormattedTextField) {
+		this.cartaoFormattedTextField = cartaoFormattedTextField;
+	}
+
+	public JLabel getMensagemPagamentoLabel() {
+		return mensagemPagamentoLabel;
+	}
+
+	public void setMensagemPagamentoLabel(JLabel mensagemPagamentoLabel) {
+		this.mensagemPagamentoLabel = mensagemPagamentoLabel;
+	}
+	
+	
 }
