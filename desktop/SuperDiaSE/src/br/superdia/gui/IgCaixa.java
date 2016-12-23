@@ -182,15 +182,16 @@ public class IgCaixa extends JDialog {
 	} // construtor
 	
 	private void obterProdutos() {	
-		/* Solu��o 2: Utiliza o modelo de dados da caixa de listagem para exibir os produtos na caixa de listagem. */
+		/* Utiliza o modelo de dados da caixa de listagem para exibir os produtos na caixa de listagem. */
 		produtosListModel.clear();
 		for (String produto : listaNomeProdutos())
 			produtosListModel.addElement(produto);
 	}
 	
 	/**
-	 * Remove o ingrediente selecionado da caixa de listagem pizza personalizada e adiciona da caixa de listagem ingredientes.
-	 * Mant�m a lista de ingredientes na caixa de listagem ingredientes sempre ordenada.
+	 * Remove o produto selecionado da caixa de listagem <strong>caixa</strong> e adiciona na caixa de 
+	 * listagem <strong>Produtos - Carrinho</strong>. Mantem a lista de produtos na caixa de listagem 
+	 * <strong>Produtos - Carrinho</strong> sempre ordenada.
 	 */
 	private void removerProduto() {
 		atualizaLista(produtosListModel, caixaJList.getSelectedValue());
@@ -200,8 +201,8 @@ public class IgCaixa extends JDialog {
 	}
 	
 	/**
-	 * Adiciona os ingredientes selecionados na caixa de listagem pizza personalizada e remove da caixa de listagem ingredientes.
-	 * Mant�m a lista de ingredientes na caixa de listagem pizza personalizada sempre ordenada. 
+	 * Adiciona os produtos selecionados na caixa de listagem <strong>caixa</strong> e remove da caixa de listagem produtos.
+	 * Mantem a lista de produtos na caixa de listagem <strong>caixa</strong> sempre ordenada. 
 	 */
 	private void adicionarProduto() {
 		for (String produto : produtosJList.getSelectedValuesList().toArray(new String[0])) {
@@ -212,7 +213,7 @@ public class IgCaixa extends JDialog {
 	}
 	
 	/**
-	 * Verifica se os bot�es Adicionar e Remover devem ser ativados ou desativados.
+	 * Verifica se os botoes Adicionar e Remover devem ser ativados ou desativados.
 	 */
 	private void ativarOuDesativarBotoes() {
 		if (produtosListModel.isEmpty()) addicionarButton.setEnabled(false); 
@@ -235,9 +236,8 @@ public class IgCaixa extends JDialog {
 			listModel.addElement((String) i);
 	}
 	
+	/**Obtem uma lista somente com os nomes de todos os produtos cadastrados*/
 	private List<String> listaNomeProdutos() {		
-		//List<Produto> produtos = igLogin.getSuperDiaApp().getClient().getProdutos();
-		
 		List<Produto> produtos = superDiaApp.getClient().getProdutos();
 		
 		List<String> nomeProdutos = new ArrayList<>();
@@ -253,13 +253,13 @@ public class IgCaixa extends JDialog {
 		this.dispose();
 	}
 	
-	/**Obtém uma lista com os nomes dos produtos adicionado ao caixa.*/
+	/**Obtem uma lista com os nomes dos produtos adicionado ao caixa.*/
 	private List<String> listaProdutosNoCaixa(){
 		ArrayList<String> produtosNoCaixa = Collections.list(caixaListModel.elements());		
 		return produtosNoCaixa;
 	}
 	
-	/**Obtém uma lista com todos os produtos que foram adicionados no caixa*/
+	/**Obtem uma lista com todos os produtos que foram adicionados no caixa*/
 	private List<Produto> listaProdutosComprados(){
 		List<Produto> todosProdutos = superDiaApp.getClient().getProdutos();
 		List<String> nomesProdutosComprados = listaProdutosNoCaixa();

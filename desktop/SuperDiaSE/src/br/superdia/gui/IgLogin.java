@@ -25,7 +25,7 @@ public class IgLogin extends JDialog {
 	private SuperDiaApp superDiaApp;
 	private TrataEventosIgLogin trataEventosIgLogin;
 	/**
-	 * Cria e exibe uma caixa de diï¿½logo para obter o login do usuï¿½rio.
+	 * Cria e exibe uma caixa de diálogo para obter o login do usuï¿½rio.
 	 */
 	public IgLogin(SuperDiaApp superDiaApp) {
 		this.superDiaApp = superDiaApp;		
@@ -145,7 +145,5 @@ public class IgLogin extends JDialog {
 
 	public void setTrataEventosIgLogin(TrataEventosIgLogin trataEventosIgLogin) {
 		this.trataEventosIgLogin = trataEventosIgLogin;
-	}
-	
-	
+	}	
 }// class IgLogin
