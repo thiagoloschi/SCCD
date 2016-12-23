@@ -85,9 +85,8 @@
                 android:text="Descricao produto" />
 
             <Button
-                android:text="Carrinho"
+                android:text="@string/btn_carrinho"
                 android:id="@+id/activity_produto_btn_carrinho"
-                android:onClick=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

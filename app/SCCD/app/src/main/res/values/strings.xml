@@ -36,4 +36,7 @@
         Internet, no ano de 2016.</string>
     <string name="version">Versão 1.1</string>
 
+    <!-- Produto -->
+    <string name="btn_carrinho">Adicionar ao Carrinho</string>
+
 </resources>

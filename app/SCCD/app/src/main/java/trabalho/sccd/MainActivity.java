@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        verificaFiltroSelecionado();
-        mRecyclerView.scrollToPosition((int)data.getExtras().get("position"));
+        //verificaFiltroSelecionado();
+        //mRecyclerView.scrollToPosition((int)data.getExtras().get("position"));
     }
 
     private void createRecyclerView(){

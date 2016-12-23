@@ -24,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import trabalho.sccd.activity.FragmentDrawer;
 import trabalho.sccd.adapter.AdapterListViewMain;
 import trabalho.sccd.controller.RequestURL;
@@ -67,8 +68,8 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
         nomeProduto.setText(produto.getNome());
         descricaoProduto.setText(produto.getDescricao());
         precoProduto.setText("R$ " + produto.getPreco().toString());
-        vendidoPorProduto.setText(produto.getVendidoPor());
-        quantidadeProduto.setText(produto.getQuantidadeEstoque().toString());
+        vendidoPorProduto.setText("Vendido Por: " + produto.getVendidoPor());
+        quantidadeProduto.setText("Quantidade em Estoque: " + produto.getQuantidadeEstoque().toString());
     }
 
     private void createToolbar(){
@@ -117,5 +118,11 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
             case 4: infoActivity(view); break;
             default: Log.i("ERRO","POSITION ERROR"); break;
         }
+    }
+
+    @OnClick(R.id.activity_produto_btn_carrinho)
+    void abrirCarrinho(View view) {
+        //api carrinho
+        //ir para tela do carrinho
     }
 }
