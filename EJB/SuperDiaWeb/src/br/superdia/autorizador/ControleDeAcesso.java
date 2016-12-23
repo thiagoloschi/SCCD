@@ -24,9 +24,9 @@ public class ControleDeAcesso implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		//Usuario user = (Usuario) session.getAttribute("USUARIOLogado");
+		Usuario user = (Usuario) session.getAttribute("USUARIOLogado");
 		
-		/*if ((user != null)) {
+		if ((user != null)) {
 			
 			// Se o jovem for cliente não deixa ir para controle de estoque.
 			if(user.getPerfil().equalsIgnoreCase("cliente") && 
@@ -40,10 +40,7 @@ public class ControleDeAcesso implements Filter {
 		}
 
 		else
-			((HttpServletResponse) response).sendRedirect(req.getContextPath() + "/login.xhtml");
-			/*if(req.getRequestURI().endsWith("login.xhtml"))
-				chain.doFilter(request, response);*/
-		chain.doFilter(request, response);
+			request.getRequestDispatcher("login.xhtml").forward(request, response);
 
 	}
 

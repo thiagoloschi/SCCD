@@ -10,6 +10,7 @@ import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Produto;
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.ICarrinho;
+import br.superdia.sessionbean.IValidaCompra;
 import br.superdia.utils.SessionUtil;
 
 @ManagedBean
@@ -18,16 +19,22 @@ public class CarrinhoMB {
 
 	@EJB
 	private ICarrinho icarrinho;
+	
+	@EJB
+	private IValidaCompra iValidaCompra;
+	
 	private List<ItemVenda>produtos;
 
+	private String numeroCartao;
+
 	public float total = 0;
-	
+
 	public void addProdutoCarrinho(Produto produto, Integer quantidade){
-		
+
 		ItemVenda itemVenda = new ItemVenda();
 		itemVenda.setProduto(produto);
 		itemVenda.setQuantidade(quantidade.longValue());
-		
+
 		icarrinho.addProduct(itemVenda);
 		atualizaLista();
 		getTotal();
@@ -35,7 +42,7 @@ public class CarrinhoMB {
 	}
 
 	public void removerProdutoCarrinho(ItemVenda item, Integer quantidade){
-		
+
 		icarrinho.removeProduct(item);
 		System.out.println(icarrinho.getItemVendas().toString());
 		atualizaLista();
@@ -58,10 +65,10 @@ public class CarrinhoMB {
 	}
 
 	public float getTotal() {
-		
+
 		if(produtos == null)
 			return 0;
-		
+
 		total = 0;
 
 		for(int contador = 0; contador < produtos.size(); contador++)
@@ -75,19 +82,30 @@ public class CarrinhoMB {
 	}
 
 	public void clearCarrinho(){
-		
+
 		icarrinho.clearItens();
 		atualizaLista();
-		
+
 	}
-	
+
 	public void endsBuy(){
-		
-		Usuario usuario = (Usuario) SessionUtil.getSession().getAttribute("USUARIOLogado");
-		System.out.println("\n\n********* user " + usuario.getUsuario());
-		icarrinho.endsBuy(usuario);
-		atualizaLista();
-		
+
+		if(iValidaCompra.validaCartao("", numeroCartao) && produtos.size() != 0){
+
+			Usuario usuario = (Usuario) SessionUtil.getSession().getAttribute("USUARIOLogado");
+			System.out.println("\n\n********* user " + usuario.getUsuario());
+			icarrinho.endsBuy(usuario);
+			atualizaLista();
+		}
+
+	}
+
+	public String getNumeroCartao() {
+		return numeroCartao;
+	}
+
+	public void setNumeroCartao(String numeroCartao) {
+		this.numeroCartao = numeroCartao;
 	}
 
 }

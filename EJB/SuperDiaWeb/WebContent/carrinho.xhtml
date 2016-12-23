@@ -40,8 +40,16 @@
 						disabled="true"/><br/><br/>
 						<br/>
 		<h:commandButton class="botaoVerde" value="Limpar carrinho" action="#{carrinhoMB.clearCarrinho()}"></h:commandButton>
-		<h:commandButton class="botaoVerde" value="Finalizar compra" action="#{carrinhoMB.endsBuy()}"></h:commandButton>
+		<b:button  onclick="$('.modalPseudoClass').modal()" class="botaoVerde" value="Finalizar compra"></b:button>
 		</center>
+		
+		<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
+    		<b:inputText placeholder="N° cartão" value="#{carrinhoMB.numeroCartao}"></b:inputText>
+    		<f:facet name="footer">
+        		<h:commandButton class="botaoVerde" value="close" dismiss="modal" onclick="return false;"/>
+        		<h:commandButton id="mmodal" class="botaoVerde" value="Ok" action="#{carrinhoMB.endsBuy()}"></h:commandButton>
+    		</f:facet>
+		</b:modal>
 		
 	</h:form>
 	</div>
