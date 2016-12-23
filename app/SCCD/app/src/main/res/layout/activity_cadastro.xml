@@ -11,18 +11,14 @@
     tools:context="trabalho.sccd.CadastroActivity"
     android:background="#ccc">
 
-    <EditText
+    <Button
+        android:text="Finalizar Cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="E-mail"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="114dp"
-        android:id="@+id/emailCadastro"
-        android:background="#fff"
-        android:padding="5dp" />
+        android:id="@+id/cadastrar"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/passwordCadastro"
+        android:layout_alignEnd="@+id/passwordCadastro" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -30,30 +26,46 @@
         android:inputType="textPassword"
         android:ems="10"
         android:hint="Senha"
-        android:layout_marginTop="26dp"
         android:id="@+id/passwordCadastro"
         android:background="#fff"
         android:padding="5dp"
-        android:layout_below="@+id/emailCadastro"
+        android:layout_above="@+id/cadastrar"
         android:layout_alignStart="@+id/emailCadastro" />
 
-    <Button
-        android:text="Finalizar Cadastro"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cadastrar"
-        android:layout_below="@+id/passwordCadastro"
-        android:layout_alignStart="@+id/passwordCadastro"
-        android:layout_marginTop="17dp"
-        android:layout_alignEnd="@+id/passwordCadastro" />
+        android:inputType="textPersonName"
+        android:hint="E-mail"
+        android:ems="10"
+        android:id="@+id/emailCadastro"
+        android:background="#fff"
+        android:padding="5dp"
+        android:layout_above="@+id/passwordCadastro"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:text="Registre-se "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/email"
-        android:layout_marginTop="27dp"
         android:id="@+id/textView"
-        android:layout_alignEnd="@+id/email" />
+        android:layout_marginTop="74dp"
+        android:textColor="#000"
+        android:textSize="28dp"
+        android:textStyle="normal|bold"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Efetue suas compras online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textAlignment="center"
+        android:textSize="22dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
