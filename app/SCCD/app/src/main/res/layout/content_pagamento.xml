@@ -52,6 +52,21 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="Tipo"
+        android:maxLength="3"
+        android:ems="8"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="205dp"
+        android:layout_below="@id/label_cartao"
+        android:id="@+id/cartao_tipo"
+        android:background="#fff"
+        android:textColor="#000"
+        android:padding="5dp"
+        android:layout_alignStart="@+id/activity_pagamento_finalizar_compra"/>
+<!--
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:hint="000"
         android:maxLength="3"
         android:ems="2"
@@ -63,7 +78,8 @@
         android:textColor="#000"
         android:padding="5dp"
         android:layout_alignStart="@+id/activity_pagamento_finalizar_compra"/>
-
+        -->
+<!--
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,7 +94,7 @@
         android:background="#fff"
         android:textColor="#000"
         android:padding="5dp"
-        android:layout_alignStart="@+id/cartao_cvv"/>
+        android:layout_alignStart="@+id/cartao_cvv"/>-->
 
     <Button
         android:text="Finalizar Compra"
