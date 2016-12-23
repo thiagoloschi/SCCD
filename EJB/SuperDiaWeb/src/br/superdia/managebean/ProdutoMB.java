@@ -27,10 +27,7 @@ public class ProdutoMB {
 		System.out.println("\n\n\n******************** AQUI PRODUTOS\n\n\n");
 	}
 
-	public void gravaProduto(){
-		
-		produto.setVendidoPor("");
-		
+	public void gravaProduto(){		
 		if(produto.getId() == null)
 			iProduto.add(produto);
 		else iProduto.update(produto);
