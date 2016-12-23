@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/ic_profile"
+            android:src="@drawable/ic_icon"
             android:scaleType="fitCenter"
             android:layout_centerInParent="true" />
 
