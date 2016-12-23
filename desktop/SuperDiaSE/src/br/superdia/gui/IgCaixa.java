@@ -38,15 +38,17 @@ public class IgCaixa extends JDialog {
 	private JButton finalizarCompraButton;
 	private JLabel usuarioLogadoLabel;
 	private IgLogin igLogin;
+	private IgFinalizarCompra igFinalizarCompra;
+	private IgCaixa igCaixa;
 		
 	SuperDiaApp superDiaApp;
 	
 	/**
 	 * Cria e exibe a GUI.
 	 */
-	
 	public IgCaixa(IgLogin igLogin) {
 		this.igLogin = igLogin;
+		igCaixa = this;
 		this.superDiaApp = igLogin.getSuperDiaApp();
 			
 		addWindowListener(new WindowAdapter() {
@@ -150,7 +152,7 @@ public class IgCaixa extends JDialog {
 		usuarioLogadoLabel.setBounds(81, 411, 149, 29);
 		contentPanel.add(usuarioLogadoLabel);
 		
-		JLabel lblUsurio = new JLabel("Usuário:");
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		lblUsurio.setBounds(12, 413, 59, 23);
 		contentPanel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -163,9 +165,8 @@ public class IgCaixa extends JDialog {
 		
 		finalizarCompraButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//aqui o que fazer ao finalizar a compra
-				
+				fechar();
+				new IgFinalizarCompra(igCaixa);		
 			}
 		});
 		
@@ -274,7 +275,100 @@ public class IgCaixa extends JDialog {
 		}		
 		return produtosComprados;		
 	}
-	
-	
-	
+
+	public JList<String> getProdutosJList() {
+		return produtosJList;
+	}
+
+	public void setProdutosJList(JList<String> produtosJList) {
+		this.produtosJList = produtosJList;
+	}
+
+	public DefaultListModel<String> getProdutosListModel() {
+		return produtosListModel;
+	}
+
+	public void setProdutosListModel(DefaultListModel<String> produtosListModel) {
+		this.produtosListModel = produtosListModel;
+	}
+
+	public DefaultListModel<String> getCaixaListModel() {
+		return caixaListModel;
+	}
+
+	public void setCaixaListModel(DefaultListModel<String> caixaListModel) {
+		this.caixaListModel = caixaListModel;
+	}
+
+	public JList<String> getCaixaJList() {
+		return caixaJList;
+	}
+
+	public void setCaixaJList(JList<String> caixaJList) {
+		this.caixaJList = caixaJList;
+	}
+
+	public JButton getAddicionarButton() {
+		return addicionarButton;
+	}
+
+	public void setAddicionarButton(JButton addicionarButton) {
+		this.addicionarButton = addicionarButton;
+	}
+
+	public JButton getRemoverButton() {
+		return removerButton;
+	}
+
+	public void setRemoverButton(JButton removerButton) {
+		this.removerButton = removerButton;
+	}
+
+	public JButton getFinalizarCompraButton() {
+		return finalizarCompraButton;
+	}
+
+	public void setFinalizarCompraButton(JButton finalizarCompraButton) {
+		this.finalizarCompraButton = finalizarCompraButton;
+	}
+
+	public JLabel getUsuarioLogadoLabel() {
+		return usuarioLogadoLabel;
+	}
+
+	public void setUsuarioLogadoLabel(JLabel usuarioLogadoLabel) {
+		this.usuarioLogadoLabel = usuarioLogadoLabel;
+	}
+
+	public IgLogin getIgLogin() {
+		return igLogin;
+	}
+
+	public void setIgLogin(IgLogin igLogin) {
+		this.igLogin = igLogin;
+	}
+
+	public SuperDiaApp getSuperDiaApp() {
+		return superDiaApp;
+	}
+
+	public void setSuperDiaApp(SuperDiaApp superDiaApp) {
+		this.superDiaApp = superDiaApp;
+	}
+
+	public IgFinalizarCompra getIgFinalizarCompra() {
+		return igFinalizarCompra;
+	}
+
+	public void setIgFinalizarCompra(IgFinalizarCompra igFinalizarCompra) {
+		this.igFinalizarCompra = igFinalizarCompra;
+	}
+
+	public IgCaixa getIgCaixa() {
+		return igCaixa;
+	}
+
+	public void setIgCaixa(IgCaixa igCaixa) {
+		this.igCaixa = igCaixa;
+	}	
 } // class IgComboBoxList

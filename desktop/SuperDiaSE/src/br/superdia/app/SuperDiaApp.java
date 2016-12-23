@@ -30,7 +30,7 @@ public class SuperDiaApp {
 		new SuperDiaApp();
 	}
 
-	private void criaConexao(){
+	public void criaConexao(){
 		ClientServiceService service = new ClientServiceService();
 		client = service.getClientServicePort();		
 	}

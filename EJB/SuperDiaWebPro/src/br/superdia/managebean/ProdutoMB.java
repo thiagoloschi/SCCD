@@ -37,6 +37,7 @@ public class ProdutoMB {
 		else iProduto.update(produto);
 		
 		produto = new Produto();
+		produto.setPreco(0.00);
 		produtos = iProduto.getAll(Produto.class);
 	}
 	

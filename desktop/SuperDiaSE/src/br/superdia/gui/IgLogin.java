@@ -43,13 +43,13 @@ public class IgLogin extends JDialog {
 		autenticacaoPanel.add(tituloPanel);
 		tituloPanel.setLayout(null);
 		
-		JLabel lblCdSuperdia = new JLabel("Centro Distribuição - SuperDia");
+		JLabel lblCdSuperdia = new JLabel("Centro Distribui\u00E7\u00E3o - SuperDia");
 		lblCdSuperdia.setForeground(new Color(255, 255, 255));
 		lblCdSuperdia.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblCdSuperdia.setBounds(10, 11, 253, 35);
 		tituloPanel.add(lblCdSuperdia);
 		
-		JLabel usuarioLabel = new JLabel("Usuário:");
+		JLabel usuarioLabel = new JLabel("Usu\u00E1rio:");
 		usuarioLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		usuarioLabel.setBounds(10, 95, 82, 20);
 		autenticacaoPanel.add(usuarioLabel);
@@ -74,7 +74,7 @@ public class IgLogin extends JDialog {
 		
 		senhaPasswordField.addMouseListener(trataEventosIgLogin.new TrataEventoSenhaTextField());
 		
-		mensagemLabel = new JLabel("Informe o usuário e a senha e clique em Entrar.");
+		mensagemLabel = new JLabel("Informe o usu\u00E1rio e a senha e clique em Entrar.");
 		mensagemLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		mensagemLabel.setBounds(10, 168, 258, 57);
 		autenticacaoPanel.add(mensagemLabel);

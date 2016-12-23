@@ -5,8 +5,8 @@
 	<projects>
 		<project>SuperDiaEJB</project>
 		<project>SuperDiaEJBClient</project>
-		<project>SuperDiaWeb</project>
 		<project>SuperDiaRestFul</project>
+		<project>SuperDiaWebPro</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
