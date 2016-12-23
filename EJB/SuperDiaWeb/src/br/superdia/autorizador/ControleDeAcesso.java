@@ -13,42 +13,51 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.superdia.modelo.Usuario;
+
 @WebFilter(value = "*.xhtml")
 public class ControleDeAcesso implements Filter {
+	
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-
-		if ((session.getAttribute("USUARIOLogado") != null)
-				|| (req.getRequestURI().endsWith("produtos.xhtml"))
-				|| (req.getRequestURI().endsWith("carrinho.xhtml"))) {
-
+		
+		Usuario user = (Usuario) session.getAttribute("USUARIOLogado");
+		
+		if ((user != null)) {
 			
-
-				//redireciona("/SuperDiaWeb/produtos.xhtml", response);
+			// Se o jovem for cliente não deixa ir para controle de estoque.
+			if(user.getPerfil().equalsIgnoreCase("cliente") && 
+					req.getRequestURI().endsWith("controleEstoque.xhtml"))
+				redireciona("/SuperDiaWeb/produtos.xhtml", response);
 			
-			chain.doFilter(request, response);
+			else
+				chain.doFilter(request, response);
+			//redireciona("/SuperDiaWeb/produtos.xhtml", response);
+			
 		}
 
-		else {
-			System.out.println("\n\n*********** AQUIIIII **********************\n\n");
-			chain.doFilter(request, response);
-		}
+		else 
+			if(req.getRequestURI().endsWith("login.xhtml"))
+				chain.doFilter(request, response);
 
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 
-	public void destroy() {
-	}
 
-	@SuppressWarnings("unused")
 	private void redireciona(String url, ServletResponse response)
 			throws IOException {
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.sendRedirect(url);
+	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
 	}
 }
