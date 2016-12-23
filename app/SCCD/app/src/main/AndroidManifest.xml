@@ -37,7 +37,8 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/MyMaterialTheme" />
-        <activity android:name=".CadastroActivity"></activity>
+        <activity android:name=".CadastroActivity" />
+        <activity android:name=".SucessoCompraActivity"></activity>
     </application>
 
 </manifest>
