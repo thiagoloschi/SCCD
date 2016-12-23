@@ -16,41 +16,64 @@
 	</ui:insert>
 	<div class="body">
 
-		<h4>Cadastro de produtos</h4>
+		<h4>Cadastro de produtos</h4><hr/><br/>
 
 
-		<b:form  look="success" id="cadastro">
-						<center>
+		<b:form  id="cadastro">
+			<center>
+	
 				<b:row>
-					<b:inputText style="width:170px" label="Nome:"
+				<b:inputText large-screen="one-fourth" label="Nome:" render-label="true"
+						label-style="width:150px" value="#{produtoMB.produto.nome}"
+						tooltip="Produto" />
+					<b:inputText large-screen="one-fourth"  label="Preço" render-label="true"
+						label-style="width:150px" value="#{produtoMB.produto.preco}"
+						tooltip="Custo unitátio do produto" />
+					<b:inputText large-screen="one-fourth"  label="Estoque atual"
 						render-label="true" label-style="width:150px"
-						value="#{produtoMB.produto.nome}" update="@this" tooltip="Produto" />
+						value="#{produtoMB.produto.quantidadeEstoque}"
+						tooltip="Quantidade de itens em estoque" />
+					<b:inputText large-screen="one-fourth"  label="Estoque Mínimo"
+						render-label="true" label-style="width:150px"
+						value="#{produtoMB.produto.estoqueMinimo}"
+						tooltip="Quantidade mínima em estoque até que haja um aviso." />
+	
 				</b:row>
 				<b:row>
-				<b:inputTextarea tiny-screen="12" small-screen="7" medium-screen="5"
-						large-screen="4" style="width:170px" label="Descrição"
+					<b:inputText large-screen="one-fourth" label="Fornecedor"
 						render-label="true" label-style="width:150px"
-						value="#{produtoMB.produto.descricao}" update="@this" tooltip="Descrição do produto" />
+						value="#{produtoMB.produto.vendidoPor}"
+						tooltip="Fornecedor do produto" />
+					<b:inputTextarea large-screen="three-fourths" label="Descrição"
+						render-label="true" label-style="width:150px"
+						value="#{produtoMB.produto.descricao}"
+						tooltip="Descrição do produto" />
+		
 				</b:row>
+			<br/><br/>
 				<b:row>
-				<b:inputText tiny-screen="12" small-screen="7" medium-screen="5"
-						large-screen="4" style="width:170px" label="Nome:"
-						render-label="true" label-style="width:150px"
-						value="#{produtoMB.produto.preco}" update="@this" tooltip="Custo do produto" />
+					<h:commandButton class="botaoVerde" value="Cadastrar"
+					action="#{produtoMB.gravaProduto}" />
 				</b:row>
-				
+<br/><br/>
+
+
+
+
+				<!-- estoque min, qtd estoque, vendido por -->
 </center>
 		</b:form>
 		
-		<br /> <br />
 
-		<h4>Produtos Cadastrados</h4>
+
+		<h4>Produtos Cadastrados</h4><hr/><br/>
 		<h:form id="lista">
 			<b:dataTable value="#{produtoMB.produtos}" var="pr">
-				<b:dataTableColumn value="#{pr.nome}" />
-				<b:dataTableColumn value="#{pr.descricao}" />
-				<b:dataTableColumn value="#{pr.preco}" />
-				<b:dataTableColumn value="#{pr.quantidadeEstoque}" />
+				<b:dataTableColumn value="#{pr.nome}" label="Produto" />
+				<b:dataTableColumn value="#{pr.descricao}" label="Descrição" />
+				<b:dataTableColumn value="#{pr.preco}" label="Preço" />
+				<b:dataTableColumn value="#{pr.quantidadeEstoque}" label="Quantidade em Estoque" />
+				<b:dataTableColumn value="#{pr.vendidoPor}" label="Fornecedor"/>
 				<b:dataTableColumn label="Ações">
 					<h:commandLink>
 						<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}"/>
