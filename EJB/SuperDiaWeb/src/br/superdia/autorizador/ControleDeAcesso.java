@@ -28,10 +28,11 @@ public class ControleDeAcesso implements Filter {
 		
 		if ((user != null)) {
 			
-			// Se não for cliente nem o admin, rejeita o acesso
-			if(user.getPerfil().equalsIgnoreCase("cliente") == false ||
-					user.getPerfil().equalsIgnoreCase("adm") == false)
-				request.getRequestDispatcher("login.xhtml").forward(request, response);
+			// Se o jovem for cliente não deixa ir para controle de estoque.
+			if(user.getPerfil().equalsIgnoreCase("cliente") && 
+					req.getRequestURI().endsWith("controleEstoque.xhtml"))
+				redireciona("/SuperDiaWeb/produtos.xhtml", response);
+			
 			
 			else
 				chain.doFilter(request, response);
