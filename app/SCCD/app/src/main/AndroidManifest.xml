@@ -30,7 +30,6 @@
         <activity
             android:name=".ProdutoActivity"
             android:screenOrientation="portrait" />
-<<<<<<< HEAD
         <activity
             android:name=".InfoActivity"
             android:screenOrientation="portrait" />
@@ -38,15 +37,8 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/MyMaterialTheme"></activity>
-=======
 
-        <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
 
-        <activity android:name=".InfoActivity"
-                  android:screenOrientation="portrait" />
->>>>>>> 84cc2ea9b9e1716ab2bf2b7cc8e040ec10642684
     </application>
 
 </manifest>

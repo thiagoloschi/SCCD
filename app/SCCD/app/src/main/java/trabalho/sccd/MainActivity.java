@@ -154,15 +154,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     public void infoActivity(View view) {
-<<<<<<< HEAD
-
-        Log.d("LOGIN","infoActivity -----");
 
         Intent infoActivity = new Intent(this, InfoActivity.class);
         startActivity(infoActivity);
-=======
-        startActivity(new Intent(this, InfoActivity.class));
->>>>>>> 84cc2ea9b9e1716ab2bf2b7cc8e040ec10642684
+
     }
 
     @Override
