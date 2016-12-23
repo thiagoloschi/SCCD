@@ -63,6 +63,12 @@ public class ProdutoActivity extends AppCompatActivity implements FragmentDrawer
     private void carregaInforActivity(Bundle bundle) {
         String produtoJson = bundle.getString("produto");
         Produto produto = new Gson().fromJson(produtoJson, Produto.class);
+
+        nomeProduto.setText(produto.getNome());
+        descricaoProduto.setText(produto.getDescricao());
+        precoProduto.setText("R$ " + produto.getPreco().toString());
+        vendidoPorProduto.setText(produto.getVendidoPor());
+        quantidadeProduto.setText(produto.getQuantidadeEstoque().toString());
     }
 
     private void createToolbar(){
