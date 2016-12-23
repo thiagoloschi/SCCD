@@ -11,12 +11,14 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
 
 public class IgFinalizarCompra extends JDialog {
-	private JButton cartaoButton;
-	private JFormattedTextField cartaoFormattedTextField;
+	private JButton pagarButton;
 	private JLabel mensagemPagamentoLabel;
 	private IgCaixa igCaixa;
+	private JTextField nomeTitularTextField;
+	private JTextField cartaoTextField;
 	
 	/**
 	 * Create the dialog.
@@ -50,28 +52,40 @@ public class IgFinalizarCompra extends JDialog {
 		JLabel cartaoLabel = new JLabel("Cart\u00E3o De Cr\u00E9dito:");
 		cartaoLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		cartaoLabel.setToolTipText("Informe o n\u00FAmero do cart\u00E3o de cr\u00E9dito.");
-		cartaoLabel.setBounds(10, 83, 110, 22);
+		cartaoLabel.setBounds(9, 130, 110, 22);
 		getContentPane().add(cartaoLabel);
 		
-		cartaoFormattedTextField = new JFormattedTextField();
-		cartaoFormattedTextField.setBounds(119, 83, 195, 22);
-		getContentPane().add(cartaoFormattedTextField);
-		
-		cartaoButton = new JButton("Pagar");
-		cartaoButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		cartaoButton.setBounds(129, 121, 89, 23);
-		getContentPane().add(cartaoButton);
+		pagarButton = new JButton("Pagar");
+		pagarButton.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		pagarButton.setBounds(126, 200, 89, 23);
+		getContentPane().add(pagarButton);
 		
 		mensagemPagamentoLabel = new JLabel("");
 		mensagemPagamentoLabel.setForeground(Color.RED);
 		mensagemPagamentoLabel.setFont(new Font("Times New Roman", Font.PLAIN, 12));
 		mensagemPagamentoLabel.setBorder(new TitledBorder(null, "Situa\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		mensagemPagamentoLabel.setBounds(10, 155, 304, 90);
+		mensagemPagamentoLabel.setBounds(9, 230, 304, 90);
 		getContentPane().add(mensagemPagamentoLabel);
 		
 		setTitle("Pagamento");
-		setBounds(100, 100, 330, 285);
+		setBounds(100, 100, 330, 364);
 		getContentPane().setLayout(null);
+		
+		JLabel nomeTitularLabel = new JLabel("Nome do Titular:");
+		nomeTitularLabel.setToolTipText("Informe o nome do titular do cart\u00E3o de cr\u00E9dito.");
+		nomeTitularLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		nomeTitularLabel.setBounds(10, 70, 110, 22);
+		getContentPane().add(nomeTitularLabel);
+		
+		nomeTitularTextField = new JTextField();
+		nomeTitularTextField.setBounds(10, 91, 304, 28);
+		getContentPane().add(nomeTitularTextField);
+		nomeTitularTextField.setColumns(10);
+		
+		cartaoTextField = new JTextField();
+		cartaoTextField.setColumns(10);
+		cartaoTextField.setBounds(10, 152, 304, 28);
+		getContentPane().add(cartaoTextField);
 		setVisible(true);
 	}
 	
@@ -81,19 +95,11 @@ public class IgFinalizarCompra extends JDialog {
 	}
 
 	public JButton getCartaoButton() {
-		return cartaoButton;
+		return pagarButton;
 	}
 
 	public void setCartaoButton(JButton cartaoButton) {
-		this.cartaoButton = cartaoButton;
-	}
-
-	public JFormattedTextField getCartaoFormattedTextField() {
-		return cartaoFormattedTextField;
-	}
-
-	public void setCartaoFormattedTextField(JFormattedTextField cartaoFormattedTextField) {
-		this.cartaoFormattedTextField = cartaoFormattedTextField;
+		this.pagarButton = cartaoButton;
 	}
 
 	public JLabel getMensagemPagamentoLabel() {
@@ -103,6 +109,36 @@ public class IgFinalizarCompra extends JDialog {
 	public void setMensagemPagamentoLabel(JLabel mensagemPagamentoLabel) {
 		this.mensagemPagamentoLabel = mensagemPagamentoLabel;
 	}
-	
-	
+
+	public JButton getPagarButton() {
+		return pagarButton;
+	}
+
+	public void setPagarButton(JButton pagarButton) {
+		this.pagarButton = pagarButton;
+	}
+
+	public IgCaixa getIgCaixa() {
+		return igCaixa;
+	}
+
+	public void setIgCaixa(IgCaixa igCaixa) {
+		this.igCaixa = igCaixa;
+	}
+
+	public JTextField getNomeTitularTextField() {
+		return nomeTitularTextField;
+	}
+
+	public void setNomeTitularTextField(JTextField nomeTitularTextField) {
+		this.nomeTitularTextField = nomeTitularTextField;
+	}
+
+	public JTextField getCartaoTextField() {
+		return cartaoTextField;
+	}
+
+	public void setCartaoTextField(JTextField cartaoTextField) {
+		this.cartaoTextField = cartaoTextField;
+	}
 }

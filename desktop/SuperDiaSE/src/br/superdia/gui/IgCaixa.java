@@ -38,6 +38,7 @@ public class IgCaixa extends JDialog {
 	private JButton finalizarCompraButton;
 	private JLabel usuarioLogadoLabel;
 	private IgLogin igLogin;
+	private IgFinalizarCompra igFinalizarCompra;
 		
 	SuperDiaApp superDiaApp;
 	
@@ -353,5 +354,13 @@ public class IgCaixa extends JDialog {
 
 	public void setSuperDiaApp(SuperDiaApp superDiaApp) {
 		this.superDiaApp = superDiaApp;
-	}	
+	}
+
+	public IgFinalizarCompra getIgFinalizarCompra() {
+		return igFinalizarCompra;
+	}
+
+	public void setIgFinalizarCompra(IgFinalizarCompra igFinalizarCompra) {
+		this.igFinalizarCompra = igFinalizarCompra;
+	}
 } // class IgComboBoxList
