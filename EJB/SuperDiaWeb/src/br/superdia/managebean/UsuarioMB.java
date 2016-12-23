@@ -60,8 +60,10 @@ public class UsuarioMB {
 	}
 	
 	public String logout(){
+		
+		SessionUtil.remove("USUARIOLogado");
 		SessionUtil.invalidate();
-		usuario = new Usuario();
+		
 		return "login";	
 	}
 	
