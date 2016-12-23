@@ -47,11 +47,11 @@ public class Produto implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public double getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 

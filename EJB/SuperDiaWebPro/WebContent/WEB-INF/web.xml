@@ -19,6 +19,5 @@
     <param-name>BootsFaces_THEME</param-name>
     <param-value>flatly</param-value>
   </context-param>
- 
   
 </web-app>
