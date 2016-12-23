@@ -16,7 +16,14 @@
 			<h:outputLabel value="Senha:" for="senha" />
 			<h:inputSecret value="#{usuarioMB.usuario.senha}" id="senha" />
 			<h:outputLabel value="Repita senha:" for="senha2" />
-			<h:inputSecret value="#{usuarioMB.senha2}" id="senha2" />
+			<h:inputSecret value="#{usuarioMB.senha2}" id="senha2" />		
+		</h:panelGrid>
+		<h:panelGrid columns="1">
+				<h:selectOneRadio>
+				<f:selectItem itemValue="" itemLabel="Administrador" />
+				<f:selectItem itemValue="" itemLabel="Caixa" />
+				<f:selectItem itemValue="" itemLabel="Cliente" />
+			</h:selectOneRadio>
 			<h:commandButton action="#{usuarioMB.cadastrarCliente}" value="Cadastrar" />
 		</h:panelGrid>
 	</h:form>
