@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import trabalho.sccd.activity.FragmentDrawer;
 import trabalho.sccd.adapter.AdapterListViewMain;
 import trabalho.sccd.controller.RequestURL;
@@ -196,5 +198,11 @@ public class CarrinhoActivity extends AppCompatActivity implements FragmentDrawe
             Log.i("Login",token);
             Toast.makeText(getApplicationContext(),"Logado como: "+ pref.getString("usuario",""), Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    @OnClick(R.id.activity_carrinho_ir_pagamento)
+    public void finalizarCompra(Button button) {
+        startActivity(new Intent(this, PagamentoActivity.class));
     }
 }

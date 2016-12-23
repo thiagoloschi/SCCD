@@ -34,6 +34,9 @@
             android:name=".CarrinhoActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".PagamentoActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".InfoActivity"
             android:screenOrientation="portrait" />
         <activity

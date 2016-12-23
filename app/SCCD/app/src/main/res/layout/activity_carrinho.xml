@@ -47,6 +47,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/activity_carrinho_ir_pagamento"
                 android:text="Ir para Pagamento" />
         </LinearLayout>
 

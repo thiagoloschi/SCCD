@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_pagamento"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="trabalho.sccd.PagamentoActivity"
+    tools:showIn="@layout/activity_pagamento"
+    android:background="#ccc">
+
+    <TextView
+        android:text="Pagamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textColor="#000"
+        android:textSize="24dp"
+        android:textStyle="normal|bold"
+        android:layout_alignStart="@+id/label_cartao"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Cartão de Credito"
+        android:ems="15"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="143dp"
+        android:id="@+id/label_cartao"
+        android:textColor="#000"
+        android:layout_alignStart="@+id/cartao_numero"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="0000-0000-0000-0000"
+        android:ems="15"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="165dp"
+        android:layout_below="@id/label_cartao"
+        android:id="@+id/cartao_numero"
+        android:background="#fff"
+        android:textColor="#000"
+        android:padding="5dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="000"
+        android:maxLength="3"
+        android:ems="2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="205dp"
+        android:layout_below="@id/label_cartao"
+        android:id="@+id/cartao_cvv"
+        android:background="#fff"
+        android:textColor="#000"
+        android:padding="5dp"
+        android:layout_alignStart="@+id/activity_pagamento_finalizar_compra"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="12/99"
+        android:maxLength="3"
+        android:ems="3"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="205dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/label_cartao"
+        android:id="@+id/cartao_data"
+        android:background="#fff"
+        android:textColor="#000"
+        android:padding="5dp"
+        android:layout_alignStart="@+id/cartao_cvv"/>
+
+    <Button
+        android:text="Finalizar Compra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/activity_pagamento_finalizar_compra"
+        android:layout_below="@+id/cartao_numero"
+        android:layout_alignStart="@id/cartao_numero"
+        android:layout_alignEnd="@id/cartao_numero" />
+
+</RelativeLayout>
