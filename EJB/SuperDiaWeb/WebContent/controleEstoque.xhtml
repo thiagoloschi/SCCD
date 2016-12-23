@@ -76,7 +76,7 @@
 				<b:dataTableColumn value="#{pr.vendidoPor}" label="Fornecedor"/>
 				<b:dataTableColumn label="Ações">
 					<h:commandLink>
-						<f:setPropertyActionListener value="#{produto}" target="#{produtoMB.produto}"/>
+						<f:setPropertyActionListener value="#{pr}" target="#{produtoMB.produto}"/>
 						<b:icon name="pencil"  size="2x"/>
 						<f:ajax execute="@form" render=":cadastro" />
 					</h:commandLink> 
