@@ -11,39 +11,6 @@
     tools:context="trabalho.sccd.CadastroActivity"
     android:background="#ccc">
 
-    <Button
-        android:text="Finalizar Cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cadastrar"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/passwordCadastro"
-        android:layout_alignEnd="@+id/passwordCadastro" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:hint="Senha"
-        android:id="@+id/passwordCadastro"
-        android:background="#fff"
-        android:padding="5dp"
-        android:layout_above="@+id/cadastrar"
-        android:layout_alignStart="@+id/emailCadastro" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="E-mail"
-        android:ems="10"
-        android:id="@+id/emailCadastro"
-        android:background="#fff"
-        android:padding="5dp"
-        android:layout_above="@+id/passwordCadastro"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
 
     <TextView
         android:text="Registre-se "
@@ -58,6 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+
     <TextView
         android:text="Efetue suas compras online"
         android:layout_width="wrap_content"
@@ -65,7 +33,45 @@
         android:id="@+id/textView2"
         android:textAlignment="center"
         android:textSize="22dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="E-mail"
+        android:ems="10"
+        android:id="@+id/emailCadastro"
+        android:background="#fff"
+        android:padding="5dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:hint="Senha"
+        android:id="@+id/passwordCadastro"
+        android:background="#fff"
+        android:padding="5dp"
+        android:layout_below="@+id/emailCadastro"
+        android:layout_alignStart="@+id/emailCadastro"
+        android:layout_marginTop="22dp" />
+
+    <Button
+        android:text="Finalizar Cadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cadastrar"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/passwordCadastro"
+        android:layout_alignStart="@+id/passwordCadastro"
+        android:layout_alignEnd="@+id/passwordCadastro" />
+
+
 </RelativeLayout>

@@ -56,7 +56,11 @@ public class CadastroActivity extends AppCompatActivity {
         Usuario usuario = new Usuario();
         usuario.setSenha(passwordField.getText().toString());
         usuario.setUsuario(loginField.getText().toString());
-
+        usuario.setPerfil("cliente");
+        if(!usuario.isValid()) {
+            Toast.makeText(getApplicationContext(),"Usuário invalido", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             String URL = Constantes.URL_API_CADASTRAR;

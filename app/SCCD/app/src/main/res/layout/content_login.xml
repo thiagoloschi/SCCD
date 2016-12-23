@@ -67,11 +67,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
         android:textColor="#000"
-        android:textSize="28dp"
-        android:layout_marginBottom="55dp"
+        android:textSize="24dp"
+        android:layout_marginBottom="63dp"
         android:textStyle="normal|bold"
         android:layout_above="@+id/password"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="32dp" />
+        android:layout_alignStart="@+id/login" />
 
 </RelativeLayout>
