@@ -33,6 +33,11 @@ public class ControleDeAcesso implements Filter {
 					req.getRequestURI().endsWith("controleEstoque.xhtml"))
 				redireciona("/SuperDiaWeb/produtos.xhtml", response);
 			
+			// Se não for cliente nem o admin, rejeita o acesso
+			if(user.getPerfil().equalsIgnoreCase("cliente") == false ||
+					user.getPerfil().equalsIgnoreCase("adm") == false)
+				request.getRequestDispatcher("login.xhtml").forward(request, response);
+			
 			else
 				chain.doFilter(request, response);
 			//redireciona("/SuperDiaWeb/produtos.xhtml", response);
