@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" output="target/classes" path="ejbModule">
-		<attributes>
-			<attribute name="optional" value="true"/>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="oracle.eclipse.tools.glassfish.lib.system">
+	<classpathentry exported="true" kind="con" path="oracle.eclipse.tools.glassfish.lib.system">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.ejb"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/SuperDiaEJBClient">
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SuperDiaEJBClient">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
@@ -27,8 +21,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/wagner/Servers/glassfish4/glassfish/lib/postgresql-9.4.1212.jar"/>
-	<classpathentry kind="lib" path="/home/wagner/.m2/repository/commons-validator/commons-validator/1.4.0/commons-validator-1.4.0.jar" sourcepath="/home/wagner/.m2/repository/commons-validator/commons-validator/1.4.0/commons-validator-1.4.0-sources.jar">
+	<classpathentry exported="true" kind="lib" path="ejbModule/META-INF/lib/postgresql-9.4-1201.jdbc4.jar"/>
+	<classpathentry exported="true" kind="lib" path="~/.m2/repository/commons-validator/commons-validator/1.4.0/commons-validator-1.4.0.jar" sourcepath="~/.m2/repository/commons-validator/commons-validator/1.4.0/commons-validator-1.4.0-sources.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.archivename" value="commons-validator-1.4.0.jar"/>
@@ -36,6 +30,12 @@
 			<attribute name="maven.artifactId" value="commons-validator"/>
 			<attribute name="maven.version" value="1.4.0"/>
 			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="META-INF/lib/|META-INF/lib/" including="**/*.java" kind="src" output="target/classes" path="ejbModule">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
