@@ -51,4 +51,10 @@ public class Usuario {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public boolean isValid(){
+        if(this.senha.trim().isEmpty() || this.usuario.trim().isEmpty() || this.perfil.trim().isEmpty())
+            return false;
+        return true;
+    }
 }
