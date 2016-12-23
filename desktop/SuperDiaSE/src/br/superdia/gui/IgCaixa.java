@@ -39,15 +39,16 @@ public class IgCaixa extends JDialog {
 	private JLabel usuarioLogadoLabel;
 	private IgLogin igLogin;
 	private IgFinalizarCompra igFinalizarCompra;
+	private IgCaixa igCaixa;
 		
 	SuperDiaApp superDiaApp;
 	
 	/**
 	 * Cria e exibe a GUI.
 	 */
-	
 	public IgCaixa(IgLogin igLogin) {
 		this.igLogin = igLogin;
+		igCaixa = this;
 		this.superDiaApp = igLogin.getSuperDiaApp();
 			
 		addWindowListener(new WindowAdapter() {
@@ -151,7 +152,7 @@ public class IgCaixa extends JDialog {
 		usuarioLogadoLabel.setBounds(81, 411, 149, 29);
 		contentPanel.add(usuarioLogadoLabel);
 		
-		JLabel lblUsurio = new JLabel("Usuário:");
+		JLabel lblUsurio = new JLabel("Usu\u00E1rio:");
 		lblUsurio.setBounds(12, 413, 59, 23);
 		contentPanel.add(lblUsurio);
 		lblUsurio.setFont(new Font("Times New Roman", Font.PLAIN, 14));
@@ -164,9 +165,8 @@ public class IgCaixa extends JDialog {
 		
 		finalizarCompraButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//aqui o que fazer ao finalizar a compra
-				
+				fechar();
+				new IgFinalizarCompra(igCaixa);		
 			}
 		});
 		
@@ -363,4 +363,12 @@ public class IgCaixa extends JDialog {
 	public void setIgFinalizarCompra(IgFinalizarCompra igFinalizarCompra) {
 		this.igFinalizarCompra = igFinalizarCompra;
 	}
+
+	public IgCaixa getIgCaixa() {
+		return igCaixa;
+	}
+
+	public void setIgCaixa(IgCaixa igCaixa) {
+		this.igCaixa = igCaixa;
+	}	
 } // class IgComboBoxList

@@ -2,6 +2,8 @@ package br.superdia.gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -11,6 +13,12 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import org.apache.commons.validator.routines.CreditCardValidator;
+
+import br.superdia.webservice.ClientService;
+import br.superdia.webservice.Usuario;
+
 import javax.swing.JTextField;
 
 public class IgFinalizarCompra extends JDialog {
@@ -19,11 +27,14 @@ public class IgFinalizarCompra extends JDialog {
 	private IgCaixa igCaixa;
 	private JTextField nomeTitularTextField;
 	private JTextField cartaoTextField;
+	private IgLogin igLogin;
+	private ClientService client;
 	
 	/**
 	 * Create the dialog.
 	 */
 	public IgFinalizarCompra(IgCaixa igCaixa) {
+		this.igLogin = igCaixa.getIgLogin();
 		this.igCaixa = igCaixa;
 		getContentPane().setBackground(Color.WHITE);
 		setResizable(false);
@@ -33,7 +44,7 @@ public class IgFinalizarCompra extends JDialog {
 			public void windowClosing(WindowEvent arg0) {
 				System.out.println("clicou em fechar igFinalizarCompra");
 				fechar();
-				
+				igCaixa.setVisible(true);
 			}
 		});
 		
@@ -86,6 +97,16 @@ public class IgFinalizarCompra extends JDialog {
 		cartaoTextField.setColumns(10);
 		cartaoTextField.setBounds(10, 152, 304, 28);
 		getContentPane().add(cartaoTextField);
+		
+		pagarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				finalizaCompra(igLogin.getSuperDiaApp().getUsuario());
+				mensagemPagamentoLabel.setText("");
+				cartaoTextField.setText("");
+				nomeTitularTextField.setText("");
+			}
+		});
+		
 		setVisible(true);
 	}
 	
@@ -140,5 +161,42 @@ public class IgFinalizarCompra extends JDialog {
 
 	public void setCartaoTextField(JTextField cartaoTextField) {
 		this.cartaoTextField = cartaoTextField;
+	}
+	
+	public void finalizaCompra(Usuario usuario) {
+		client = igLogin.getSuperDiaApp().getClient();
+		if(cartao()){
+			client.endsBuy(usuario);
+			client.cleanCarrinho();
+			mensagemPagamentoLabel.setText("Compra Finalizada.\n\nTotal: RS" + client.getCarrinho());			
+			client = null;
+			igLogin.getSuperDiaApp().criaConexao();
+		}
+	}
+	
+	public Boolean cartao() {
+		CreditCardValidator creditCardValidator = new CreditCardValidator();
+		
+		if(nomeTitularTextField.getText().equals("")){
+			mensagemPagamentoLabel.setForeground(Color.RED);
+			mensagemPagamentoLabel.setText("Erro: Forneça o nome do titular.");
+			return false;
+		}
+		
+		if(cartaoTextField.getText().equals("")){
+			mensagemPagamentoLabel.setForeground(Color.RED);
+			mensagemPagamentoLabel.setText("Erro: Forneça o número do cartão.");
+			return false;
+		}
+				
+		if(creditCardValidator.isValid(cartaoTextField.getText())){
+			mensagemPagamentoLabel.setForeground(Color.BLUE);
+			mensagemPagamentoLabel.setText("Transação Autorizada!\n\nCompra Concluida");			
+			return true;
+		}else{
+			mensagemPagamentoLabel.setText("Cartão Inválido!\n\nFinalizar Compra");
+			mensagemPagamentoLabel.setForeground(Color.RED);
+			return false;
+		}
 	}
 }
