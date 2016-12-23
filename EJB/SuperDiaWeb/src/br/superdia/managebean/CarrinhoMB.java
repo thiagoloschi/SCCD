@@ -6,11 +6,12 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import org.apache.commons.validator.routines.CreditCardValidator;
+
 import br.superdia.modelo.ItemVenda;
 import br.superdia.modelo.Produto;
 import br.superdia.modelo.Usuario;
 import br.superdia.sessionbean.ICarrinho;
-import br.superdia.sessionbean.IValidaCompra;
 import br.superdia.utils.SessionUtil;
 
 @ManagedBean
@@ -19,9 +20,6 @@ public class CarrinhoMB {
 
 	@EJB
 	private ICarrinho icarrinho;
-	
-	@EJB
-	private IValidaCompra iValidaCompra;
 	
 	private List<ItemVenda>produtos;
 
@@ -90,7 +88,8 @@ public class CarrinhoMB {
 
 	public void endsBuy(){
 
-		if(iValidaCompra.validaCartao("", numeroCartao) && produtos.size() != 0){
+		CreditCardValidator creditCardValidator = new CreditCardValidator();
+		if(creditCardValidator.isValid(numeroCartao) && produtos.size() != 0){
 
 			Usuario usuario = (Usuario) SessionUtil.getSession().getAttribute("USUARIOLogado");
 			System.out.println("\n\n********* user " + usuario.getUsuario());
