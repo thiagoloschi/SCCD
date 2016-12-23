@@ -43,9 +43,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private List<Produto> produtos = new ArrayList<>();
 
-    private Button filtroButton;
+    private  Button filtroButton;
     private  SharedPreferences pref;
     private  SharedPreferences.Editor editor;
+    private  String token = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // USUARIO NÃO LOGADO VAI PRA TELA DE LOGIN
         // TOKEN VAZIO = SEM LOGIN
         //=========================================== //
-        pref = getApplicationContext().getSharedPreferences("Login", 0); // 0 - for private mode
+        pref = getApplicationContext().getSharedPreferences("sccd.app", 0); // 0 - for private mode
         editor = pref.edit();
         verificarLogin();
 
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         createToolbar();
         verificaFiltroSelecionado();
     }
+
 
     private void createToolbar(){
         setSupportActionBar(mToolbar);
@@ -111,15 +113,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public void obtemVagasAPI(){
         RequestURL req = new RequestURL(this);
 
-        req.requestURL(String.format(Constantes.URL_API_LISTAR_PRODUTOS), new RequestURL.VolleyCallback() {
+        req.requestURL(String.format(Constantes.URL_API_LISTAR_PRODUTOS.replace("#{token}",token)), new RequestURL.VolleyCallback() {
             @Override
             public void onSuccess(String response) {
                 System.out.println("GET PRODUTOS:" + response);
                 Gson gson = new Gson();
-                List<Produto> produtosJSON = Arrays.asList(gson.fromJson(response, Produto[].class));
+                try{
+                    List<Produto> produtosJSON = Arrays.asList(gson.fromJson(response, Produto[].class));
 
-                produtos.addAll(produtosJSON);
-                carregaRecyclerView();
+
+
+                    produtos.addAll(produtosJSON);
+                    carregaRecyclerView();
+                }catch (Exception e){
+
+                }
             }
         });
     }
@@ -168,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
     public void verificarLogin(){
-        String token = pref.getString("token","");
+        token = pref.getString("token","");
         String usr = pref.getString("usuario","");
         if(token.trim().isEmpty()){
             Log.i("Login","Redirecionando pra tela de login");

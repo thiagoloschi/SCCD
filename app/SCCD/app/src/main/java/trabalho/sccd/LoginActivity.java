@@ -36,6 +36,7 @@ import butterknife.OnClick;
 import trabalho.sccd.model.Login;
 import trabalho.sccd.model.Produto;
 import trabalho.sccd.model.Usuario;
+import trabalho.sccd.utils.Constantes;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -73,12 +74,12 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.logar)
     public void efeturLogin(Button button) {
 
-        pref = getApplicationContext().getSharedPreferences("Login", 0); // 0 - for private mode
+        pref = getApplicationContext().getSharedPreferences("sccd.app", 0); // 0 - for private mode
         editor = pref.edit();
 
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
-            String URL = "http://192.168.0.16:8080/SuperDiaRestFul/rest/usuarios/autenticar";
+            String URL = Constantes.URL_API_AUTENTICAR;
             JSONObject jsonBody = new JSONObject();
             jsonBody.put("usuario", loginField.getText().toString());
             jsonBody.put("senha", passwordField.getText().toString());
@@ -89,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(String response) {
 
                     try {
-
+                        Log.i("Login Response",response);
                         Usuario usuario = new Gson().fromJson(response, Usuario.class);
                         finalizarLogin(usuario);
 
@@ -146,14 +147,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void finalizarLogin(Usuario usuario){
+
         editor.putString("token", usuario.getToken()); // Storing string
         editor.putString("usuario", usuario.getUsuario()); // Storing string
         editor.putString("perfil", usuario.getPerfil()); // Storing string
         editor.putString("id", usuario.getId().toString()); // Storing string
         editor.commit();
 
-        Intent infoActivity = new Intent(this, MainActivity.class);
-        startActivity(infoActivity);
+        Intent main = new Intent(this, MainActivity.class);
+        startActivity(main);
     }
 
 }
