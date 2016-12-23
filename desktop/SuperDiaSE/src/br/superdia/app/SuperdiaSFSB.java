@@ -8,6 +8,7 @@ import static javax.swing.JOptionPane.showOptionDialog;
 
 import java.util.List;
 
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -19,6 +20,9 @@ import br.superdia.webservice.Produto;
 import br.superdia.webservice.UserService;
 import br.superdia.webservice.UserServiceService;
 import br.superdia.webservice.Usuario;
+import br.superdia.webservice.ValidateCard;
+import br.superdia.webservice.ValidateCardService;
+import javafx.scene.control.PasswordField;
 
 public class SuperdiaSFSB {
 
@@ -122,7 +126,6 @@ public class SuperdiaSFSB {
 			usuario.setUsuario(login);
 
 			String senha = lerString("Senha: ", "Você deve fornecer a senha", NOME_PROGRAMA + "-" + LOGIN, false);
-			if (senha == null) System.exit(0);
 
 			usuario.setSenha(senha);
 
@@ -130,13 +133,11 @@ public class SuperdiaSFSB {
 
 			if (usuario == null) return;
 
-			System.out.println(usuario.getPerfil());
-
+			if (!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())))
+				msgErro(usuario.getUsuario() + " é do perfil: " + usuario.getPerfil() + " - não tem acesso ao Caixa!", NOME_PROGRAMA + "-" + LOGIN);
 		}while(!(usuario.getPerfil().equalsIgnoreCase(Perfil.ADMINISTRADOR.getPerfil()) || usuario.getPerfil().equalsIgnoreCase(Perfil.CAIXA.getPerfil())));
-
-		//return usuario;
 	}
-	
+
 	public static Produto adiciona() {
 		if (client.getProdutos().isEmpty()) {
 			msgInfo("Nenhum produto cadastrado!!!", NOME_PROGRAMA + LISTA_PRODUTO);
@@ -248,16 +249,27 @@ public class SuperdiaSFSB {
 	}
 
 	public static void finalizaCompra(Usuario usuario) {
-		//usuario;// = obterUsuario();
-
-		if (usuario == null)
-			msgErro("Usuário Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-		else{
-			client.endsBuy(usuario);
-			client.cleanCarrinho();
-			msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
-			criaConexao();
-		}
+		client.endsBuy(usuario);
+		client.cleanCarrinho();
+		msgInfo("Compra Finalizada", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		//msgInfo("Total: R$" + client.getCarrinho(), NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		criaConexao();
+	}
+	
+	public static void cartao() {
+		ValidateCardService service = new ValidateCardService();
+		ValidateCard userClient = service.getValidateCardPort();
+		
+		String nome = lerString("Nome do Titular: ", "Você deve fornecer o nome", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+		if (nome == null) return;
+		
+		String numeroCartao = lerString("Número do Cartão: ", "Você deve fornecer o número do cartão!", NOME_PROGRAMA + "-" + FINALIZA_COMPRA, false);
+		if (numeroCartao == null) return;
+		
+		if(userClient.validaCartao(nome, numeroCartao))
+			msgInfo("Transação Autorizada!", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
+		else
+			msgErro("Cartão Inválido", NOME_PROGRAMA + "-" + FINALIZA_COMPRA);
 	}
 
 	public static String lerString(String prompt, String msgErro, String modulo, boolean vazia) {
@@ -265,7 +277,7 @@ public class SuperdiaSFSB {
 
 		do {
 			string = showInputDialog(null, prompt, modulo, QUESTION_MESSAGE);
-			
+
 			if (string == null) break;
 
 			if (string.equals("") && !vazia)
