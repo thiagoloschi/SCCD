@@ -25,7 +25,8 @@
         android:layout_marginTop="143dp"
         android:id="@+id/login"
         android:background="#fff"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:padding="5dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -33,21 +34,44 @@
         android:inputType="textPassword"
         android:hint="Senha"
         android:ems="10"
-        android:layout_below="@+id/login"
-        android:layout_alignEnd="@+id/login"
-        android:layout_marginTop="37dp"
+        android:layout_marginTop="16dp"
         android:id="@+id/password"
         android:background="#fff"
-        android:textColor="#000" />
+        android:textColor="#000"
+        android:padding="5dp"
+        android:layout_below="@+id/login"
+        android:layout_alignStart="@+id/login" />
 
     <Button
         android:text="Login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/logar"
         android:layout_below="@+id/password"
         android:layout_alignStart="@+id/password"
-        android:layout_marginTop="43dp"
-        android:id="@+id/logar"
         android:layout_alignEnd="@+id/password" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/criarConta"
+        android:layout_below="@+id/logar"
+        android:layout_centerHorizontal="true"
+        android:text="Criar uma conta"
+        android:background="@android:color/transparent" />
+
+    <TextView
+        android:text="Acessar minha conta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textColor="#000"
+        android:textSize="28dp"
+        android:layout_marginBottom="55dp"
+        android:textStyle="normal|bold"
+        android:layout_above="@+id/password"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="32dp" />
 
 </RelativeLayout>
