@@ -13,9 +13,9 @@ import org.json.JSONObject;
 import br.superdia.controller.RequestHTTP;
 import br.superdia.modelo.Produto;
 
-@Remote(IProdutosAPI.class)
+@Remote(IProdutosAPIExterna.class)
 @Stateless
-public class ProdutosApi implements IProdutosAPI {
+public class ProdutosApiExterna implements IProdutosAPIExterna {
 	//https://shopicruit.myshopify.com/admin/products.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6
 	
 	@Override
@@ -25,9 +25,10 @@ public class ProdutosApi implements IProdutosAPI {
 		
 		try {
 			//Obtém os dados da URL recebida.
+			System.out.println("O que chegou: " + url);
 			RequestHTTP requestHTTP = new RequestHTTP();
 			String response = requestHTTP.sendingGetRequest(url);
-			
+			System.out.println("REsposta: " + response);
 			//Obteve a resposta
 			JSONObject object = new JSONObject(response);
 			JSONArray ob = object.getJSONArray("products");
@@ -77,5 +78,4 @@ public class ProdutosApi implements IProdutosAPI {
 		}
 		return -1;
 	}
-	
 }//class ProdutosApi
