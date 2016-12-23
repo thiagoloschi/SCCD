@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private List<Produto> produtos = new ArrayList<>();
 
-    private  Button filtroButton;
     private  SharedPreferences pref;
     private  SharedPreferences.Editor editor;
     private  String token = "";
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         ButterKnife.bind(this);
         ButterKnife.setDebug(true);
 
-        filtroButton = (Button) findViewById(R.id.filterProdutos);
 
         obtemVagasAPI(); //TODO: Apagar
 
